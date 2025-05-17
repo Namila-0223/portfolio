@@ -470,7 +470,7 @@ export default function Home() {
                         <div className="max-w-2xl mx-auto flex flex-col items-center justify-center">
                             <div className="w-16 h-16 rounded-full overflow-hidden mb-2">
                                 <Image
-                                    src="/public/avatar.png"
+                                    src="/public/placeholder.svg"
                                     alt="Namila"
                                     width={64}
                                     height={64}
