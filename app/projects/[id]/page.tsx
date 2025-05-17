@@ -978,7 +978,7 @@ export default function ProjectPage() {
             >
               <div className="w-8 h-8 mr-2">
                 <Image
-                  src="/images/avatar.png"
+                  src="/public/placeholder.svg"
                   alt="Namila"
                   width={32}
                   height={32}
