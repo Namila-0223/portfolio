@@ -807,7 +807,7 @@ export default function ProjectPage() {
               <div className="flex flex-col items-center justify-center">
                 <div className="w-16 h-16 rounded-full overflow-hidden mb-2">
                   <Image
-                    src="/images/avatar.png"
+                    src="/public/avatar.png"
                     alt="Namila"
                     width={64}
                     height={64}
