@@ -36,19 +36,28 @@ body {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Typing animation */
 @keyframes bounce {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-5px);
   }
+}
+
+img {
+  max-width: 100% !important;
+  height: -webkit-fill-available !important;
 }
 
 .animate-bounce {
@@ -75,6 +84,7 @@ body {
     opacity: 0;
     transform: translateX(-20px) translateY(10px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) translateY(0) scale(1);
@@ -86,6 +96,7 @@ body {
     opacity: 0;
     transform: translateX(20px) translateY(10px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) translateY(0) scale(1);
@@ -97,6 +108,7 @@ body {
     opacity: 0;
     transform: translateY(10px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);

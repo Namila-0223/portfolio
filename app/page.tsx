@@ -24,7 +24,6 @@ export default function Home() {
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [currentDate] = useState(new Date());
-    const [isInitialized, setIsInitialized] = useState(false);
 
     // Format date for display
     const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -268,53 +267,6 @@ export default function Home() {
         },
     ];
 
-    // Load saved state from localStorage
-    useEffect(() => {
-        // Only run once after initial render
-        if (!isInitialized) {
-            const savedMessageIndex = localStorage.getItem("chatMessageIndex");
-            const savedIsSubscribed = localStorage.getItem("chatIsSubscribed");
-            const savedIsMessageSent = localStorage.getItem("chatIsMessageSent");
-
-            if (savedMessageIndex) {
-                const parsedIndex = Number.parseInt(savedMessageIndex, 10);
-                // Only set if it's a valid number and within range
-                if (!isNaN(parsedIndex) && parsedIndex >= 0 && parsedIndex <= messages.length) {
-                    setCurrentMessageIndex(parsedIndex);
-                }
-            }
-
-            if (savedIsSubscribed === "true") {
-                setIsSubscribed(true);
-            }
-
-            if (savedIsMessageSent === "true") {
-                setIsMessageSent(true);
-            }
-
-            // Restore scroll position
-            const savedScrollPosition = localStorage.getItem("chatScrollPosition");
-            if (savedScrollPosition && chatContainerRef.current) {
-                setTimeout(() => {
-                    if (chatContainerRef.current) {
-                        chatContainerRef.current.scrollTop = Number.parseInt(savedScrollPosition, 10);
-                    }
-                }, 100);
-            }
-
-            setIsInitialized(true);
-        }
-    }, [isInitialized, messages.length]);
-
-    // Save state to localStorage whenever it changes
-    useEffect(() => {
-        if (isInitialized) {
-            localStorage.setItem("chatMessageIndex", currentMessageIndex.toString());
-            localStorage.setItem("chatIsSubscribed", isSubscribed.toString());
-            localStorage.setItem("chatIsMessageSent", isMessageSent.toString());
-        }
-    }, [currentMessageIndex, isSubscribed, isMessageSent, isInitialized]);
-
     // Simulate typing and message appearance with slower pace
     useEffect(() => {
         if (currentMessageIndex < messages.length) {
@@ -356,9 +308,6 @@ export default function Home() {
                 const scrollTop = chatContainerRef.current.scrollTop;
                 setShowScrollToTop(scrollTop > 500);
                 setIsScrolled(scrollTop > 100);
-
-                // Save scroll position
-                localStorage.setItem("chatScrollPosition", scrollTop.toString());
             }
         };
 
@@ -399,12 +348,6 @@ export default function Home() {
         setCurrentMessageIndex(0);
         setIsSubscribed(false);
         setIsMessageSent(false);
-
-        // Clear localStorage
-        localStorage.removeItem("chatMessageIndex");
-        localStorage.removeItem("chatIsSubscribed");
-        localStorage.removeItem("chatIsMessageSent");
-        localStorage.removeItem("chatScrollPosition");
 
         // Scroll to top when restarting
         if (chatContainerRef.current) {
@@ -470,7 +413,7 @@ export default function Home() {
                         <div className="max-w-2xl mx-auto flex flex-col items-center justify-center">
                             <div className="w-16 h-16 rounded-full overflow-hidden mb-2">
                                 <Image
-                                    src="/public/placeholder.svg"
+                                    src="/images/avatar.png"
                                     alt="Namila"
                                     width={64}
                                     height={64}
@@ -802,7 +745,6 @@ export default function Home() {
                                         ></div>
                                     </div>
                                 </div>
-                                <span className="text-xs mt-1 text-gray-500">{formattedTime}</span>
                             </div>
                         </motion.div>
                     )}
