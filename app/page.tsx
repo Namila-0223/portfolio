@@ -455,7 +455,7 @@ export default function Home() {
                             className="rounded-full object-cover"
                         />
                     </div>
-                    <h1 className="text-lg font-bold">Namila</h1>
+                    <h1 className="text-lg font-bold">Namila Preshan</h1>
                 </div>
             </div>
 
