@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
 import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink } from "lucide-react";
+import { ProfileHeader } from "@/components/profile-header";
 
 export default function Home() {
     const [name, setName] = useState("");
@@ -61,6 +62,18 @@ export default function Home() {
             image: "/images/design-system.png",
         },
     ];
+
+    const designer = {
+        name: "Namila Preshan",
+        title: "UI UX Enginieer at ",
+        workplace: "@Epic lanka",
+        tagline: "Crafting interfaces that matter ✨",
+        location: "Colombo, Sri Lanka",
+        email: "hello@namila.me",
+        personality: "ENFJ",
+        avatar: "/images/avatar.png?height=250&width=250",
+        isOnline: true,
+    };
 
     // Messages for the chat
     const messages = [
@@ -402,42 +415,8 @@ export default function Home() {
     return (
         <main className="min-h-screen bg-[#0f0f0f] text-white">
             {/* Full header - visible only when not scrolled */}
-            <AnimatePresence>
-                {!isScrolled && (
-                    <motion.div
-                        className="pt-8 pb-4 px-4"
-                        initial={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        <div className="max-w-2xl mx-auto flex flex-col items-center justify-center">
-                            <div className="w-16 h-16 rounded-full overflow-hidden mb-2">
-                                <Image
-                                    src="/images/avatar.png"
-                                    alt="Namila"
-                                    width={64}
-                                    height={64}
-                                    className="rounded-full object-cover"
-                                />
-                            </div>
-                            <h1 className="text-xl font-bold">Namila</h1>
-                            <p className="text-sm text-gray-400">
-                                Digital Product Designer at{" "}
-                                <a href="#" className="text-blue-400">
-                                    @NamilaDesign
-                                </a>
-                            </p>
-                            <p className="text-sm text-gray-400 mt-1">Crafting interfaces that matter ✨</p>
-                            <div className="text-xs text-gray-500 mt-2">
-                                <p>RSA • Colombia, Sri Lanka • hello@namila.me</p>
-                            </div>
-                            <div className="text-xs text-gray-500 mt-1">
-                                <p>👋 Hey, how are you?</p>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+
+            <ProfileHeader designer={designer} isScrolled={isScrolled} />
 
             {/* Compact sticky header - only shows when scrolled */}
             <div
@@ -445,7 +424,7 @@ export default function Home() {
                     isScrolled ? "py-2" : "py-0 opacity-0"
                 }`}
             >
-                <div className="max-w-2xl mx-auto px-4 flex items-center justify-center">
+                <div className="max-w-2xl mx-auto p-4 flex items-center justify-center">
                     <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
                         <Image
                             src="/images/avatar.png"
