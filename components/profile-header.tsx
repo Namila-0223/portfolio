@@ -47,7 +47,7 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                             }}
                         >
                             <img
-                                src={designer.avatar || "/images/avatar.png"}
+                                src={designer.avatar || "/images/profile-1.jpeg"}
                                 alt={designer.name}
                                 className="w-full h-full object-cover"
                                 style={{ transform: "translateZ(0)" }}
