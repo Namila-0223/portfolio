@@ -21,6 +21,7 @@ export default function Home() {
     const [showTyping, setShowTyping] = useState(false);
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     const [isSubscribed, setIsSubscribed] = useState(false);
+    const [headerHeight, setHeaderHeight] = useState(0);
     const [isMessageSent, setIsMessageSent] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -71,9 +72,25 @@ export default function Home() {
         location: "Colombo, Sri Lanka",
         email: "hello@namila.me",
         personality: "ENFJ",
-        avatar: "/images/avatar.png?height=250&width=250",
+        avatar: "/images/profile-1.jpeg?height=250&width=250",
         isOnline: true,
     };
+
+    // Calculate header height for proper spacing
+    useEffect(() => {
+        // Function to calculate expanded header height
+        const calculateHeaderHeight = () => {
+            // Expanded header is approximately 200px, collapsed is about 80px
+            const expandedHeight = isScrolled ? 80 : 200;
+            setHeaderHeight(expandedHeight);
+        };
+
+        calculateHeaderHeight();
+
+        // Recalculate when scroll state changes
+        window.addEventListener("resize", calculateHeaderHeight);
+        return () => window.removeEventListener("resize", calculateHeaderHeight);
+    }, [isScrolled]);
 
     // Messages for the chat
     const messages = [
@@ -81,7 +98,7 @@ export default function Home() {
         {
             id: 1,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content: "Hey! I'm Namila, a product designer. Crafting interfaces that matter ✨",
         },
 
@@ -97,13 +114,13 @@ export default function Home() {
         {
             id: 3,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content: "Of course! Here are some projects I've worked on recently:",
         },
         {
             id: 4,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content: "Here's a dashboard I designed for a fintech startup:",
             hasImage: true,
             imageAlt: "Dashboard UI Design",
@@ -113,168 +130,156 @@ export default function Home() {
         {
             id: 5,
             sender: "namila",
-            senderName: "Namila",
-            content: "Take a look at my creative explorations on Dribbble:",
+            senderName: "Namila Preshan",
+            content: "Take a look at my creative explorations on Behance:",
             hasImage: true,
-            imageAlt: "Dribbble shots",
-            imageSrc: "/images/dribbble-shots.png",
-            projectId: "dribbble-explorations",
+            imageAlt: "Behance shots",
+            imageSrc: "/images/behance.svg",
+            projectId: "behance-explorations",
         },
         {
             id: 6,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content: "A design system I built to deliver consistency, scalability, and impact across digital products:",
             hasImage: true,
             imageAlt: "Design System",
             imageSrc: "/images/design-system.png",
             projectId: "design-system",
         },
+        // {
+        //     id: 7,
+        //     sender: "namila",
+        //     senderName: "Namila Preshan",
+        //     content: "Design Projects",
+        //     isHeader: true,
+        // },
         {
             id: 7,
             sender: "namila",
-            senderName: "Namila",
-            content: "Design Projects",
-            isHeader: true,
-        },
-        {
-            id: 8,
-            sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content:
                 "Explore the projects where I've collaborated with startups to solve real problems and deliver measurable results.",
+            isHeader: true,
         },
 
         // 4. Client testimonials
         {
-            id: 9,
+            id: 8,
             sender: "user",
             senderName: "You",
             content: "Here's what a few people have said after working with me.",
         },
         {
-            id: 10,
+            id: 9,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content:
                 '"Namila is a true asset to design, blending artistry with functionality. His exceptional user-friendly UX designs are always on point, and his ability to understand client needs has made our collaboration incredibly successful at project goals."',
             isTestimonial: true,
             testimonialAuthor: "- Samantha P, Product at Acme Co",
         },
         {
-            id: 11,
+            id: 10,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content:
                 '"Namila stands out as a skilled UI/UX designer who not only gets the job done but does it with style. In spite of tight timelines, he delivers exceptional work. His meticulous attention to detail is remarkable for optimal user experience. His collaborative spirit and professionalism make him highly recommended!"',
             isTestimonial: true,
+            testimonialAuthor: "- Samantha P, Product at Acme Co",
         },
         {
-            id: 12,
+            id: 11,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content:
                 '"I highly recommend Namila as an exceptional product designer. He balances aesthetics and functionality, creating solutions that are intuitive and user-focused. Namila is creative and resourceful - a valuable asset to any team."',
             isTestimonial: true,
+            testimonialAuthor: "- Samantha P, Product at Acme Co",
         },
 
         // 5. Tell me more about you
         {
-            id: 13,
+            id: 12,
             sender: "user",
             senderName: "You",
             content: "I'm very impressed by your work. Anything else you'd like to share?",
         },
         {
-            id: 14,
+            id: 13,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content:
-                "I'm all about improving how people interact with digital products. With over 5 years of experience in design and front-end development, I help brands create good design that looks amazing while being functional.",
+                "I'm all about improving how people interact with digital products. With over 1 years of experience in design and UI development, I help brands create good design that looks amazing while being functional.",
             hasProfileImage: true,
-            profileImageSrc: "/images/profile-photo.png",
+            profileImageSrc: "/images/profile-3.jpg",
         },
 
         // 6. Newsletter subscription
         {
-            id: 15,
+            id: 14,
             sender: "namila",
-            senderName: "Namila",
-            content: "I also have a newsletter I write weekly:",
+            senderName: "Namila Preshan",
+            content: "I also have a newsletter I write weekly, here's one of post",
         },
         {
-            id: 16,
+            id: 15,
             sender: "namila",
-            senderName: "Namila",
-            content: "Improving Customer Experience: A Comparison",
+            senderName: "Namila Preshan",
+            content: "A Comprehensive Guide to Information Architecture Basics in UX Design",
             isNewsletter: true,
             number: 1,
         },
+        // {
+        //     id: 17,
+        //     sender: "namila",
+        //     senderName: "Namila Preshan",
+        //     content: "Exploring the New Notion UI/UX: Addressing the Controversy",
+        //     isNewsletter: true,
+        //     number: 2,
+        // },
         {
-            id: 17,
+            id: 16,
             sender: "namila",
-            senderName: "Namila",
-            content: "Exploring the New Notion UI/UX: Addressing the Controversy",
-            isNewsletter: true,
-            number: 2,
-        },
-        {
-            id: 18,
-            sender: "namila",
-            senderName: "Namila",
-            content: "10 UI/UX Micro Animations to Add in Your Design",
-            isNewsletter: true,
-            number: 3,
-        },
-        {
-            id: 19,
-            sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content: "If you're interested you can subscribe by entering your email below:",
             showSubscribe: true,
         },
 
         // 7. Contact section
         {
-            id: 20,
+            id: 17,
             sender: "user",
             senderName: "You",
             content: "How can I get in touch with you?",
         },
         {
-            id: 21,
+            id: 18,
             sender: "namila",
-            senderName: "Namila",
-            content: "Let's Connect",
-            isHeader: true,
-        },
-        {
-            id: 22,
-            sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content: "My email is hello@namila.me",
             showContactButtons: true,
         },
         {
-            id: 23,
+            id: 19,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content:
                 "I usually reply within 24 hours to communicate a good fit. I like to focus on projects that make a real impact.",
         },
         {
-            id: 24,
+            id: 20,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content: "You can also leave me a message, and I'll be sure to get back to you as soon as possible.",
             showContactForm: true,
         },
 
         // 8. Final message
         {
-            id: 25,
+            id: 21,
             sender: "namila",
-            senderName: "Namila",
+            senderName: "Namila Preshan",
             content: "That's it for this chat! Feel free to restart the conversation.",
             showRestart: true,
         },
@@ -419,322 +424,311 @@ export default function Home() {
             <ProfileHeader designer={designer} isScrolled={isScrolled} />
 
             {/* Compact sticky header - only shows when scrolled */}
-            <div
-                className={`sticky top-0 z-10 backdrop-blur-md bg-[#0f0f0f]/80 transition-all duration-300 ${
-                    isScrolled ? "py-2" : "py-0 opacity-0"
-                }`}
-            >
-                <div className="max-w-2xl mx-auto p-4 flex items-center justify-center">
-                    <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
-                        <Image
-                            src="/images/avatar.png"
-                            alt="Namila"
-                            width={32}
-                            height={32}
-                            className="rounded-full object-cover"
-                        />
-                    </div>
-                    <h1 className="text-lg font-bold">Namila Preshan</h1>
-                </div>
-            </div>
 
             {/* Chat container */}
-            <div
-                className="max-w-2xl mx-auto px-4 pb-8 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar"
-                ref={chatContainerRef}
-            >
-                {/* Date/time separator */}
-                <div className="flex justify-center my-4">
-                    <div className="bg-gray-800 rounded-full px-4 py-1 text-xs text-gray-400">
-                        {formattedDate} • {formattedTime}
+            <div style={{ paddingTop: `${headerHeight + 20}px` }}>
+                <div
+                    className="max-w-2xl mx-auto px-4 pb-8 pt-4 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar"
+                    ref={chatContainerRef}
+                >
+                    {/* Date/time separator */}
+                    <div className="flex justify-center my-4">
+                        <div className="bg-gray-800 rounded-full px-4 py-1 text-xs text-gray-400">
+                            {formattedDate} • {formattedTime}
+                        </div>
                     </div>
-                </div>
 
-                {/* Chat messages */}
-                <div className="space-y-6 pb-20 pt-4">
-                    {messages.slice(0, currentMessageIndex).map((msg) => (
-                        <motion.div
-                            key={msg.id}
-                            className={`flex ${msg.sender === "user" ? "justify-end" : ""}`}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            variants={msg.sender === "user" ? userMessageVariants : namilaMessageVariants}
-                        >
-                            {msg.sender === "namila" && (
-                                <div className="w-8 h-8 mr-2 flex-shrink-0">
+                    {/* Chat messages */}
+                    <div className="space-y-6 pb-20 pt-4">
+                        {messages.slice(0, currentMessageIndex).map((msg) => (
+                            <motion.div
+                                key={msg.id}
+                                className={`flex ${msg.sender === "user" ? "justify-end" : ""}`}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                variants={msg.sender === "user" ? userMessageVariants : namilaMessageVariants}
+                            >
+                                {msg.sender === "namila" && (
+                                    <div className="w-8 h-8 mr-2 flex-shrink-0">
+                                        <Image
+                                            src="/images/profile-1.jpeg"
+                                            alt="Namila"
+                                            width={64}
+                                            height={64}
+                                            className="rounded-full object-cover"
+                                        />
+                                    </div>
+                                )}
+
+                                <div className="flex flex-col max-w-[80%]">
+                                    {/* Sender name */}
+                                    <span
+                                        className={`text-xs mb-1 ${
+                                            msg.sender === "user" ? "text-right text-gray-400" : "text-gray-400"
+                                        }`}
+                                    >
+                                        {msg.senderName}
+                                    </span>
+
+                                    <div
+                                        className={`p-4 w-96 ${
+                                            msg.sender === "user"
+                                                ? "bg-[#1a1a1a] rounded-2xl rounded-tr-none message-bubble-user"
+                                                : msg.isTestimonial
+                                                ? "bg-[#232323] rounded-2xl rounded-tl-none message-bubble-namila"
+                                                : "bg-[#1a1a1a] rounded-2xl rounded-tl-none message-bubble-namila"
+                                        }`}
+                                    >
+                                        {msg.isHeader ? (
+                                            <div className="bg-[#232323] p-4 rounded-lg">
+                                                <h2 className="text-lg font-bold">{msg.content}</h2>
+                                            </div>
+                                        ) : (
+                                            <p className={msg.isTestimonial ? "text-sm italic" : "text-sm"}>
+                                                {msg.content}
+                                            </p>
+                                        )}
+
+                                        {msg.testimonialAuthor && (
+                                            <div className="mt-2 text-xs text-gray-400">
+                                                <p>{msg.testimonialAuthor}</p>
+                                            </div>
+                                        )}
+
+                                        {msg.hasImage && (
+                                            <div className="mt-3 mb-2">
+                                                {msg.projectId ? (
+                                                    <Link href={`/projects/${msg.projectId}`} className="block group">
+                                                        <div className="relative overflow-hidden rounded-xl">
+                                                            <Image
+                                                                src={
+                                                                    msg.imageSrc ||
+                                                                    "/placeholder.svg?height=180&width=280"
+                                                                }
+                                                                alt={msg.imageAlt || "Project"}
+                                                                width={400}
+                                                                height={225}
+                                                                className="rounded-xl w-full object-cover shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02]"
+                                                                style={{ aspectRatio: "16/9", height: "auto" }}
+                                                            />
+                                                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                                                <div className="bg-blue-600 rounded-full p-2">
+                                                                    <ExternalLink size={20} className="text-white" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <p className="text-xs text-blue-400 mt-2 flex items-center">
+                                                            <span>View project details</span>
+                                                            <ExternalLink size={12} className="ml-1" />
+                                                        </p>
+                                                    </Link>
+                                                ) : (
+                                                    <Image
+                                                        src={msg.imageSrc || "/placeholder.svg?height=180&width=280"}
+                                                        alt={msg.imageAlt || "Project"}
+                                                        width={400}
+                                                        height={225}
+                                                        className="rounded-xl w-full object-cover shadow-lg hover:shadow-xl transition-shadow"
+                                                        style={{ aspectRatio: "16/9", height: "auto" }}
+                                                    />
+                                                )}
+                                            </div>
+                                        )}
+
+                                        {msg.hasProfileImage && (
+                                            <div className="mt-3 flex flex-col items-center">
+                                                <Image
+                                                    src={msg.profileImageSrc || "/images/profile-3.jpg"}
+                                                    alt="Profile"
+                                                    width={400}
+                                                    height={400}
+                                                    className="rounded-xl object-cover shadow-lg"
+                                                    style={{ aspectRatio: "1/1", height: "auto", maxWidth: "200px" }}
+                                                />
+                                                <p className="text-center mt-2 text-xs text-gray-400">That's me :)</p>
+                                            </div>
+                                        )}
+
+                                        {msg.isNewsletter && (
+                                            <div className="flex items-center">
+                                                <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center mr-2 flex-shrink-0">
+                                                    <span className="text-white font-bold">{msg.number}</span>
+                                                </div>
+                                                {/* <p className="text-sm">{msg.content}</p> */}
+                                            </div>
+                                        )}
+
+                                        {msg.showSubscribe && !isSubscribed && (
+                                            <form onSubmit={handleSubscribe} className="mt-3 flex flex-col gap-2">
+                                                <Input
+                                                    type="email"
+                                                    placeholder="Your email"
+                                                    className="bg-[#232323] border-[#333] focus:border-blue-500"
+                                                    value={emailSubscribe}
+                                                    onChange={(e) => setEmailSubscribe(e.target.value)}
+                                                    required
+                                                />
+                                                <Button
+                                                    type="submit"
+                                                    className=" hover:bg-blue-700"
+                                                    style={{ background: "rgb(46, 46, 46)" }}
+                                                >
+                                                    Subscribe
+                                                </Button>
+                                            </form>
+                                        )}
+
+                                        {msg.showSubscribe && isSubscribed && (
+                                            <p className="mt-3 text-green-400 text-sm">Thanks for subscribing!</p>
+                                        )}
+
+                                        {msg.showContactButtons && (
+                                            <div className="flex flex-wrap gap-2 mt-3">
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                >
+                                                    <Copy size={14} className="mr-2" />
+                                                    Copy
+                                                </Button>
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                >
+                                                    <Linkedin size={14} className="mr-2" />
+                                                    Connect on LinkedIn
+                                                </Button>
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                >
+                                                    <Calendar size={14} className="mr-2" />
+                                                    Book a call
+                                                </Button>
+                                            </div>
+                                        )}
+
+                                        {msg.showContactForm && !isMessageSent && (
+                                            <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+                                                <Input
+                                                    type="text"
+                                                    placeholder="Your name"
+                                                    className="bg-[#232323] border-[#333] focus:border-blue-500"
+                                                    value={name}
+                                                    onChange={(e) => setName(e.target.value)}
+                                                    required
+                                                />
+                                                <Input
+                                                    type="email"
+                                                    placeholder="Your email"
+                                                    className="bg-[#232323] border-[#333] focus:border-blue-500"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    required
+                                                />
+                                                <Textarea
+                                                    placeholder="Your message"
+                                                    className="bg-[#232323] border-[#333] focus:border-blue-500 min-h-[100px]"
+                                                    value={message}
+                                                    onChange={(e) => setMessage(e.target.value)}
+                                                    required
+                                                />
+                                                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+                                                    <Send size={14} className="mr-2" />
+                                                    Send
+                                                </Button>
+                                            </form>
+                                        )}
+
+                                        {msg.showContactForm && isMessageSent && (
+                                            <p className="mt-3 text-green-400 text-sm">
+                                                Message sent! I'll get back to you soon.
+                                            </p>
+                                        )}
+
+                                        {msg.showRestart && (
+                                            <div className="flex justify-center mt-4">
+                                                <Button
+                                                    variant="outline"
+                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                    onClick={handleRestart}
+                                                >
+                                                    <RefreshCw size={14} className="mr-2" />
+                                                    Start over
+                                                </Button>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Message time */}
+                                    <span
+                                        className={`text-xs mt-1 ${
+                                            msg.sender === "user" ? "text-right text-gray-500" : "text-gray-500"
+                                        }`}
+                                    >
+                                        {formattedTime}
+                                    </span>
+                                </div>
+
+                                {msg.sender === "user" && (
+                                    <div className="w-8 h-8 ml-2 flex-shrink-0">
+                                        <div className="w-8 h-8 rounded-full bg-gray-700"></div>
+                                    </div>
+                                )}
+                            </motion.div>
+                        ))}
+
+                        {/* Typing indicator */}
+                        {showTyping && messages[currentMessageIndex]?.sender === "namila" && (
+                            <motion.div
+                                className="flex"
+                                initial={{ opacity: 0, x: -20, scale: 0.9 }}
+                                animate={{ opacity: 1, x: 0, scale: 1 }}
+                                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                            >
+                                <div className="w-8 h-8 mr-2">
                                     <Image
-                                        src="/images/avatar.png"
+                                        src="/images/profile-1.jpeg"
                                         alt="Namila"
                                         width={32}
                                         height={32}
                                         className="rounded-full object-cover"
                                     />
                                 </div>
-                            )}
-
-                            <div className="flex flex-col max-w-[80%]">
-                                {/* Sender name */}
-                                <span
-                                    className={`text-xs mb-1 ${
-                                        msg.sender === "user" ? "text-right text-gray-400" : "text-gray-400"
-                                    }`}
-                                >
-                                    {msg.senderName}
-                                </span>
-
-                                <div
-                                    className={`p-4 ${
-                                        msg.sender === "user"
-                                            ? "bg-[#1a1a1a] rounded-2xl rounded-tr-none message-bubble-user"
-                                            : msg.isTestimonial
-                                            ? "bg-[#232323] rounded-2xl rounded-tl-none message-bubble-namila"
-                                            : "bg-[#1a1a1a] rounded-2xl rounded-tl-none message-bubble-namila"
-                                    }`}
-                                >
-                                    {msg.isHeader ? (
-                                        <div className="bg-[#232323] p-4 rounded-lg">
-                                            <h2 className="text-lg font-bold">{msg.content}</h2>
+                                <div className="flex flex-col">
+                                    <span className="text-xs mb-1 text-gray-400">Namila</span>
+                                    <div className="bg-[#1a1a1a] rounded-2xl rounded-tl-none p-3 typing-indicator">
+                                        <div className="flex space-x-1">
+                                            <div
+                                                className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                                                style={{ animationDelay: "0ms" }}
+                                            ></div>
+                                            <div
+                                                className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                                                style={{ animationDelay: "150ms" }}
+                                            ></div>
+                                            <div
+                                                className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                                                style={{ animationDelay: "300ms" }}
+                                            ></div>
                                         </div>
-                                    ) : (
-                                        <p className={msg.isTestimonial ? "text-sm italic" : "text-sm"}>
-                                            {msg.content}
-                                        </p>
-                                    )}
-
-                                    {msg.testimonialAuthor && (
-                                        <div className="mt-2 text-xs text-gray-400">
-                                            <p>{msg.testimonialAuthor}</p>
-                                        </div>
-                                    )}
-
-                                    {msg.hasImage && (
-                                        <div className="mt-3 mb-2">
-                                            {msg.projectId ? (
-                                                <Link href={`/projects/${msg.projectId}`} className="block group">
-                                                    <div className="relative overflow-hidden rounded-lg">
-                                                        <Image
-                                                            src={
-                                                                msg.imageSrc || "/placeholder.svg?height=180&width=280"
-                                                            }
-                                                            alt={msg.imageAlt || "Project"}
-                                                            width={400}
-                                                            height={225}
-                                                            className="rounded-lg w-full object-cover shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02]"
-                                                            style={{ aspectRatio: "16/9", height: "auto" }}
-                                                        />
-                                                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                                            <div className="bg-blue-600 rounded-full p-2">
-                                                                <ExternalLink size={20} className="text-white" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p className="text-xs text-blue-400 mt-2 flex items-center">
-                                                        <span>View project details</span>
-                                                        <ExternalLink size={12} className="ml-1" />
-                                                    </p>
-                                                </Link>
-                                            ) : (
-                                                <Image
-                                                    src={msg.imageSrc || "/placeholder.svg?height=180&width=280"}
-                                                    alt={msg.imageAlt || "Project"}
-                                                    width={400}
-                                                    height={225}
-                                                    className="rounded-lg w-full object-cover shadow-lg hover:shadow-xl transition-shadow"
-                                                    style={{ aspectRatio: "16/9", height: "auto" }}
-                                                />
-                                            )}
-                                        </div>
-                                    )}
-
-                                    {msg.hasProfileImage && (
-                                        <div className="mt-3 flex flex-col items-center">
-                                            <Image
-                                                src={msg.profileImageSrc || "/images/profile-photo.png"}
-                                                alt="Profile"
-                                                width={400}
-                                                height={400}
-                                                className="rounded-lg object-cover shadow-lg"
-                                                style={{ aspectRatio: "1/1", height: "auto", maxWidth: "200px" }}
-                                            />
-                                            <p className="text-center mt-2 text-xs text-gray-400">That's me :)</p>
-                                        </div>
-                                    )}
-
-                                    {msg.isNewsletter && (
-                                        <div className="flex items-center">
-                                            <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center mr-2 flex-shrink-0">
-                                                <span className="text-white font-bold">{msg.number}</span>
-                                            </div>
-                                            <p className="text-sm">{msg.content}</p>
-                                        </div>
-                                    )}
-
-                                    {msg.showSubscribe && !isSubscribed && (
-                                        <form onSubmit={handleSubscribe} className="mt-3 flex gap-2">
-                                            <Input
-                                                type="email"
-                                                placeholder="Your email"
-                                                className="bg-[#232323] border-[#333] focus:border-blue-500"
-                                                value={emailSubscribe}
-                                                onChange={(e) => setEmailSubscribe(e.target.value)}
-                                                required
-                                            />
-                                            <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
-                                                Subscribe
-                                            </Button>
-                                        </form>
-                                    )}
-
-                                    {msg.showSubscribe && isSubscribed && (
-                                        <p className="mt-3 text-green-400 text-sm">Thanks for subscribing!</p>
-                                    )}
-
-                                    {msg.showContactButtons && (
-                                        <div className="flex flex-wrap gap-2 mt-3">
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
-                                            >
-                                                <Copy size={14} className="mr-2" />
-                                                Copy
-                                            </Button>
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
-                                            >
-                                                <Linkedin size={14} className="mr-2" />
-                                                Connect on LinkedIn
-                                            </Button>
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
-                                            >
-                                                <Calendar size={14} className="mr-2" />
-                                                Book a call
-                                            </Button>
-                                        </div>
-                                    )}
-
-                                    {msg.showContactForm && !isMessageSent && (
-                                        <form onSubmit={handleSubmit} className="mt-4 space-y-3">
-                                            <Input
-                                                type="text"
-                                                placeholder="Your name"
-                                                className="bg-[#232323] border-[#333] focus:border-blue-500"
-                                                value={name}
-                                                onChange={(e) => setName(e.target.value)}
-                                                required
-                                            />
-                                            <Input
-                                                type="email"
-                                                placeholder="Your email"
-                                                className="bg-[#232323] border-[#333] focus:border-blue-500"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                required
-                                            />
-                                            <Textarea
-                                                placeholder="Your message"
-                                                className="bg-[#232323] border-[#333] focus:border-blue-500 min-h-[100px]"
-                                                value={message}
-                                                onChange={(e) => setMessage(e.target.value)}
-                                                required
-                                            />
-                                            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                                                <Send size={14} className="mr-2" />
-                                                Send
-                                            </Button>
-                                        </form>
-                                    )}
-
-                                    {msg.showContactForm && isMessageSent && (
-                                        <p className="mt-3 text-green-400 text-sm">
-                                            Message sent! I'll get back to you soon.
-                                        </p>
-                                    )}
-
-                                    {msg.showRestart && (
-                                        <div className="flex justify-center mt-4">
-                                            <Button
-                                                variant="outline"
-                                                className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
-                                                onClick={handleRestart}
-                                            >
-                                                <RefreshCw size={14} className="mr-2" />
-                                                Start over
-                                            </Button>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Message time */}
-                                <span
-                                    className={`text-xs mt-1 ${
-                                        msg.sender === "user" ? "text-right text-gray-500" : "text-gray-500"
-                                    }`}
-                                >
-                                    {formattedTime}
-                                </span>
-                            </div>
-
-                            {msg.sender === "user" && (
-                                <div className="w-8 h-8 ml-2 flex-shrink-0">
-                                    <div className="w-8 h-8 rounded-full bg-gray-700"></div>
-                                </div>
-                            )}
-                        </motion.div>
-                    ))}
-
-                    {/* Typing indicator */}
-                    {showTyping && messages[currentMessageIndex]?.sender === "namila" && (
-                        <motion.div
-                            className="flex"
-                            initial={{ opacity: 0, x: -20, scale: 0.9 }}
-                            animate={{ opacity: 1, x: 0, scale: 1 }}
-                            transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                        >
-                            <div className="w-8 h-8 mr-2">
-                                <Image
-                                    src="/images/avatar.png"
-                                    alt="Namila"
-                                    width={32}
-                                    height={32}
-                                    className="rounded-full object-cover"
-                                />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-xs mb-1 text-gray-400">Namila</span>
-                                <div className="bg-[#1a1a1a] rounded-2xl rounded-tl-none p-3 typing-indicator">
-                                    <div className="flex space-x-1">
-                                        <div
-                                            className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
-                                            style={{ animationDelay: "0ms" }}
-                                        ></div>
-                                        <div
-                                            className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
-                                            style={{ animationDelay: "150ms" }}
-                                        ></div>
-                                        <div
-                                            className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
-                                            style={{ animationDelay: "300ms" }}
-                                        ></div>
                                     </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </div>
+                            </motion.div>
+                        )}
+                    </div>
 
-                {/* Footer */}
-                <div className="text-center text-xs text-gray-500 mt-8 pt-4 border-t border-gray-800">
-                    © 2023 Handcrafted by Namila •{" "}
-                    <a href="#" className="hover:text-gray-400">
-                        Privacy
-                    </a>
+                    {/* Footer */}
+                    <div className="text-center text-xs text-gray-500 mt-8 pt-4 border-t border-gray-800">
+                        © 2023 Handcrafted by Namila •{" "}
+                        <a href="#" className="hover:text-gray-400">
+                            Privacy
+                        </a>
+                    </div>
                 </div>
             </div>
 
