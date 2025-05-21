@@ -472,7 +472,7 @@ export default function Home() {
                                     </span>
 
                                     <div
-                                        className={`p-4 w-96 ${
+                                        className={`p-4 lg:w-96 md:w-96 ${
                                             msg.sender === "user"
                                                 ? "bg-[#1a1a1a] rounded-2xl rounded-tr-none message-bubble-user"
                                                 : msg.isTestimonial
