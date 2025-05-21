@@ -99,7 +99,7 @@ export default function Home() {
             id: 1,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Hey! I'm Namila, a product designer. Crafting interfaces that matter ✨",
+            content: "Hey! It’s me, Thimira, a product designer based in Colombo. How can I help you today? 😊",
         },
 
         // 2. User asking to see work
@@ -160,7 +160,7 @@ export default function Home() {
             senderName: "Namila Preshan",
             content:
                 "Explore the projects where I've collaborated with startups to solve real problems and deliver measurable results.",
-            isHeader: true,
+            isHeader: false,
         },
 
         // 4. Client testimonials
@@ -584,7 +584,7 @@ export default function Home() {
                                         )}
 
                                         {msg.showContactButtons && (
-                                            <div className="flex flex-wrap gap-2 mt-3">
+                                            <div className="flex flex-col gap-2 mt-3">
                                                 <Button
                                                     variant="outline"
                                                     size="sm"
@@ -700,7 +700,7 @@ export default function Home() {
                                     />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-xs mb-1 text-gray-400">Namila</span>
+                                    <span className="text-xs mb-1 text-gray-400">Namila Preshan</span>
                                     <div className="bg-[#1a1a1a] rounded-2xl rounded-tl-none p-3 typing-indicator">
                                         <div className="flex space-x-1">
                                             <div
@@ -723,8 +723,8 @@ export default function Home() {
                     </div>
 
                     {/* Footer */}
-                    <div className="text-center text-xs text-gray-500 mt-8 pt-4 border-t border-gray-800">
-                        © 2023 Handcrafted by Namila •{" "}
+                    <div className=" text-center text-xs text-gray-500 mt-8 pt-4  border-gray-800">
+                        © 2025 Handcrafted by Namila •{" "}
                         <a href="#" className="hover:text-gray-400">
                             Privacy
                         </a>
@@ -736,7 +736,7 @@ export default function Home() {
             <AnimatePresence>
                 {showScrollToTop && (
                     <motion.button
-                        className="fixed bottom-6 right-6 p-3 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50"
+                        className="fixed bottom-6 right-4 p-3 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50"
                         onClick={scrollToTop}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -744,7 +744,7 @@ export default function Home() {
                         transition={{ duration: 0.2 }}
                         aria-label="Scroll to top"
                     >
-                        <ArrowUp size={20} />
+                        <ArrowUp size={16} />
                     </motion.button>
                 )}
             </AnimatePresence>
