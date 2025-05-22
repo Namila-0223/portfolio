@@ -17,7 +17,7 @@ const projectsData = {
         client: "FinanceFlow Inc.",
         duration: "3 months",
         role: "Lead UI/UX Designer",
-        year: "2023",
+        year: "2025",
         tools: ["Figma", "Illustrator", "Principle", "Notion"],
         messages: [
             {
