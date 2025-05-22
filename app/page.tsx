@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,6 +29,7 @@ export default function Home() {
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [currentDate] = useState(new Date());
+    const [copied, setCopied] = useState(false);
 
     // Format date for display
     const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -45,6 +45,17 @@ export default function Home() {
         minute: "numeric",
         hour12: true,
     }).format(currentDate);
+
+    // Copy to clipboard function
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText("namilapreshan11@gmail.com");
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (error) {
+            console.error("Copy failed:", error);
+        }
+    };
 
     // Project data
     const projects = [
@@ -776,12 +787,13 @@ export default function Home() {
                                         {msg.showContactButtons && (
                                             <div className="flex flex-col gap-2 mt-3">
                                                 <Button
+                                                    onClick={handleCopy}
                                                     variant="outline"
                                                     size="sm"
                                                     className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
                                                 >
                                                     <Copy size={14} className="mr-2" />
-                                                    Copy
+                                                    {copied ? "Copied!" : "Copy"}
                                                 </Button>
                                                 <Button
                                                     variant="outline"
