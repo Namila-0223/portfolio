@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +10,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
 import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink } from "lucide-react";
 import { ProfileHeader } from "@/components/profile-header";
+import Lottie from "lottie-react";
+
+//lottie animations
+import behanceData from "@/public/animations/behance.json";
 
 export default function Home() {
     const [name, setName] = useState("");
@@ -26,6 +29,7 @@ export default function Home() {
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [currentDate] = useState(new Date());
+    const [copied, setCopied] = useState(false);
 
     // Format date for display
     const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -41,6 +45,17 @@ export default function Home() {
         minute: "numeric",
         hour12: true,
     }).format(currentDate);
+
+    // Copy to clipboard function
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText("namilapreshan11@gmail.com");
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (error) {
+            console.error("Copy failed:", error);
+        }
+    };
 
     // Project data
     const projects = [
@@ -132,10 +147,11 @@ export default function Home() {
             sender: "namila",
             senderName: "Namila Preshan",
             content: "Take a look at my creative explorations on Behance:",
-            hasImage: true,
-            imageAlt: "Behance shots",
-            imageSrc: "/images/behance.svg",
-            projectId: "behance-explorations",
+            hasLottie: true,
+            lottieSrc: "/animations/behance.json",
+            lottieAlt: "Behance animation",
+            projectId: null,
+            externalUrl: "https://www.behance.net/namilapreshan1",
         },
         {
             id: 6,
@@ -168,10 +184,84 @@ export default function Home() {
             id: 8,
             sender: "user",
             senderName: "You",
-            content: "Here's what a few people have said after working with me.",
+            content: "What tools and skills do you work with?",
         },
         {
             id: 9,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content: "Great question! Here's a quick overview of the tools and skills I work with regularly:",
+        },
+        {
+            id: 10,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content: "🧠 UX Skills: ",
+            skill: [
+                { name: "Wireframing" },
+                { name: "Prototyping" },
+                { name: "Interaction Design" },
+                { name: "Usability Testing" },
+
+                { name: "Information Architecture" },
+            ],
+        },
+        {
+            id: 11,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content: "🎨 UI Skills: ",
+            skill: [
+                { name: "Design Systems" },
+                { name: "Visual Design" },
+                { name: "Typography" },
+                { name: "Accessibility" },
+                { name: "Responsive Design" },
+            ],
+        },
+        {
+            id: 12,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content: "🛠 Tools I use:",
+            tools: [
+                { name: "Figma", icon: "/icons/Figma.svg" },
+                { name: "Illustrator", icon: "/icons/Illustrator.svg" },
+                { name: "Photoshop", icon: "/icons/Photoshop.svg" },
+            ],
+        },
+        {
+            id: 13,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content: "💻 language I use:",
+            tools: [
+                { name: "HTML", icon: "/icons/HTML5.svg" },
+                { name: "SCSS", icon: "/icons/Sass.svg" },
+                { name: "Tailwind CSS", icon: "/icons/Photoshop.svg" },
+                { name: "JavaScript", icon: "/icons/JS.svg" },
+                { name: "Angular", icon: "/icons/Angular.svg" },
+                { name: "Next.js", icon: "/icons/Photoshop.svg" },
+                { name: "TypeScript", icon: "/icons/TypeScript.svg" },
+            ],
+        },
+        {
+            id: 14,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content:
+                "And I'm always learning—currently diving deeper into design tokens and advanced component systems.",
+        },
+
+        // 4. Client testimonials
+        {
+            id: 15,
+            sender: "user",
+            senderName: "You",
+            content: "Here's what a few people have said after working with me.",
+        },
+        {
+            id: 16,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
@@ -180,7 +270,7 @@ export default function Home() {
             testimonialAuthor: "- Samantha P, Product at Acme Co",
         },
         {
-            id: 10,
+            id: 17,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
@@ -189,24 +279,24 @@ export default function Home() {
             testimonialAuthor: "- Samantha P, Product at Acme Co",
         },
         {
-            id: 11,
+            id: 18,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
-                '"I highly recommend Namila as an exceptional product designer. He balances aesthetics and functionality, creating solutions that are intuitive and user-focused. Namila is creative and resourceful - a valuable asset to any team."',
+                '"Namila stands out as a skilled UI/UX designer who not only gets the job done but does it with style. In spite of tight timelines, he delivers exceptional work. His meticulous attention to detail is remarkable for optimal user experience. His collaborative spirit and professionalism make him highly recommended!"',
             isTestimonial: true,
             testimonialAuthor: "- Samantha P, Product at Acme Co",
         },
 
         // 5. Tell me more about you
         {
-            id: 12,
+            id: 19,
             sender: "user",
             senderName: "You",
             content: "I'm very impressed by your work. Anything else you'd like to share?",
         },
         {
-            id: 13,
+            id: 20,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
@@ -217,29 +307,21 @@ export default function Home() {
 
         // 6. Newsletter subscription
         {
-            id: 14,
+            id: 21,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "I also have a newsletter I write weekly, here's one of post",
         },
         {
-            id: 15,
+            id: 22,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "A Comprehensive Guide to Information Architecture Basics in UX Design",
             isNewsletter: true,
             number: 1,
         },
-        // {
-        //     id: 17,
-        //     sender: "namila",
-        //     senderName: "Namila Preshan",
-        //     content: "Exploring the New Notion UI/UX: Addressing the Controversy",
-        //     isNewsletter: true,
-        //     number: 2,
-        // },
         {
-            id: 16,
+            id: 23,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "If you're interested you can subscribe by entering your email below:",
@@ -248,27 +330,27 @@ export default function Home() {
 
         // 7. Contact section
         {
-            id: 17,
+            id: 24,
             sender: "user",
             senderName: "You",
             content: "How can I get in touch with you?",
         },
         {
-            id: 18,
+            id: 25,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "My email is hello@namila.me",
             showContactButtons: true,
         },
         {
-            id: 19,
+            id: 26,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
                 "I usually reply within 24 hours to communicate a good fit. I like to focus on projects that make a real impact.",
         },
         {
-            id: 20,
+            id: 27,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "You can also leave me a message, and I'll be sure to get back to you as soon as possible.",
@@ -277,7 +359,7 @@ export default function Home() {
 
         // 8. Final message
         {
-            id: 21,
+            id: 28,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "That's it for this chat! Feel free to restart the conversation.",
@@ -299,14 +381,14 @@ export default function Home() {
                         setCurrentMessageIndex((prev) => prev + 1);
                     },
                     // Increased delay for slower conversation
-                    2500 + Math.random() * 1500
+                    3500 + Math.random() * 1500
                 );
                 return () => clearTimeout(typingTimer);
             } else {
                 // For user messages, just show them after a longer delay
                 const userMsgTimer = setTimeout(() => {
                     setCurrentMessageIndex((prev) => prev + 1);
-                }, 1500); // Increased from 800ms
+                }, 2000); // Increased from 800ms
                 return () => clearTimeout(userMsgTimer);
             }
         }
@@ -490,39 +572,148 @@ export default function Home() {
                                             </p>
                                         )}
 
+                                        {/* Skills */}
+                                        {msg.skill && (
+                                            <div className="flex flex-wrap gap-2 mt-2">
+                                                {msg.skill.map((skill, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="flex items-center bg-gray-800 rounded-full px-3 py-1"
+                                                    >
+                                                        <span className="text-xs">{skill.name}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        {/* Tools list */}
+                                        {msg.tools && (
+                                            <div className="flex flex-wrap gap-2 mt-2">
+                                                {msg.tools.map((tool, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="flex items-center bg-gray-800 rounded-full px-3 py-1"
+                                                    >
+                                                        <Image
+                                                            src={tool.icon}
+                                                            alt={tool.name}
+                                                            width={24}
+                                                            height={24}
+                                                            className="mr-1"
+                                                        />
+                                                        <span className="text-xs">{tool.name}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        {/* Testimonial content */}
                                         {msg.testimonialAuthor && (
                                             <div className="mt-2 text-xs text-gray-400">
                                                 <p>{msg.testimonialAuthor}</p>
                                             </div>
                                         )}
 
-                                        {msg.hasImage && (
+                                        {(msg.hasImage || msg.hasLottie) && (
                                             <div className="mt-3 mb-2">
-                                                {msg.projectId ? (
-                                                    <Link href={`/projects/${msg.projectId}`} className="block group">
-                                                        <div className="relative overflow-hidden rounded-xl">
-                                                            <Image
-                                                                src={
-                                                                    msg.imageSrc ||
-                                                                    "/placeholder.svg?height=180&width=280"
-                                                                }
-                                                                alt={msg.imageAlt || "Project"}
-                                                                width={400}
-                                                                height={225}
-                                                                className="rounded-xl w-full object-cover shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02]"
-                                                                style={{ aspectRatio: "16/9", height: "auto" }}
-                                                            />
-                                                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                                                <div className="bg-blue-600 rounded-full p-2">
-                                                                    <ExternalLink size={20} className="text-white" />
+                                                {msg.projectId || msg.externalUrl ? (
+                                                    msg.externalUrl ? (
+                                                        // External link block
+                                                        <a
+                                                            href={msg.externalUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="block group"
+                                                        >
+                                                            <div className="relative overflow-hidden rounded-xl">
+                                                                {msg.hasLottie ? (
+                                                                    <div
+                                                                        className="w-full"
+                                                                        style={{
+                                                                            backgroundImage:
+                                                                                "url('/images/cardbg.jpg')",
+                                                                            backgroundSize: "cover",
+                                                                        }}
+                                                                    >
+                                                                        <Lottie
+                                                                            animationData={behanceData}
+                                                                            className="w-full h-56 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02]"
+                                                                            loop
+                                                                            autoplay
+                                                                        />
+                                                                    </div>
+                                                                ) : (
+                                                                    <Image
+                                                                        src={
+                                                                            msg.imageSrc ||
+                                                                            "/placeholder.svg?height=180&width=280"
+                                                                        }
+                                                                        alt={msg.imageAlt || "Project"}
+                                                                        width={400}
+                                                                        height={225}
+                                                                        className="rounded-xl w-full object-cover shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02]"
+                                                                        style={{ aspectRatio: "16/9", height: "auto" }}
+                                                                    />
+                                                                )}
+
+                                                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                                                    <div className="bg-blue-600 rounded-full p-2">
+                                                                        <ExternalLink
+                                                                            size={20}
+                                                                            className="text-white"
+                                                                        />
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <p className="text-xs text-blue-400 mt-2 flex items-center">
-                                                            <span>View project details</span>
-                                                            <ExternalLink size={12} className="ml-1" />
-                                                        </p>
-                                                    </Link>
+                                                        </a>
+                                                    ) : (
+                                                        // Internal project link block
+                                                        <Link
+                                                            href={`/projects/${msg.projectId}`}
+                                                            className="block group"
+                                                        >
+                                                            <div className="relative overflow-hidden rounded-xl">
+                                                                {msg.hasLottie ? (
+                                                                    <div
+                                                                        className="w-full"
+                                                                        style={{
+                                                                            backgroundImage:
+                                                                                "url('/images/cardbg.jpg')",
+                                                                            backgroundSize: "cover",
+                                                                        }}
+                                                                    >
+                                                                        <Lottie
+                                                                            animationData={behanceData}
+                                                                            className="w-full h-56 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02]"
+                                                                            loop
+                                                                            autoplay
+                                                                        />
+                                                                    </div>
+                                                                ) : (
+                                                                    <Image
+                                                                        src={
+                                                                            msg.imageSrc ||
+                                                                            "/placeholder.svg?height=180&width=280"
+                                                                        }
+                                                                        alt={msg.imageAlt || "Project"}
+                                                                        width={400}
+                                                                        height={225}
+                                                                        className="rounded-xl w-full object-cover shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02]"
+                                                                        style={{ aspectRatio: "16/9", height: "auto" }}
+                                                                    />
+                                                                )}
+
+                                                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                                                    <div className="bg-blue-600 rounded-full p-2">
+                                                                        <ExternalLink
+                                                                            size={20}
+                                                                            className="text-white"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </Link>
+                                                    )
                                                 ) : (
                                                     <Image
                                                         src={msg.imageSrc || "/placeholder.svg?height=180&width=280"}
@@ -586,12 +777,13 @@ export default function Home() {
                                         {msg.showContactButtons && (
                                             <div className="flex flex-col gap-2 mt-3">
                                                 <Button
+                                                    onClick={handleCopy}
                                                     variant="outline"
                                                     size="sm"
                                                     className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
                                                 >
                                                     <Copy size={14} className="mr-2" />
-                                                    Copy
+                                                    {copied ? "Copied!" : "Copy"}
                                                 </Button>
                                                 <Button
                                                     variant="outline"
