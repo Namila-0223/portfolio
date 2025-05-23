@@ -47,7 +47,7 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                             }}
                         >
                             <img
-                                src={designer.avatar || "/images/profile-1.jpeg"}
+                                src={designer.avatar || "/images/profile-2.jpeg"}
                                 alt={designer.name}
                                 className="w-full h-full object-cover"
                                 style={{ transform: "translateZ(0)" }}
@@ -92,18 +92,18 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                                     style={{ overflow: "hidden", willChange: "opacity, height" }}
                                 >
                                     {/* <p className="text-gray-400 text-sm mt-1 mb-2">{designer.pronouns}</p> */}
-                                    <p className="text-sm text-gray-400">
+                                    <p className="text-sm text-gray-200">
                                         {designer.title}
                                         <a href="#" className="text-blue-400">
                                             {designer.workplace}
                                         </a>
                                     </p>
                                     {/* <p className="text-sm text-gray-400"></p> */}
-                                    <p className="text-sm text-gray-400 mt-1">{designer.tagline}</p>
-                                    <p className="text-xs text-gray-500 mt-2">
+                                    <p className="text-sm text-gray-300 mt-1">{designer.tagline}</p>
+                                    <p className="text-xs text-gray-400 mt-2">
                                         {designer.personality} · {designer.location} · {designer.email}
                                     </p>
-                                    <div className="text-xs text-gray-500 mt-1">
+                                    <div className="text-xs text-gray-400 mt-1">
                                         <p>👋 Hey, how are you?</p>
                                     </div>
                                 </motion.div>

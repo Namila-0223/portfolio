@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
-import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink } from "lucide-react";
+import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink, ArrowDown } from "lucide-react";
 import { ProfileHeader } from "@/components/profile-header";
 import Lottie from "lottie-react";
 
@@ -21,6 +21,7 @@ export default function Home() {
     const [message, setMessage] = useState("");
     const [emailSubscribe, setEmailSubscribe] = useState("");
     const chatContainerRef = useRef<HTMLDivElement>(null);
+    const messageRefs = useRef<(HTMLDivElement | null)[]>([]); // Ref for each message
     const [showTyping, setShowTyping] = useState(false);
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     const [isSubscribed, setIsSubscribed] = useState(false);
@@ -28,10 +29,21 @@ export default function Home() {
     const [isMessageSent, setIsMessageSent] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [currentDate] = useState(new Date());
     const [copied, setCopied] = useState(false);
+    const [isAtBottom, setIsAtBottom] = useState(true);
+    const [showNewMessageAlert, setShowNewMessageAlert] = useState(false);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [lastViewedMessageIndex, setLastViewedMessageIndex] = useState(-1);
 
-    // Format date for display
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentDate(new Date());
+        }, 60000); // update every minute
+        return () => clearInterval(timer);
+    }, []);
+
     const formattedDate = new Intl.DateTimeFormat("en-US", {
         weekday: "long",
         year: "numeric",
@@ -39,7 +51,6 @@ export default function Home() {
         day: "numeric",
     }).format(currentDate);
 
-    // Format time for display
     const formattedTime = new Intl.DateTimeFormat("en-US", {
         hour: "numeric",
         minute: "numeric",
@@ -87,45 +98,36 @@ export default function Home() {
         location: "Colombo, Sri Lanka",
         email: "hello@namila.me",
         personality: "ENFJ",
-        avatar: "/images/profile-1.jpeg?height=250&width=250",
+        avatar: "/images/profile-2.jpeg?height=250&width=250",
         isOnline: true,
     };
 
     // Calculate header height for proper spacing
     useEffect(() => {
-        // Function to calculate expanded header height
         const calculateHeaderHeight = () => {
-            // Expanded header is approximately 200px, collapsed is about 80px
             const expandedHeight = isScrolled ? 80 : 200;
             setHeaderHeight(expandedHeight);
         };
 
         calculateHeaderHeight();
-
-        // Recalculate when scroll state changes
         window.addEventListener("resize", calculateHeaderHeight);
         return () => window.removeEventListener("resize", calculateHeaderHeight);
     }, [isScrolled]);
 
     // Messages for the chat
     const messages = [
-        // 1. Namila's greeting and self-introduction
         {
             id: 1,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Hey! It’s me, Thimira, a product designer based in Colombo. How can I help you today? 😊",
+            content: "Hey! It’s me, Namila, a UI UX Engineer based in Colombo. How can I help you today? 😊",
         },
-
-        // 2. User asking to see work
         {
             id: 2,
             sender: "user",
             senderName: "You",
             content: "Can I see your work?",
         },
-
-        // 3. Namila sharing portfolio items
         {
             id: 3,
             sender: "namila",
@@ -163,13 +165,6 @@ export default function Home() {
             imageSrc: "/images/design-system.png",
             projectId: "design-system",
         },
-        // {
-        //     id: 7,
-        //     sender: "namila",
-        //     senderName: "Namila Preshan",
-        //     content: "Design Projects",
-        //     isHeader: true,
-        // },
         {
             id: 7,
             sender: "namila",
@@ -178,8 +173,6 @@ export default function Home() {
                 "Explore the projects where I've collaborated with startups to solve real problems and deliver measurable results.",
             isHeader: false,
         },
-
-        // 4. Client testimonials
         {
             id: 8,
             sender: "user",
@@ -202,7 +195,6 @@ export default function Home() {
                 { name: "Prototyping" },
                 { name: "Interaction Design" },
                 { name: "Usability Testing" },
-
                 { name: "Information Architecture" },
             ],
         },
@@ -252,8 +244,6 @@ export default function Home() {
             content:
                 "And I'm always learning—currently diving deeper into design tokens and advanced component systems.",
         },
-
-        // 4. Client testimonials
         {
             id: 15,
             sender: "user",
@@ -287,8 +277,6 @@ export default function Home() {
             isTestimonial: true,
             testimonialAuthor: "- Samantha P, Product at Acme Co",
         },
-
-        // 5. Tell me more about you
         {
             id: 19,
             sender: "user",
@@ -304,8 +292,6 @@ export default function Home() {
             hasProfileImage: true,
             profileImageSrc: "/images/profile-3.jpg",
         },
-
-        // 6. Newsletter subscription
         {
             id: 21,
             sender: "namila",
@@ -327,8 +313,6 @@ export default function Home() {
             content: "If you're interested you can subscribe by entering your email below:",
             showSubscribe: true,
         },
-
-        // 7. Contact section
         {
             id: 24,
             sender: "user",
@@ -356,8 +340,6 @@ export default function Home() {
             content: "You can also leave me a message, and I'll be sure to get back to you as soon as possible.",
             showContactForm: true,
         },
-
-        // 8. Final message
         {
             id: 28,
             sender: "namila",
@@ -372,61 +354,80 @@ export default function Home() {
         if (currentMessageIndex < messages.length) {
             const currentMsg = messages[currentMessageIndex];
 
-            // Only show typing indicator for Namila's messages
             if (currentMsg.sender === "namila") {
                 setShowTyping(true);
-                const typingTimer = setTimeout(
-                    () => {
-                        setShowTyping(false);
-                        setCurrentMessageIndex((prev) => prev + 1);
-                    },
-                    // Increased delay for slower conversation
-                    3500 + Math.random() * 1500
-                );
+                const typingTimer = setTimeout(() => {
+                    setShowTyping(false);
+                    setCurrentMessageIndex((prev) => {
+                        const newIndex = prev + 1;
+                        if (!isAtBottom && newIndex > lastViewedMessageIndex + 1) {
+                            setUnreadCount((prev) => prev + 1);
+                            setShowNewMessageAlert(true);
+                        }
+                        return newIndex;
+                    });
+                }, 3500 + Math.random() * 1500);
                 return () => clearTimeout(typingTimer);
             } else {
-                // For user messages, just show them after a longer delay
                 const userMsgTimer = setTimeout(() => {
-                    setCurrentMessageIndex((prev) => prev + 1);
-                }, 2000); // Increased from 800ms
+                    setCurrentMessageIndex((prev) => {
+                        const newIndex = prev + 1;
+                        if (!isAtBottom && newIndex > lastViewedMessageIndex + 1) {
+                            setUnreadCount((prev) => prev + 1);
+                            setShowNewMessageAlert(true);
+                        }
+                        return newIndex;
+                    });
+                }, 2000);
                 return () => clearTimeout(userMsgTimer);
             }
         }
-    }, [currentMessageIndex, messages.length]);
+    }, [currentMessageIndex, isAtBottom, lastViewedMessageIndex, messages.length]);
 
-    // Always auto-scroll to the latest message
+    // Check if user is at the bottom of the chat
     useEffect(() => {
-        if (chatContainerRef.current) {
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-        }
-    }, [currentMessageIndex, showTyping]);
-
-    // Show/hide scroll to top button and track scroll position
-    useEffect(() => {
-        const handleScroll = () => {
+        const checkIfAtBottom = () => {
             if (chatContainerRef.current) {
-                const scrollTop = chatContainerRef.current.scrollTop;
+                const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+                const atBottom = scrollTop + clientHeight >= scrollHeight - 100;
+                setIsAtBottom(atBottom);
                 setShowScrollToTop(scrollTop > 500);
                 setIsScrolled(scrollTop > 100);
+
+                // Update lastViewedMessageIndex if at bottom
+                if (atBottom && currentMessageIndex > 0) {
+                    setLastViewedMessageIndex(currentMessageIndex - 1);
+                    setUnreadCount(0);
+                    setShowNewMessageAlert(false);
+                }
             }
         };
 
         const chatContainer = chatContainerRef.current;
         if (chatContainer) {
-            chatContainer.addEventListener("scroll", handleScroll);
-            return () => chatContainer.removeEventListener("scroll", handleScroll);
+            chatContainer.addEventListener("scroll", checkIfAtBottom);
+            checkIfAtBottom();
+            return () => chatContainer.removeEventListener("scroll", checkIfAtBottom);
         }
-    }, []);
+    }, [currentMessageIndex]);
+
+    // Auto-scroll to bottom only if user is at bottom
+    useEffect(() => {
+        if (chatContainerRef.current && isAtBottom && currentMessageIndex > 0) {
+            chatContainerRef.current.scrollTo({
+                top: chatContainerRef.current.scrollHeight,
+                behavior: "smooth",
+            });
+            setLastViewedMessageIndex(currentMessageIndex - 1);
+            setUnreadCount(0);
+            setShowNewMessageAlert(false);
+        }
+    }, [currentMessageIndex, showTyping, isAtBottom]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // In a real app, you would send the form data to your backend
         console.log({ name, email, message });
-
-        // Show success message
         setIsMessageSent(true);
-
-        // Clear form
         setName("");
         setEmail("");
         setMessage("");
@@ -434,13 +435,8 @@ export default function Home() {
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault();
-        // In a real app, you would subscribe the email
         console.log({ emailSubscribe });
-
-        // Show success message
         setIsSubscribed(true);
-
-        // Clear form
         setEmailSubscribe("");
     };
 
@@ -448,11 +444,13 @@ export default function Home() {
         setCurrentMessageIndex(0);
         setIsSubscribed(false);
         setIsMessageSent(false);
-
-        // Scroll to top when restarting
+        setShowNewMessageAlert(false);
+        setUnreadCount(0);
+        setLastViewedMessageIndex(-1);
         if (chatContainerRef.current) {
             chatContainerRef.current.scrollTop = 0;
         }
+        setIsAtBottom(true);
     };
 
     const scrollToTop = () => {
@@ -460,6 +458,21 @@ export default function Home() {
             chatContainerRef.current.scrollTo({
                 top: 0,
                 behavior: "smooth",
+            });
+        }
+    };
+
+    const scrollToFirstUnread = () => {
+        if (unreadCount > 0 && messageRefs.current[lastViewedMessageIndex + 1]) {
+            messageRefs.current[lastViewedMessageIndex + 1]?.scrollIntoView({ behavior: "smooth" });
+            setLastViewedMessageIndex((prev) => prev + 1);
+            setUnreadCount((prev) => {
+                const newCount = prev - 1;
+                if (newCount === 0) {
+                    setShowNewMessageAlert(false);
+                    setIsAtBottom(true);
+                }
+                return newCount;
             });
         }
     };
@@ -501,30 +514,26 @@ export default function Home() {
 
     return (
         <main className="min-h-screen bg-[#0f0f0f] text-white">
-            {/* Full header - visible only when not scrolled */}
-
             <ProfileHeader designer={designer} isScrolled={isScrolled} />
 
-            {/* Compact sticky header - only shows when scrolled */}
-
-            {/* Chat container */}
             <div style={{ paddingTop: `${headerHeight + 20}px` }}>
                 <div
                     className="max-w-2xl mx-auto px-4 pb-8 pt-4 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar"
                     ref={chatContainerRef}
                 >
-                    {/* Date/time separator */}
                     <div className="flex justify-center my-4">
                         <div className="bg-gray-800 rounded-full px-4 py-1 text-xs text-gray-400">
                             {formattedDate} • {formattedTime}
                         </div>
                     </div>
 
-                    {/* Chat messages */}
                     <div className="space-y-6 pb-20 pt-4">
-                        {messages.slice(0, currentMessageIndex).map((msg) => (
+                        {messages.slice(0, currentMessageIndex).map((msg, index) => (
                             <motion.div
                                 key={msg.id}
+                                ref={(el) => {
+                                    messageRefs.current[index] = el;
+                                }}
                                 className={`flex ${msg.sender === "user" ? "justify-end" : ""}`}
                                 initial="hidden"
                                 animate="visible"
@@ -534,7 +543,7 @@ export default function Home() {
                                 {msg.sender === "namila" && (
                                     <div className="w-8 h-8 mr-2 flex-shrink-0">
                                         <Image
-                                            src="/images/profile-1.jpeg"
+                                            src="/images/profile-2.jpeg"
                                             alt="Namila"
                                             width={64}
                                             height={64}
@@ -544,7 +553,6 @@ export default function Home() {
                                 )}
 
                                 <div className="flex flex-col max-w-[80%]">
-                                    {/* Sender name */}
                                     <span
                                         className={`text-xs mb-1 ${
                                             msg.sender === "user" ? "text-right text-gray-400" : "text-gray-400"
@@ -607,18 +615,18 @@ export default function Home() {
                                             </div>
                                         )}
 
-                                        {/* Testimonial content */}
+                                        {/* Testimonial author */}
                                         {msg.testimonialAuthor && (
                                             <div className="mt-2 text-xs text-gray-400">
                                                 <p>{msg.testimonialAuthor}</p>
                                             </div>
                                         )}
 
+                                        {/* Image or Lottie animation */}
                                         {(msg.hasImage || msg.hasLottie) && (
                                             <div className="mt-3 mb-2">
                                                 {msg.projectId || msg.externalUrl ? (
                                                     msg.externalUrl ? (
-                                                        // External link block
                                                         <a
                                                             href={msg.externalUrl}
                                                             target="_blank"
@@ -667,7 +675,6 @@ export default function Home() {
                                                             </div>
                                                         </a>
                                                     ) : (
-                                                        // Internal project link block
                                                         <Link
                                                             href={`/projects/${msg.projectId}`}
                                                             className="block group"
@@ -727,6 +734,7 @@ export default function Home() {
                                             </div>
                                         )}
 
+                                        {/* Profile image */}
                                         {msg.hasProfileImage && (
                                             <div className="mt-3 flex flex-col items-center">
                                                 <Image
@@ -741,15 +749,16 @@ export default function Home() {
                                             </div>
                                         )}
 
+                                        {/* Newsletter */}
                                         {msg.isNewsletter && (
                                             <div className="flex items-center">
                                                 <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center mr-2 flex-shrink-0">
                                                     <span className="text-white font-bold">{msg.number}</span>
                                                 </div>
-                                                {/* <p className="text-sm">{msg.content}</p> */}
                                             </div>
                                         )}
 
+                                        {/* Subscribe form */}
                                         {msg.showSubscribe && !isSubscribed && (
                                             <form onSubmit={handleSubscribe} className="mt-3 flex flex-col gap-2">
                                                 <Input
@@ -774,6 +783,7 @@ export default function Home() {
                                             <p className="mt-3 text-green-400 text-sm">Thanks for subscribing!</p>
                                         )}
 
+                                        {/* Contact buttons */}
                                         {msg.showContactButtons && (
                                             <div className="flex flex-col gap-2 mt-3">
                                                 <Button
@@ -785,25 +795,42 @@ export default function Home() {
                                                     <Copy size={14} className="mr-2" />
                                                     {copied ? "Copied!" : "Copy"}
                                                 </Button>
-                                                <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                <Link
+                                                    href="https://www.linkedin.com/in/namila-preshan/"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-full"
                                                 >
-                                                    <Linkedin size={14} className="mr-2" />
-                                                    Connect on LinkedIn
-                                                </Button>
-                                                <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        className="w-full bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                        type="button"
+                                                    >
+                                                        <Linkedin size={14} className="mr-2" />
+                                                        Connect on LinkedIn
+                                                    </Button>
+                                                </Link>
+                                                <Link
+                                                    href="https://cal.com/namila-preshan"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-full"
                                                 >
-                                                    <Calendar size={14} className="mr-2" />
-                                                    Book a call
-                                                </Button>
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333] w-full"
+                                                        type="button"
+                                                    >
+                                                        <Calendar size={14} className="mr-2" />
+                                                        Book a call
+                                                    </Button>
+                                                </Link>
                                             </div>
                                         )}
 
+                                        {/* Contact form */}
                                         {msg.showContactForm && !isMessageSent && (
                                             <form onSubmit={handleSubmit} className="mt-4 space-y-3">
                                                 <Input
@@ -829,7 +856,10 @@ export default function Home() {
                                                     onChange={(e) => setMessage(e.target.value)}
                                                     required
                                                 />
-                                                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+                                                <Button
+                                                    type="submit"
+                                                    className="w-full bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                >
                                                     <Send size={14} className="mr-2" />
                                                     Send
                                                 </Button>
@@ -842,6 +872,7 @@ export default function Home() {
                                             </p>
                                         )}
 
+                                        {/* Restart button */}
                                         {msg.showRestart && (
                                             <div className="flex justify-center mt-4">
                                                 <Button
@@ -856,7 +887,7 @@ export default function Home() {
                                         )}
                                     </div>
 
-                                    {/* Message time */}
+                                    {/* Message timestamp */}
                                     <span
                                         className={`text-xs mt-1 ${
                                             msg.sender === "user" ? "text-right text-gray-500" : "text-gray-500"
@@ -874,7 +905,6 @@ export default function Home() {
                             </motion.div>
                         ))}
 
-                        {/* Typing indicator */}
                         {showTyping && messages[currentMessageIndex]?.sender === "namila" && (
                             <motion.div
                                 className="flex"
@@ -884,7 +914,7 @@ export default function Home() {
                             >
                                 <div className="w-8 h-8 mr-2">
                                     <Image
-                                        src="/images/profile-1.jpeg"
+                                        src="/images/profile-2.jpeg"
                                         alt="Namila"
                                         width={32}
                                         height={32}
@@ -914,17 +944,36 @@ export default function Home() {
                         )}
                     </div>
 
-                    {/* Footer */}
-                    <div className=" text-center text-xs text-gray-500 mt-8 pt-4  border-gray-800">
+                    <div className=" text-center text-xs text-gray-500 mt-8 pt-4 border-gray-800">
                         © 2025 Handcrafted by Namila •{" "}
                         <a href="#" className="hover:text-gray-400">
                             Privacy
                         </a>
                     </div>
+
+                    <div className="flex justify-center">
+                        <AnimatePresence>
+                            {showNewMessageAlert && unreadCount > 0 && (
+                                <motion.button
+                                    className="fixed bottom-6 mx-auto p-2 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50 flex items-center"
+                                    onClick={scrollToFirstUnread}
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    transition={{ duration: 0.2 }}
+                                    aria-label="Scroll to new message"
+                                >
+                                    <ArrowDown size={12} className="mr-2" />
+                                    <span className="text-sm">
+                                        {unreadCount > 5 ? "5+" : unreadCount} New Message{unreadCount !== 1 ? "s" : ""}
+                                    </span>
+                                </motion.button>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
             </div>
 
-            {/* Scroll to top button */}
             <AnimatePresence>
                 {showScrollToTop && (
                     <motion.button
