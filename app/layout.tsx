@@ -1,3 +1,5 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body className={`${inter.className} bg-[#0f0f0f] text-white antialiased`}>
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
                     {children}
+                    <SpeedInsights />
                 </ThemeProvider>
             </body>
         </html>
