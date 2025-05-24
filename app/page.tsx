@@ -40,7 +40,7 @@ export default function Home() {
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentDate(new Date());
-        }, 60000); // update every minute
+        }, 1000); // update every minute
         return () => clearInterval(timer);
     }, []);
 
@@ -55,6 +55,7 @@ export default function Home() {
         hour: "numeric",
         minute: "numeric",
         hour12: true,
+        timeZone: "Asia/Colombo", // Force correct time zone
     }).format(currentDate);
 
     // Copy to clipboard function
@@ -95,10 +96,10 @@ export default function Home() {
         title: "UI UX Enginieer at ",
         workplace: "@Epic lanka",
         tagline: "Crafting interfaces that matter ✨",
-        location: "Colombo, Sri Lanka",
+        location: "Sri Lanka",
         email: "hello@namila.me",
-        personality: "ENFJ",
-        avatar: "/images/profile-2.jpeg?height=250&width=250",
+        personality: "ENFJ-T",
+        avatar: "/images/namila.jpg?height=250&width=250",
         isOnline: true,
     };
 
@@ -132,7 +133,7 @@ export default function Home() {
             id: 3,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Of course! Here are some projects I've worked on recently:",
+            content: "Of course! Here are some projects I've worked on recently",
         },
         {
             id: 4,
@@ -170,7 +171,7 @@ export default function Home() {
             sender: "namila",
             senderName: "Namila Preshan",
             content:
-                "Explore the projects where I've collaborated with startups to solve real problems and deliver measurable results.",
+                "Explore the projects where I tackled real-world problems and delivered measurable results through thoughtful design.",
             isHeader: false,
         },
         {
@@ -288,7 +289,7 @@ export default function Home() {
             sender: "namila",
             senderName: "Namila Preshan",
             content:
-                "I'm all about improving how people interact with digital products. With over 1 years of experience in design and UI development, I help brands create good design that looks amazing while being functional.",
+                "I'm passionate about making digital experiences easier and more enjoyable for people. With over a year of hands-on experience in design and UI development, I focus on creating interfaces that not only look great but also work smoothly and make sense to users.",
             hasProfileImage: true,
             profileImageSrc: "/images/profile-3.jpg",
         },
@@ -296,7 +297,7 @@ export default function Home() {
             id: 21,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "I also have a newsletter I write weekly, here's one of post",
+            content: "Occasionally, I share insights on design and development—here’s one of my recent posts.",
         },
         {
             id: 22,
@@ -310,7 +311,7 @@ export default function Home() {
             id: 23,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "If you're interested you can subscribe by entering your email below:",
+            content: "If you like it, you can follow me for more updates and thoughts.",
             showSubscribe: true,
         },
         {
@@ -323,7 +324,7 @@ export default function Home() {
             id: 25,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "My email is hello@namila.me",
+            content: "My email is namilapreshan11@gmail.com. You can reach me there.",
             showContactButtons: true,
         },
         {
@@ -331,17 +332,26 @@ export default function Home() {
             sender: "namila",
             senderName: "Namila Preshan",
             content:
+                "I mostly use LinkedIn to communicate. If you’d like a face-to-face chat, book a slot in my calendar for a video call!",
+            showsocialtButtons: true,
+        },
+
+        {
+            id: 27,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content:
                 "I usually reply within 24 hours to communicate a good fit. I like to focus on projects that make a real impact.",
         },
         {
-            id: 27,
+            id: 28,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "You can also leave me a message, and I'll be sure to get back to you as soon as possible.",
             showContactForm: true,
         },
         {
-            id: 28,
+            id: 29,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "That's it for this chat! Feel free to restart the conversation.",
@@ -543,7 +553,7 @@ export default function Home() {
                                 {msg.sender === "namila" && (
                                     <div className="w-8 h-8 mr-2 flex-shrink-0">
                                         <Image
-                                            src="/images/profile-2.jpeg"
+                                            src="/images/namila.jpg"
                                             alt="Namila"
                                             width={64}
                                             height={64}
@@ -795,22 +805,11 @@ export default function Home() {
                                                     <Copy size={14} className="mr-2" />
                                                     {copied ? "Copied!" : "Copy"}
                                                 </Button>
-                                                <Link
-                                                    href="https://www.linkedin.com/in/namila-preshan/"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="w-full"
-                                                >
-                                                    <Button
-                                                        variant="outline"
-                                                        size="sm"
-                                                        className="w-full bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
-                                                        type="button"
-                                                    >
-                                                        <Linkedin size={14} className="mr-2" />
-                                                        Connect on LinkedIn
-                                                    </Button>
-                                                </Link>
+                                            </div>
+                                        )}
+
+                                        {msg.showsocialtButtons && (
+                                            <div className="flex flex-col gap-2 mt-3">
                                                 <Link
                                                     href="https://cal.com/namila-preshan"
                                                     target="_blank"
@@ -825,6 +824,22 @@ export default function Home() {
                                                     >
                                                         <Calendar size={14} className="mr-2" />
                                                         Book a call
+                                                    </Button>
+                                                </Link>
+                                                <Link
+                                                    href="https://www.linkedin.com/in/namila-preshan/"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-full"
+                                                >
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        className="w-full bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                        type="button"
+                                                    >
+                                                        <Linkedin size={14} className="mr-2" />
+                                                        Connect on LinkedIn
                                                     </Button>
                                                 </Link>
                                             </div>
@@ -899,7 +914,13 @@ export default function Home() {
 
                                 {msg.sender === "user" && (
                                     <div className="w-8 h-8 ml-2 flex-shrink-0">
-                                        <div className="w-8 h-8 rounded-full bg-gray-700"></div>
+                                        <Image
+                                            src="/images/user.jpg"
+                                            alt="Namila"
+                                            width={64}
+                                            height={64}
+                                            className="rounded-full object-cover"
+                                        />
                                     </div>
                                 )}
                             </motion.div>
@@ -914,7 +935,7 @@ export default function Home() {
                             >
                                 <div className="w-8 h-8 mr-2">
                                     <Image
-                                        src="/images/profile-2.jpeg"
+                                        src="/images/namila.jpg"
                                         alt="Namila"
                                         width={32}
                                         height={32}
