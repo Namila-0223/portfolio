@@ -24,7 +24,6 @@ export default function Home() {
     const messageRefs = useRef<(HTMLDivElement | null)[]>([]); // Ref for each message
     const [showTyping, setShowTyping] = useState(false);
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-    const [isSubscribed, setIsSubscribed] = useState(false);
     const [headerHeight, setHeaderHeight] = useState(0);
     const [isMessageSent, setIsMessageSent] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
@@ -133,13 +132,13 @@ export default function Home() {
             id: 3,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Of course! Here are some projects I've worked on recently",
+            content: "Of course! Here are some projects I've worked on recently.",
         },
         {
             id: 4,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Here's a dashboard I designed for a fintech startup:",
+            content: "Here's a dashboard I designed for a fintech startup.",
             hasImage: true,
             imageAlt: "Dashboard UI Design",
             imageSrc: "/images/dashboard-project.png",
@@ -149,7 +148,7 @@ export default function Home() {
             id: 5,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Take a look at my creative explorations on Behance:",
+            content: "Take a look at my creative explorations on Behance.",
             hasLottie: true,
             lottieSrc: "/animations/behance.json",
             lottieAlt: "Behance animation",
@@ -160,7 +159,7 @@ export default function Home() {
             id: 6,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "A design system I built to deliver consistency, scalability, and impact across digital products:",
+            content: "A design system I built to deliver consistency, scalability, and impact across digital products.",
             hasImage: true,
             imageAlt: "Design System",
             imageSrc: "/images/design-system.png",
@@ -184,7 +183,7 @@ export default function Home() {
             id: 9,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Great question! Here's a quick overview of the tools and skills I work with regularly:",
+            content: "Great question! Here's a quick overview of the tools and skills I work with regularly.",
         },
         {
             id: 10,
@@ -234,7 +233,7 @@ export default function Home() {
                 { name: "Tailwind CSS", icon: "/icons/Photoshop.svg" },
                 { name: "JavaScript", icon: "/icons/JS.svg" },
                 { name: "Angular", icon: "/icons/Angular.svg" },
-                { name: "Next.js", icon: "/icons/Photoshop.svg" },
+                { name: "Next.js", icon: "/icons/nextjs.png" },
                 { name: "TypeScript", icon: "/icons/TypeScript.svg" },
             ],
         },
@@ -249,34 +248,34 @@ export default function Home() {
             id: 15,
             sender: "user",
             senderName: "You",
-            content: "Here's what a few people have said after working with me.",
+            content: "Words from the people I’ve collaborated with closely.",
         },
         {
             id: 16,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
-                '"Namila is a true asset to design, blending artistry with functionality. His exceptional user-friendly UX designs are always on point, and his ability to understand client needs has made our collaboration incredibly successful at project goals."',
+                '"Namila quickly adapts to new challenges and consistently delivers work with great attention to detail. His problem-solving mindset and enthusiasm for learning make him a strong contributor. He collaborates well with the team, openly shares ideas, and values feedback. Namila’s professionalism and growth-driven attitude make him a valuable asset to any team."',
             isTestimonial: true,
-            testimonialAuthor: "- Samantha P, Product at Acme Co",
+            testimonialAuthor: "- Sajith Bogahawaththa, Tech Lead at Epic Lanka",
         },
         {
             id: 17,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
-                '"Namila stands out as a skilled UI/UX designer who not only gets the job done but does it with style. In spite of tight timelines, he delivers exceptional work. His meticulous attention to detail is remarkable for optimal user experience. His collaborative spirit and professionalism make him highly recommended!"',
+                '"Working with Namila has been a pleasure. He brings solid skills in visual, UX, and UI design-especially in Angular UI development. Despite being a junior, he’s contributed meaningfully to high-impact projects across eGov, eCommerce, and fintech. Namila is proactive, collaborative, and a reliable team player. He’d be an asset to any design or dev team."',
             isTestimonial: true,
-            testimonialAuthor: "- Samantha P, Product at Acme Co",
+            testimonialAuthor: "- Oshada S, UI UX Engineer at Epic Lanka",
         },
         {
             id: 18,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
-                '"Namila stands out as a skilled UI/UX designer who not only gets the job done but does it with style. In spite of tight timelines, he delivers exceptional work. His meticulous attention to detail is remarkable for optimal user experience. His collaborative spirit and professionalism make him highly recommended!"',
+                '"Namila consistently designs intuitive, user-focused interfaces that elevate the user experience. His creativity, attention to detail, and strong understanding of UX principles have contributed to the success of multiple projects. I highly recommend him for any role in UI/UX."',
             isTestimonial: true,
-            testimonialAuthor: "- Samantha P, Product at Acme Co",
+            testimonialAuthor: "- Wathsala Nadeeshan, UI UX Engineer at Epic Lanka",
         },
         {
             id: 19,
@@ -312,7 +311,7 @@ export default function Home() {
             sender: "namila",
             senderName: "Namila Preshan",
             content: "If you like it, you can follow me for more updates and thoughts.",
-            showSubscribe: true,
+            isfollowed: true,
         },
         {
             id: 24,
@@ -443,16 +442,8 @@ export default function Home() {
         setMessage("");
     };
 
-    const handleSubscribe = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log({ emailSubscribe });
-        setIsSubscribed(true);
-        setEmailSubscribe("");
-    };
-
     const handleRestart = () => {
         setCurrentMessageIndex(0);
-        setIsSubscribed(false);
         setIsMessageSent(false);
         setShowNewMessageAlert(false);
         setUnreadCount(0);
@@ -769,28 +760,24 @@ export default function Home() {
                                         )}
 
                                         {/* Subscribe form */}
-                                        {msg.showSubscribe && !isSubscribed && (
-                                            <form onSubmit={handleSubscribe} className="mt-3 flex flex-col gap-2">
-                                                <Input
-                                                    type="email"
-                                                    placeholder="Your email"
-                                                    className="bg-[#232323] border-[#333] focus:border-blue-500"
-                                                    value={emailSubscribe}
-                                                    onChange={(e) => setEmailSubscribe(e.target.value)}
-                                                    required
-                                                />
-                                                <Button
-                                                    type="submit"
-                                                    className=" hover:bg-blue-700"
-                                                    style={{ background: "rgb(46, 46, 46)" }}
+                                        {msg.isfollowed && (
+                                            <div className="flex flex-col items-center mt-3">
+                                                <Link
+                                                    href="https://medium.com/@namilapreshan11"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-full"
                                                 >
-                                                    Subscribe
-                                                </Button>
-                                            </form>
-                                        )}
-
-                                        {msg.showSubscribe && isSubscribed && (
-                                            <p className="mt-3 text-green-400 text-sm">Thanks for subscribing!</p>
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333] w-full"
+                                                        type="button"
+                                                    >
+                                                        Follow
+                                                    </Button>
+                                                </Link>
+                                            </div>
                                         )}
 
                                         {/* Contact buttons */}
@@ -966,10 +953,10 @@ export default function Home() {
                     </div>
 
                     <div className=" text-center text-xs text-gray-500 mt-8 pt-4 border-gray-800">
-                        © 2025 Handcrafted by Namila •{" "}
-                        <a href="#" className="hover:text-gray-400">
+                        © 2025 Made with ❤️ by Namila Preshan
+                        {/* <a href="#" className="hover:text-gray-400">
                             Privacy
-                        </a>
+                        </a> */}
                     </div>
 
                     <div className="flex justify-center">
