@@ -32,6 +32,9 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                 transform: "translateZ(0)",
             }}
         >
+            <div className="bg-gray-800 text-yellow-500 text-sm text-center py-1 px-4">
+                🚧 This site is still under development – some content may be updated soon.
+            </div>
             <div className="container max-w-2xl mx-auto px-4">
                 <div className="flex flex-col items-center text-center py-2">
                     {/* Avatar with online indicator */}
