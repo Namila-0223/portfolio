@@ -32,6 +32,7 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                 transform: "translateZ(0)",
             }}
         >
+            {/*this one have to remove after cmomplete site */}
             <div className="bg-gray-800 text-yellow-500 text-sm text-center py-1 px-4">
                 🚧 This site is still under development – some content may be updated soon.
             </div>
