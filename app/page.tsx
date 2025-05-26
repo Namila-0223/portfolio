@@ -5,8 +5,6 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { motion, AnimatePresence } from "framer-motion";
 import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink, ArrowDown } from "lucide-react";
 import { ProfileHeader } from "@/components/profile-header";
@@ -14,18 +12,18 @@ import Lottie from "lottie-react";
 
 //lottie animations
 import behanceData from "@/public/animations/behance.json";
+import Contact from "@/components/contact-form";
+import FloatingMenu from "@/components/floating-menu";
 
 export default function Home() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-    const [emailSubscribe, setEmailSubscribe] = useState("");
     const chatContainerRef = useRef<HTMLDivElement>(null);
-    const messageRefs = useRef<(HTMLDivElement | null)[]>([]); // Ref for each message
+    const messageRefs = useRef<(HTMLDivElement | null)[]>([]);
     const [showTyping, setShowTyping] = useState(false);
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     const [headerHeight, setHeaderHeight] = useState(0);
-    const [isMessageSent, setIsMessageSent] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -69,26 +67,6 @@ export default function Home() {
     };
 
     // Project data
-    const projects = [
-        {
-            id: "fintech-dashboard",
-            title: "Fintech Dashboard",
-            description: "A dashboard I designed for a fintech startup",
-            image: "/images/dashboard-project.png",
-        },
-        {
-            id: "dribbble-explorations",
-            title: "Dribbble Explorations",
-            description: "Creative design explorations on Dribbble",
-            image: "/images/dribbble-shots.png",
-        },
-        {
-            id: "design-system",
-            title: "Design System",
-            description: "A design system built for consistency and scalability",
-            image: "/images/design-system.png",
-        },
-    ];
 
     const designer = {
         name: "Namila Preshan",
@@ -138,11 +116,11 @@ export default function Home() {
             id: 4,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Here's a dashboard I designed for a fintech startup.",
+            content: "This is a mobile app I created for discovering and watching movie trailers.",
             hasImage: true,
-            imageAlt: "Dashboard UI Design",
-            imageSrc: "/images/dashboard-project.png",
-            projectId: "fintech-dashboard",
+            imageAlt: "Movie Trailler App UI Design",
+            imageSrc: "/project/project-1.png",
+            projectId: "mobile-app-ui",
         },
         {
             id: 5,
@@ -347,7 +325,7 @@ export default function Home() {
             sender: "namila",
             senderName: "Namila Preshan",
             content: "You can also leave me a message, and I'll be sure to get back to you as soon as possible.",
-            showContactForm: true,
+            // showContactForm: true,
         },
         {
             id: 29,
@@ -433,18 +411,8 @@ export default function Home() {
         }
     }, [currentMessageIndex, showTyping, isAtBottom]);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log({ name, email, message });
-        setIsMessageSent(true);
-        setName("");
-        setEmail("");
-        setMessage("");
-    };
-
     const handleRestart = () => {
         setCurrentMessageIndex(0);
-        setIsMessageSent(false);
         setShowNewMessageAlert(false);
         setUnreadCount(0);
         setLastViewedMessageIndex(-1);
@@ -759,7 +727,7 @@ export default function Home() {
                                             </div>
                                         )}
 
-                                        {/* Subscribe form */}
+                                        {/* follow button */}
                                         {msg.isfollowed && (
                                             <div className="flex flex-col items-center mt-3">
                                                 <Link
@@ -830,48 +798,6 @@ export default function Home() {
                                                     </Button>
                                                 </Link>
                                             </div>
-                                        )}
-
-                                        {/* Contact form */}
-                                        {msg.showContactForm && !isMessageSent && (
-                                            <form onSubmit={handleSubmit} className="mt-4 space-y-3">
-                                                <Input
-                                                    type="text"
-                                                    placeholder="Your name"
-                                                    className="bg-[#232323] border-[#333] focus:border-blue-500"
-                                                    value={name}
-                                                    onChange={(e) => setName(e.target.value)}
-                                                    required
-                                                />
-                                                <Input
-                                                    type="email"
-                                                    placeholder="Your email"
-                                                    className="bg-[#232323] border-[#333] focus:border-blue-500"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                    required
-                                                />
-                                                <Textarea
-                                                    placeholder="Your message"
-                                                    className="bg-[#232323] border-[#333] focus:border-blue-500 min-h-[100px]"
-                                                    value={message}
-                                                    onChange={(e) => setMessage(e.target.value)}
-                                                    required
-                                                />
-                                                <Button
-                                                    type="submit"
-                                                    className="w-full bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
-                                                >
-                                                    <Send size={14} className="mr-2" />
-                                                    Send
-                                                </Button>
-                                            </form>
-                                        )}
-
-                                        {msg.showContactForm && isMessageSent && (
-                                            <p className="mt-3 text-green-400 text-sm">
-                                                Message sent! I'll get back to you soon.
-                                            </p>
                                         )}
 
                                         {/* Restart button */}
@@ -982,6 +908,7 @@ export default function Home() {
                 </div>
             </div>
 
+            <FloatingMenu />
             <AnimatePresence>
                 {showScrollToTop && (
                     <motion.button

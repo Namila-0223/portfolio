@@ -6,608 +6,176 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp, ChevronLeft } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRightCircleIcon } from "lucide-react";
 
 // Project data
 const projectsData = {
-    "fintech-dashboard": {
-        title: "Fintech Dashboard",
-        description: "A comprehensive dashboard for a fintech startup",
-        coverImage: "/images/dashboard-project.png",
-        client: "FinanceFlow Inc.",
-        duration: "3 months",
-        role: "Lead UI/UX Designer",
-        year: "2025",
-        tools: ["Figma", "Illustrator", "Principle", "Notion"],
+    "mobile-app-ui": {
+        title: "Movie Trailer App UI",
+        description: "A sleek mobile app for discovering movie trailers and booking tickets.",
+        coverImage: "/images/movie-app-cover.png",
+        client: "Personal Concept Project",
+        duration: "4 weeks",
+        role: "UI/UX Designer",
+        year: "2024",
+        tools: ["Figma", "Notion", "Photoshop"],
         messages: [
             {
                 id: 1,
                 sender: "user",
                 senderName: "You",
-                content: "Tell me more about this fintech dashboard project.",
+                content: "What’s this Movie Trailer App about?",
             },
             {
                 id: 2,
                 sender: "namila",
                 senderName: "Namila",
                 content:
-                    "This was an exciting project for FinanceFlow Inc., a startup in the financial technology space.",
+                    "It's a mobile app concept that lets users watch movie trailers and directly book tickets — all from one place.",
             },
             {
                 id: 3,
                 sender: "namila",
                 senderName: "Namila",
                 content:
-                    "The challenge was to create a dashboard that simplifies complex financial data for users while maintaining a clean, modern aesthetic.",
+                    "The goal was to create a clean, modern UI that simplifies the movie browsing and booking experience.",
             },
             {
                 id: 4,
                 sender: "namila",
                 senderName: "Namila",
-                content: "Here's the main dashboard view:",
+                content: "Here’s a look at the home screen:",
                 hasImage: true,
-                imageSrc: "/images/dashboard-project.png",
-                imageAlt: "Dashboard main view",
+                imageSrc: "/images/movie-app-home.png",
+                imageAlt: "Movie app home screen",
             },
             {
                 id: 5,
-                sender: "namila",
-                senderName: "Namila",
-                content:
-                    "I started with extensive user research to understand the needs of financial professionals and casual investors alike.",
+                sender: "user",
+                senderName: "You",
+                content: "How did you approach the design process?",
             },
             {
                 id: 6,
-                sender: "user",
-                senderName: "You",
-                content: "What was your design process like?",
+                sender: "namila",
+                senderName: "Namila",
+                content:
+                    "I started with research and user personas, then sketched wireframes, created a clear information structure, and finally designed a modern mobile UI.",
             },
             {
                 id: 7,
-                sender: "namila",
-                senderName: "Namila",
-                content: "I followed a user-centered design process with these key phases:",
+                sender: "user",
+                senderName: "You",
+                content: "What tools did you use?",
             },
             {
                 id: 8,
                 sender: "namila",
                 senderName: "Namila",
-                content: "1. Research & Discovery",
-                isProcess: true,
-                number: 1,
+                content: "I mainly used Figma for UI and prototyping, and Notion for documenting the process.",
+                showTools: true,
             },
             {
                 id: 9,
                 sender: "namila",
                 senderName: "Namila",
-                content: "2. Wireframing & Information Architecture",
-                isProcess: true,
-                number: 2,
+                content: "Here’s the seat selection and booking screen:",
+                hasImage: true,
+                imageSrc: "/images/movie-app-seat.png",
+                imageAlt: "Seat booking screen",
             },
             {
                 id: 10,
-                sender: "namila",
-                senderName: "Namila",
-                content: "3. Visual Design & Prototyping",
-                isProcess: true,
-                number: 3,
-            },
-            {
-                id: 11,
-                sender: "namila",
-                senderName: "Namila",
-                content: "4. User Testing & Iteration",
-                isProcess: true,
-                number: 4,
+                sender: "user",
+                senderName: "You",
+                content: "What are some key features of the app?",
             },
             {
                 id: 12,
-                sender: "user",
-                senderName: "You",
-                content: "What tools did you use for this project?",
+                sender: "namila",
+                senderName: "Namila",
+                content: "• Trailer previews with a clean scroll experience",
             },
             {
                 id: 13,
                 sender: "namila",
                 senderName: "Namila",
-                content: "I used a variety of tools for different phases of the project:",
-                showTools: true,
+                content: "• Seamless seat booking and showtime selection",
             },
             {
                 id: 14,
                 sender: "namila",
                 senderName: "Namila",
-                content: "Here are some wireframes from the early stages:",
-                hasImage: true,
-                imageSrc: "/images/dashboard-wireframes.png",
-                imageAlt: "Dashboard wireframes",
+                content: "• Smooth transitions and dark mode UI",
             },
             {
                 id: 15,
                 sender: "namila",
                 senderName: "Namila",
-                content: "And here's a detailed view of the analytics section:",
-                hasImage: true,
-                imageSrc: "/images/dashboard-analytics.png",
-                imageAlt: "Dashboard analytics section",
+                content: "• Lightweight interactions and ticket summary flow",
             },
             {
                 id: 16,
-                sender: "user",
-                senderName: "You",
-                content: "What were some of the key features you implemented?",
-            },
-            {
-                id: 17,
-                sender: "namila",
-                senderName: "Namila",
-                content: "The dashboard includes several key features designed to enhance the user experience:",
-            },
-            {
-                id: 18,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Real-time financial data visualization with customizable charts",
-            },
-            {
-                id: 19,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Personalized insights and recommendations based on user behavior",
-            },
-            {
-                id: 20,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Simplified transaction history with smart categorization",
-            },
-            {
-                id: 21,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Dark/light mode for different working environments",
-            },
-            {
-                id: 22,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Responsive design that works seamlessly across devices",
-            },
-            {
-                id: 23,
-                sender: "namila",
-                senderName: "Namila",
-                content: "Here's the mobile version of the dashboard:",
-                hasImage: true,
-                imageSrc: "/images/dashboard-mobile.png",
-                imageAlt: "Dashboard mobile version",
-            },
-            {
-                id: 24,
-                sender: "user",
-                senderName: "You",
-                content: "What was the outcome of this project?",
-            },
-            {
-                id: 25,
-                sender: "namila",
-                senderName: "Namila",
-                content: "The redesigned dashboard led to significant improvements:",
-            },
-            {
-                id: 26,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• 42% increase in user engagement",
-            },
-            {
-                id: 27,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• 35% reduction in support tickets related to UI confusion",
-            },
-            {
-                id: 28,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• 28% increase in daily active users",
-            },
-            {
-                id: 29,
-                sender: "namila",
-                senderName: "Namila",
-                content:
-                    "The client was extremely satisfied with the results, and we've continued our partnership for future product enhancements.",
-            },
-            {
-                id: 30,
                 sender: "namila",
                 senderName: "Namila",
                 content: "Would you like to see more projects like this one?",
-            },
-        ],
-    },
-    "dribbble-explorations": {
-        title: "Dribbble Explorations",
-        description: "Creative design explorations shared on Dribbble",
-        coverImage: "/images/dribbble-shots.png",
-        client: "Personal Projects",
-        duration: "Ongoing",
-        role: "UI/UX Designer",
-        year: "2022-2023",
-        tools: ["Figma", "Photoshop", "After Effects", "Blender"],
-        messages: [
-            {
-                id: 1,
-                sender: "user",
-                senderName: "You",
-                content: "I'd love to hear about your Dribbble explorations.",
-            },
-            {
-                id: 2,
-                sender: "namila",
-                senderName: "Namila",
-                content:
-                    "My Dribbble explorations are where I get to experiment with new design trends and push my creative boundaries.",
-            },
-            {
-                id: 3,
-                sender: "namila",
-                senderName: "Namila",
-                content: "Here's a collection of some of my recent shots:",
-                hasImage: true,
-                imageSrc: "/images/dribbble-shots.png",
-                imageAlt: "Dribbble shots collection",
-            },
-            {
-                id: 4,
-                sender: "namila",
-                senderName: "Namila",
-                content:
-                    "These explorations help me stay fresh and innovative in my client work by experimenting with new styles, interactions, and visual languages.",
-            },
-            {
-                id: 5,
-                sender: "user",
-                senderName: "You",
-                content: "What tools do you use for these creative explorations?",
-            },
-            {
-                id: 6,
-                sender: "namila",
-                senderName: "Namila",
-                content: "I use a variety of tools depending on the type of exploration:",
-                showTools: true,
-            },
-            {
-                id: 7,
-                sender: "user",
-                senderName: "You",
-                content: "What's your creative process for these explorations?",
-            },
-            {
-                id: 8,
-                sender: "namila",
-                senderName: "Namila",
-                content: "For my creative explorations, I follow a more fluid process:",
-            },
-            {
-                id: 9,
-                sender: "namila",
-                senderName: "Namila",
-                content: "1. Find inspiration from various sources (architecture, nature, other designers)",
-                isProcess: true,
-                number: 1,
-            },
-            {
-                id: 10,
-                sender: "namila",
-                senderName: "Namila",
-                content: "2. Sketch rough ideas and concepts",
-                isProcess: true,
-                number: 2,
-            },
-            {
-                id: 11,
-                sender: "namila",
-                senderName: "Namila",
-                content: "3. Create mood boards and color palettes",
-                isProcess: true,
-                number: 3,
-            },
-            {
-                id: 12,
-                sender: "namila",
-                senderName: "Namila",
-                content: "4. Design and refine in Figma",
-                isProcess: true,
-                number: 4,
-            },
-            {
-                id: 13,
-                sender: "namila",
-                senderName: "Namila",
-                content: "Here's a closer look at one of my favorite explorations - a music player concept:",
-                hasImage: true,
-                imageSrc: "/images/dribbble-music-player.png",
-                imageAlt: "Music player concept",
-            },
-            {
-                id: 14,
-                sender: "namila",
-                senderName: "Namila",
-                content: "And here's a banking app concept I created:",
-                hasImage: true,
-                imageSrc: "/images/dribbble-banking-app.png",
-                imageAlt: "Banking app concept",
-            },
-            {
-                id: 15,
-                sender: "user",
-                senderName: "You",
-                content: "How do these explorations influence your client work?",
-            },
-            {
-                id: 16,
-                sender: "namila",
-                senderName: "Namila",
-                content:
-                    "These explorations have been invaluable for my professional growth and client work in several ways:",
-            },
-            {
-                id: 17,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• They help me discover new techniques that I can apply to client projects",
-            },
-            {
-                id: 18,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• They've connected me with a community of designers who provide feedback and inspiration",
-            },
-            {
-                id: 19,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• They've actually led to client inquiries from people who discovered my work on Dribbble",
-            },
-            {
-                id: 20,
-                sender: "namila",
-                senderName: "Namila",
-                content:
-                    "• They allow me to test ideas in a low-stakes environment before implementing them in client work",
-            },
-            {
-                id: 21,
-                sender: "namila",
-                senderName: "Namila",
-                content: "Would you like to see more of my design work?",
+                showButton: true,
             },
         ],
     },
     "design-system": {
         title: "Design System",
-        description: "A comprehensive design system for digital products",
+        description: "A scalable, accessible, and reusable design system crafted for modern digital products.",
         coverImage: "/images/design-system.png",
-        client: "TechCorp",
+        client: "Self-initiated",
         duration: "6 months",
         role: "Design Systems Lead",
+        tools: [""],
         year: "2022",
-        tools: ["Figma", "Storybook", "React", "Git"],
         messages: [
             {
                 id: 1,
-                sender: "user",
-                senderName: "You",
-                content: "Can you tell me about this design system project?",
+                sender: "namila",
+                senderName: "Namila",
+                content:
+                    "A comprehensive design system I developed to ensure consistency, scalability, and accessibility across digital products.",
+                hasImage: true,
+                imageSrc: "/images/design-system.png",
+                imageAlt: "Design system overview",
             },
             {
                 id: 2,
                 sender: "namila",
                 senderName: "Namila",
                 content:
-                    "This was a major project for TechCorp, a software company with multiple digital products that had inconsistent interfaces and user experiences.",
+                    "Built entirely in Figma, this component library is optimized for web and mobile UI design, including SaaS platforms and dashboards. It leverages Auto Layout, Variants, and follows WCAG accessibility standards.",
             },
             {
                 id: 3,
                 sender: "namila",
                 senderName: "Namila",
                 content:
-                    "The challenge was to create a unified design system that would ensure consistency across all their products while allowing for flexibility and scalability.",
+                    "This self-initiated project showcases my approach to scalable design architecture, system thinking, and visual consistency.",
             },
             {
                 id: 4,
                 sender: "namila",
                 senderName: "Namila",
-                content: "Here's an overview of the design system:",
-                hasImage: true,
-                imageSrc: "/images/design-system.png",
-                imageAlt: "Design system overview",
-            },
-            {
-                id: 5,
-                sender: "user",
-                senderName: "You",
-                content: "What tools did you use for this project?",
-            },
-            {
-                id: 6,
-                sender: "namila",
-                senderName: "Namila",
-                content: "For this design system project, I used these primary tools:",
-                showTools: true,
-            },
-            {
-                id: 7,
-                sender: "user",
-                senderName: "You",
-                content: "What was your approach to building this design system?",
-            },
-            {
-                id: 8,
-                sender: "namila",
-                senderName: "Namila",
-                content: "I approached this project methodically with these key phases:",
-            },
-            {
-                id: 9,
-                sender: "namila",
-                senderName: "Namila",
-                content: "1. Audit & Analysis of existing products",
-                isProcess: true,
-                number: 1,
-            },
-            {
-                id: 10,
-                sender: "namila",
-                senderName: "Namila",
-                content: "2. Foundation Elements (colors, typography, grid)",
-                isProcess: true,
-                number: 2,
-            },
-            {
-                id: 11,
-                sender: "namila",
-                senderName: "Namila",
-                content: "3. Component Library Development",
-                isProcess: true,
-                number: 3,
-            },
-            {
-                id: 12,
-                sender: "namila",
-                senderName: "Namila",
-                content: "4. Pattern Creation & Documentation",
-                isProcess: true,
-                number: 4,
-            },
-            {
-                id: 13,
-                sender: "namila",
-                senderName: "Namila",
-                content: "5. Implementation & Team Training",
-                isProcess: true,
-                number: 5,
-            },
-            {
-                id: 14,
-                sender: "namila",
-                senderName: "Namila",
-                content: "Here's a look at the color system and typography foundations:",
-                hasImage: true,
-                imageSrc: "/images/design-system-foundations.png",
-                imageAlt: "Design system foundations",
-            },
-            {
-                id: 15,
-                sender: "namila",
-                senderName: "Namila",
-                content: "And here's part of the component library we created:",
-                hasImage: true,
-                imageSrc: "/images/design-system-components.png",
-                imageAlt: "Design system components",
-            },
-            {
-                id: 16,
-                sender: "user",
-                senderName: "You",
-                content: "What were some of the key features of this design system?",
-            },
-            {
-                id: 17,
-                sender: "namila",
-                senderName: "Namila",
-                content: "The design system included several key features:",
-            },
-            {
-                id: 18,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Comprehensive component library with 50+ reusable components",
-            },
-            {
-                id: 19,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Responsive design principles built into every component",
-            },
-            {
-                id: 20,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Accessibility compliance (WCAG AA) throughout",
-            },
-            {
-                id: 21,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Dark/light mode theming system",
-            },
-            {
-                id: 22,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Detailed documentation for designers and developers",
-            },
-            {
-                id: 23,
-                sender: "namila",
-                senderName: "Namila",
-                content: "Here's a page from the documentation:",
-                hasImage: true,
-                imageSrc: "/images/design-system-documentation.png",
-                imageAlt: "Design system documentation",
-            },
-            {
-                id: 24,
-                sender: "user",
-                senderName: "You",
-                content: "What impact did this design system have?",
-            },
-            {
-                id: 25,
-                sender: "namila",
-                senderName: "Namila",
-                content: "The implementation of this design system had significant benefits for the company:",
-            },
-            {
-                id: 26,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• 60% faster design-to-development handoff",
-            },
-            {
-                id: 27,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• 45% reduction in design inconsistencies across products",
-            },
-            {
-                id: 28,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• 30% improvement in development efficiency",
-            },
-            {
-                id: 29,
-                sender: "namila",
-                senderName: "Namila",
-                content: "• Significant improvement in user satisfaction scores",
+                content: "You can preview the Figma file here:",
+                showButton: true,
+                showTools: false,
             },
             {
                 id: 30,
-                sender: "namila",
-                senderName: "Namila",
-                content:
-                    "The design system is now a central part of their product development process and continues to evolve as their products grow.",
+                sender: "user",
+                senderName: "You",
+                content: "Nice! Any more projects I can see?",
             },
             {
                 id: 31,
                 sender: "namila",
                 senderName: "Namila",
-                content: "Would you like to see more of my work?",
+                content: "Absolutely! Check out my Behance for more.",
             },
         ],
     },
@@ -626,9 +194,23 @@ export default function ProjectPage() {
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const chatContainerRef = useRef<HTMLDivElement>(null);
-    const [currentDate] = useState(new Date());
 
-    // Format date for display
+    const messageRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const messagesLength = project.messages.length;
+    const [isAtBottom, setIsAtBottom] = useState(true);
+    const [showNewMessageAlert, setShowNewMessageAlert] = useState(false);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [lastViewedMessageIndex, setLastViewedMessageIndex] = useState(-1);
+
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentDate(new Date());
+        }, 1000); // update every minute
+        return () => clearInterval(timer);
+    }, []);
+
     const formattedDate = new Intl.DateTimeFormat("en-US", {
         weekday: "long",
         year: "numeric",
@@ -636,11 +218,11 @@ export default function ProjectPage() {
         day: "numeric",
     }).format(currentDate);
 
-    // Format time for display
     const formattedTime = new Intl.DateTimeFormat("en-US", {
         hour: "numeric",
         minute: "numeric",
         hour12: true,
+        timeZone: "Asia/Colombo", // Force correct time zone
     }).format(currentDate);
 
     if (!project) {
@@ -659,39 +241,84 @@ export default function ProjectPage() {
     }
 
     // Simulate typing and message appearance with slower pace
-    const messagesLength = project.messages.length;
     useEffect(() => {
-        if (currentMessageIndex < messagesLength) {
-            const currentMsg = project.messages[currentMessageIndex];
+        const project = projectsData[projectId as keyof typeof projectsData];
+        if (!project || !project.messages) return;
 
-            // Only show typing indicator for Namila's messages
+        const messages = project.messages;
+
+        if (currentMessageIndex < messages.length) {
+            const currentMsg = messages[currentMessageIndex];
+
             if (currentMsg.sender === "namila") {
                 setShowTyping(true);
-                const typingTimer = setTimeout(
-                    () => {
-                        setShowTyping(false);
-                        setCurrentMessageIndex((prev) => prev + 1);
-                    },
-                    // Increased delay for slower conversation
-                    2000 + Math.random() * 1000
-                );
+                const typingTimer = setTimeout(() => {
+                    setShowTyping(false);
+                    setCurrentMessageIndex((prev) => {
+                        const newIndex = prev + 1;
+                        if (!isAtBottom && newIndex > lastViewedMessageIndex + 1) {
+                            setUnreadCount((prev) => prev + 1);
+                            setShowNewMessageAlert(true);
+                        }
+                        return newIndex;
+                    });
+                }, 3500 + Math.random() * 1500);
                 return () => clearTimeout(typingTimer);
             } else {
-                // For user messages, just show them after a longer delay
                 const userMsgTimer = setTimeout(() => {
-                    setCurrentMessageIndex((prev) => prev + 1);
-                }, 1200);
+                    setCurrentMessageIndex((prev) => {
+                        const newIndex = prev + 1;
+                        if (!isAtBottom && newIndex > lastViewedMessageIndex + 1) {
+                            setUnreadCount((prev) => prev + 1);
+                            setShowNewMessageAlert(true);
+                        }
+                        return newIndex;
+                    });
+                }, 2000);
                 return () => clearTimeout(userMsgTimer);
             }
         }
-    }, [currentMessageIndex, messagesLength]);
+    }, [currentMessageIndex, isAtBottom, lastViewedMessageIndex, projectId]);
 
-    // Always auto-scroll to the latest message
+    // Check if user is at the bottom of the chat
     useEffect(() => {
-        if (chatContainerRef.current) {
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        const checkIfAtBottom = () => {
+            if (chatContainerRef.current) {
+                const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+                const atBottom = scrollTop + clientHeight >= scrollHeight - 100;
+                setIsAtBottom(atBottom);
+                setShowScrollToTop(scrollTop > 500);
+                setIsScrolled(scrollTop > 100);
+
+                // Update lastViewedMessageIndex if at bottom
+                if (atBottom && currentMessageIndex > 0) {
+                    setLastViewedMessageIndex(currentMessageIndex - 1);
+                    setUnreadCount(0);
+                    setShowNewMessageAlert(false);
+                }
+            }
+        };
+
+        const chatContainer = chatContainerRef.current;
+        if (chatContainer) {
+            chatContainer.addEventListener("scroll", checkIfAtBottom);
+            checkIfAtBottom();
+            return () => chatContainer.removeEventListener("scroll", checkIfAtBottom);
         }
-    }, [currentMessageIndex, showTyping]);
+    }, [currentMessageIndex]);
+
+    // Auto-scroll to bottom only if user is at bottom
+    useEffect(() => {
+        if (chatContainerRef.current && isAtBottom && currentMessageIndex > 0) {
+            chatContainerRef.current.scrollTo({
+                top: chatContainerRef.current.scrollHeight,
+                behavior: "smooth",
+            });
+            setLastViewedMessageIndex(currentMessageIndex - 1);
+            setUnreadCount(0);
+            setShowNewMessageAlert(false);
+        }
+    }, [currentMessageIndex, showTyping, isAtBottom]);
 
     // Show/hide scroll to top button and track scroll position
     useEffect(() => {
@@ -715,6 +342,21 @@ export default function ProjectPage() {
             chatContainerRef.current.scrollTo({
                 top: 0,
                 behavior: "smooth",
+            });
+        }
+    };
+
+    const scrollToFirstUnread = () => {
+        if (unreadCount > 0 && messageRefs.current[lastViewedMessageIndex + 1]) {
+            messageRefs.current[lastViewedMessageIndex + 1]?.scrollIntoView({ behavior: "smooth" });
+            setLastViewedMessageIndex((prev) => prev + 1);
+            setUnreadCount((prev) => {
+                const newCount = prev - 1;
+                if (newCount === 0) {
+                    setShowNewMessageAlert(false);
+                    setIsAtBottom(true);
+                }
+                return newCount;
             });
         }
     };
@@ -756,10 +398,11 @@ export default function ProjectPage() {
 
     return (
         <main className="min-h-screen bg-[#0f0f0f] text-white">
-            {/* Project header - visible only when not scrolled */}
+            {/*this one have to remove after cmomplete site */}
             <div className="bg-gray-800 text-yellow-500 text-sm text-center py-1 px-4">
                 🚧 This site is still under development – some content may be updated soon.
             </div>
+            {/* Project header - visible only when not scrolled */}
             <AnimatePresence>
                 {!isScrolled && (
                     <motion.div
@@ -780,7 +423,7 @@ export default function ProjectPage() {
                             <div className="flex flex-col items-center justify-center">
                                 <div className="w-16 h-16 rounded-full overflow-hidden mb-2">
                                     <Image
-                                        src="/public/avatar.png"
+                                        src="/images/namila.jpg"
                                         alt="Namila"
                                         width={64}
                                         height={64}
@@ -823,7 +466,7 @@ export default function ProjectPage() {
                     <div className="flex items-center">
                         <div className="w-6 h-6 rounded-full overflow-hidden mr-2">
                             <Image
-                                src="/images/avatar.png"
+                                src="/images/namila.jpg"
                                 alt="Namila"
                                 width={24}
                                 height={24}
@@ -862,7 +505,7 @@ export default function ProjectPage() {
                             {msg.sender === "namila" && (
                                 <div className="w-8 h-8 mr-2 flex-shrink-0">
                                     <Image
-                                        src="/images/avatar.png"
+                                        src="/images/namila.jpg"
                                         alt="Namila"
                                         width={32}
                                         height={32}
@@ -882,7 +525,7 @@ export default function ProjectPage() {
                                 </span>
 
                                 <div
-                                    className={`p-4 ${
+                                    className={`p-4 lg:w-96 md:w-96 ${
                                         msg.sender === "user"
                                             ? "bg-[#1a1a1a] rounded-2xl rounded-tr-none message-bubble-user"
                                             : "bg-[#1a1a1a] rounded-2xl rounded-tl-none message-bubble-namila"
@@ -903,12 +546,24 @@ export default function ProjectPage() {
                                         </div>
                                     )}
 
-                                    {msg.isProcess && (
-                                        <div className="flex items-center mt-2">
-                                            <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center mr-2 flex-shrink-0">
-                                                <span className="text-white font-bold">{msg.number}</span>
-                                            </div>
-                                            <p className="text-sm">{msg.content}</p>
+                                    {/* follow button */}
+                                    {msg.showButton && (
+                                        <div className="flex flex-col items-center mt-3">
+                                            <Link
+                                                href="https://medium.com/@namilapreshan11"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-full"
+                                            >
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333] w-full"
+                                                    type="button"
+                                                >
+                                                    View more projects
+                                                </Button>
+                                            </Link>
                                         </div>
                                     )}
 
@@ -954,7 +609,7 @@ export default function ProjectPage() {
                         >
                             <div className="w-8 h-8 mr-2">
                                 <Image
-                                    src="/public/placeholder.svg"
+                                    src="/images/namila.jpg"
                                     alt="Namila"
                                     width={32}
                                     height={32}
@@ -994,8 +649,8 @@ export default function ProjectPage() {
                         >
                             <Link href="/">
                                 <Button className="bg-blue-600 hover:bg-blue-700">
-                                    <ChevronLeft size={16} className="mr-2" />
                                     View more projects
+                                    <ChevronRightCircleIcon size={16} className="mr-2" />
                                 </Button>
                             </Link>
                         </motion.div>
@@ -1003,11 +658,32 @@ export default function ProjectPage() {
                 </div>
 
                 {/* Footer */}
-                <div className="text-center text-xs text-gray-500 mt-8 pt-4 border-t border-gray-800">
-                    © 2023 Handcrafted by Namila •{" "}
-                    <a href="#" className="hover:text-gray-400">
-                        Privacy
-                    </a>
+                <div className=" text-center text-xs text-gray-500 mt-8 pt-4 border-gray-800">
+                    © 2025 Made with ❤️ by Namila Preshan
+                    {/* <a href="#" className="hover:text-gray-400">
+                            Privacy
+                        </a> */}
+                </div>
+
+                <div className="flex justify-center">
+                    <AnimatePresence>
+                        {showNewMessageAlert && unreadCount > 0 && (
+                            <motion.button
+                                className="fixed bottom-6 mx-auto p-2 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50 flex items-center"
+                                onClick={scrollToFirstUnread}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                transition={{ duration: 0.2 }}
+                                aria-label="Scroll to new message"
+                            >
+                                <ArrowDown size={12} className="mr-2" />
+                                <span className="text-sm">
+                                    {unreadCount > 5 ? "5+" : unreadCount} New Message{unreadCount !== 1 ? "s" : ""}
+                                </span>
+                            </motion.button>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
 
