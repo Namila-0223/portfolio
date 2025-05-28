@@ -12,6 +12,15 @@ export default function FloatingMenu() {
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
     // Close modal on outside click
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -31,33 +40,47 @@ export default function FloatingMenu() {
 
     return (
         <>
+            {/* Backdrop when menu is open */}
+            {isOpen && (
+                <div
+                    className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity"
+                    onClick={() => setIsOpen(false)}
+                />
+            )}
             {/* Floating Button + Menu */}
-            <div className="fixed bottom-20 right-4 z-50 flex flex-col items-end space-y-2 rounded-full shadow-lg">
+            <div className="fixed bottom-6 right-4 z-50 flex flex-col items-end space-y-2 rounded-full shadow-lg">
                 {isOpen && (
                     <>
-                        <Button
-                            onClick={() => {
-                                setShowContact(true);
-                                setIsOpen(false);
-                            }}
-                            title="Contact Form"
-                            className="lg:w-36 flex items-center space-x-2 p-2 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition h-auto"
-                        >
-                            <Mail size={16} />
-                            <span className="hidden sm:inline">Contact me</span>
-                        </Button>
+                        <div className="flex items-center space-x-2">
+                            {isMobile && <div className="text-sm text-white">Contact me</div>}
+                            <a
+                                onClick={() => {
+                                    setShowContact(true);
+                                    setIsOpen(false);
+                                }}
+                                title="Contact Form"
+                                className="lg:w- flex items-center space-x-2 p-2 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition "
+                            >
+                                <Mail size={20} />
+                                <span className="hidden sm:inline">Contact me</span>
+                            </a>
+                        </div>
 
-                        <a
-                            href="/my-cv.pdf"
-                            download
-                            title="Download CV"
-                            className="lg:w-36 flex items-center space-x-2 p-2 rounded-full bg-green-600 text-white shadow-lg hover:bg-green-700 transition"
-                        >
-                            <Download size={16} />
-                            <span className="hidden sm:inline">Download CV</span>
-                        </a>
+                        <div className="flex items-center space-x-2">
+                            {isMobile && <div className="text-sm text-white">Download CV</div>}
+                            <a
+                                href="/documents/namila-cv.pdf"
+                                download
+                                title="Download CV"
+                                className="lg:w-36 flex items-center space-x-2 p-2 rounded-full bg-green-600 text-white shadow-lg hover:bg-green-700 transition"
+                            >
+                                <Download size={20} />
+                                <span className="hidden sm:inline">Resume CV</span>
+                            </a>
+                        </div>
                     </>
                 )}
+
                 <Button
                     onClick={toggleMenu}
                     className="p-3 rounded-full bg-black text-white shadow-xl hover:bg-gray-800 transition "
