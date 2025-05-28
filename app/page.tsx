@@ -889,7 +889,7 @@ export default function Home() {
                         <AnimatePresence>
                             {showNewMessageAlert && unreadCount > 0 && (
                                 <motion.button
-                                    className="fixed bottom-6 mx-auto p-2 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50 flex items-center"
+                                    className="fixed bottom-6 mx-auto p-2 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-40 flex items-center"
                                     onClick={scrollToFirstUnread}
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
@@ -906,24 +906,24 @@ export default function Home() {
                         </AnimatePresence>
                     </div>
                 </div>
+                <AnimatePresence>
+                    {showScrollToTop && (
+                        <motion.button
+                            className="fixed bottom-20 right-4 p-3 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-40"
+                            onClick={scrollToTop}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.2 }}
+                            aria-label="Scroll to top"
+                        >
+                            <ArrowUp size={16} />
+                        </motion.button>
+                    )}
+                </AnimatePresence>
             </div>
 
             <FloatingMenu />
-            <AnimatePresence>
-                {showScrollToTop && (
-                    <motion.button
-                        className="fixed bottom-6 right-4 p-3 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50"
-                        onClick={scrollToTop}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.2 }}
-                        aria-label="Scroll to top"
-                    >
-                        <ArrowUp size={16} />
-                    </motion.button>
-                )}
-            </AnimatePresence>
         </main>
     );
 }
