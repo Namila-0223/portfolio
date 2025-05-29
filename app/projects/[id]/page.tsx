@@ -6,7 +6,8 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, ArrowUp, ChevronLeft, ChevronRightCircleIcon } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRightCircleIcon, X } from "lucide-react";
+import FloatingMenu from "@/components/floating-menu";
 
 // Project data
 const projectsData = {
@@ -46,7 +47,7 @@ const projectsData = {
                 senderName: "Namila",
                 content: "Here’s a look at the home screen:",
                 hasImage: true,
-                imageSrc: "/images/movie-app-home.png",
+                imageSrc: "/project/frame-1.png",
                 imageAlt: "Movie app home screen",
             },
             {
@@ -81,7 +82,7 @@ const projectsData = {
                 senderName: "Namila",
                 content: "Here’s the seat selection and booking screen:",
                 hasImage: true,
-                imageSrc: "/images/movie-app-seat.png",
+                imageSrc: "/project/frame-2.png",
                 imageAlt: "Seat booking screen",
             },
             {
@@ -194,15 +195,18 @@ export default function ProjectPage() {
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const chatContainerRef = useRef<HTMLDivElement>(null);
-
     const messageRefs = useRef<(HTMLDivElement | null)[]>([]);
     const messagesLength = project.messages.length;
     const [isAtBottom, setIsAtBottom] = useState(true);
     const [showNewMessageAlert, setShowNewMessageAlert] = useState(false);
     const [unreadCount, setUnreadCount] = useState(0);
     const [lastViewedMessageIndex, setLastViewedMessageIndex] = useState(-1);
+    const [showImageModal, setShowImageModal] = useState(false);
+    const [activeImage, setActiveImage] = useState("");
+    const [headerHeight, setHeaderHeight] = useState(0);
 
     const [currentDate, setCurrentDate] = useState(new Date());
+    const imageModalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -239,6 +243,19 @@ export default function ProjectPage() {
             </div>
         );
     }
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (showImageModal && imageModalRef.current && !imageModalRef.current.contains(event.target as Node)) {
+                setShowImageModal(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showImageModal]);
 
     // Simulate typing and message appearance with slower pace
     useEffect(() => {
@@ -396,6 +413,18 @@ export default function ProjectPage() {
         exit: { opacity: 0, x: -20, scale: 0.9, transition: { duration: 0.2 } },
     };
 
+    // Calculate header height for proper spacing
+    useEffect(() => {
+        const calculateHeaderHeight = () => {
+            const expandedHeight = isScrolled ? 80 : 200;
+            setHeaderHeight(expandedHeight);
+        };
+
+        calculateHeaderHeight();
+        window.addEventListener("resize", calculateHeaderHeight);
+        return () => window.removeEventListener("resize", calculateHeaderHeight);
+    }, [isScrolled]);
+
     return (
         <main className="min-h-screen bg-[#0f0f0f] text-white">
             {/*this one have to remove after cmomplete site */}
@@ -403,79 +432,98 @@ export default function ProjectPage() {
                 🚧 This site is still under development – some content may be updated soon.
             </div>
             {/* Project header - visible only when not scrolled */}
-            <AnimatePresence>
-                {!isScrolled && (
-                    <motion.div
-                        className="pt-8 pb-4 px-4"
-                        initial={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
+            <div
+                className={`fixed top-0 left-0 right-0 z-20 will-change-transform ${
+                    isScrolled
+                        ? "backdrop-blur-md bg-[#0f0f0f]/80 border-b border-gray-800/70 shadow-md"
+                        : "bg-[#0f0f0f] border-b border-gray-800"
+                }`}
+                style={{
+                    transition: "background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
+                    contain: "layout paint style",
+                    transform: "translateZ(0)",
+                }}
+            >
+                {/* Optional notice bar */}
+                <div className="bg-gray-800 text-yellow-500 text-sm text-center py-1 px-4">
+                    🚧 This site is still under development – some content may be updated soon.
+                </div>
+
+                <div className="container max-w-2xl mx-auto px-4 relative">
+                    {/* Back button */}
+                    <Link
+                        href="/"
+                        className="absolute left-0 top-4 flex items-center text-gray-300 hover:text-white transition-colors"
                     >
-                        <div className="max-w-2xl mx-auto">
-                            <Link
-                                href="/"
-                                className="inline-flex items-center text-gray-400 hover:text-white mb-4 transition-colors"
+                        <ChevronLeft size={16} className="mr-2" />
+                        Back
+                    </Link>
+
+                    <div className="flex flex-col items-center text-center py-2">
+                        {/* Project icon/avatar */}
+                        <div className="relative" style={{ marginBottom: isScrolled ? "4px" : "12px" }}>
+                            <div
+                                className="rounded-full overflow-hidden border-2 border-blue-500"
+                                style={{
+                                    width: isScrolled ? "48px" : "80px",
+                                    height: isScrolled ? "48px" : "80px",
+                                    transition: "width 0.3s ease, height 0.3s ease",
+                                    willChange: "width, height",
+                                    transform: "translateZ(0)",
+                                }}
                             >
-                                <ChevronLeft size={16} className="mr-2" />
-                                Back to Portfolio
-                            </Link>
-
-                            <div className="flex flex-col items-center justify-center">
-                                <div className="w-16 h-16 rounded-full overflow-hidden mb-2">
-                                    <Image
-                                        src="/images/namila.jpg"
-                                        alt="Namila"
-                                        width={64}
-                                        height={64}
-                                        className="rounded-full object-cover"
-                                    />
-                                </div>
-                                <h1 className="text-xl font-bold">{project.title}</h1>
-                                <p className="text-sm text-gray-400 mt-1">{project.description}</p>
-
-                                <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-4 text-sm">
-                                    <div>
-                                        <span className="text-gray-400">Client:</span> {project.client}
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-400">Role:</span> {project.role}
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-400">Duration:</span> {project.duration}
-                                    </div>
-                                    <div>
-                                        <span className="text-gray-400">Year:</span> {project.year}
-                                    </div>
-                                </div>
+                                <img
+                                    src="/project/app-icon.png"
+                                    alt={project.title}
+                                    className="w-full h-full object-cover"
+                                    style={{ transform: "translateZ(0)" }}
+                                />
                             </div>
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
 
-            {/* Compact sticky header - only shows when scrolled */}
-            <div
-                className={`sticky top-0 z-10 backdrop-blur-md bg-[#0f0f0f]/80 transition-all duration-300 ${
-                    isScrolled ? "py-2" : "py-0 opacity-0"
-                }`}
-            >
-                <div className="max-w-2xl mx-auto px-4 flex items-center justify-between">
-                    <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                        <ChevronLeft size={16} />
-                    </Link>
-                    <div className="flex items-center">
-                        <div className="w-6 h-6 rounded-full overflow-hidden mr-2">
-                            <Image
-                                src="/images/namila.jpg"
-                                alt="Namila"
-                                width={24}
-                                height={24}
-                                className="rounded-full object-cover"
-                            />
-                        </div>
-                        <h1 className="text-sm font-bold">{project.title}</h1>
+                        {/* Project title */}
+                        <h1
+                            className="font-bold"
+                            style={{
+                                fontSize: isScrolled ? "1.125rem" : "1.25rem",
+                                transition: "font-size 0.3s ease",
+                                willChange: "font-size",
+                            }}
+                        >
+                            {project.title}
+                        </h1>
+
+                        {/* Extra info, animated */}
+                        <AnimatePresence>
+                            {!isScrolled && (
+                                <motion.div
+                                    key="project-info"
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    style={{ overflow: "hidden", willChange: "opacity, height" }}
+                                >
+                                    <p className="text-sm text-gray-400 mt-1">{project.description}</p>
+
+                                    <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-3 text-sm text-gray-300">
+                                        <div>
+                                            <span className="text-gray-400">Client:</span> {project.client}
+                                        </div>
+                                        <div>
+                                            <span className="text-gray-400">Role:</span> {project.role}
+                                        </div>
+                                        <div>
+                                            <span className="text-gray-400">Duration:</span> {project.duration}
+                                        </div>
+                                        <div>
+                                            <span className="text-gray-400">Year:</span> {project.year}
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
-                    <div className="w-4"></div> {/* Empty div for flex spacing */}
                 </div>
             </div>
 
@@ -483,6 +531,7 @@ export default function ProjectPage() {
             <div
                 className="max-w-2xl mx-auto px-4 pb-8 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar"
                 ref={chatContainerRef}
+                style={{ paddingTop: `${headerHeight + 20}px` }}
             >
                 {/* Date/time separator */}
                 <div className="flex justify-center my-4">
@@ -540,8 +589,12 @@ export default function ProjectPage() {
                                                 alt={msg.imageAlt || "Project"}
                                                 width={400}
                                                 height={225}
-                                                className="rounded-lg w-full object-cover shadow-lg hover:shadow-xl transition-shadow"
+                                                className="rounded-lg w-full object-cover shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                                                 style={{ aspectRatio: "16/9", height: "auto" }}
+                                                onClick={() => {
+                                                    setActiveImage(msg.imageSrc || "");
+                                                    setShowImageModal(true);
+                                                }}
                                             />
                                         </div>
                                     )}
@@ -593,7 +646,13 @@ export default function ProjectPage() {
 
                             {msg.sender === "user" && (
                                 <div className="w-8 h-8 ml-2 flex-shrink-0">
-                                    <div className="w-8 h-8 rounded-full bg-gray-700"></div>
+                                    <Image
+                                        src="/images/user.jpg"
+                                        alt="Namila"
+                                        width={64}
+                                        height={64}
+                                        className="rounded-full object-cover"
+                                    />
                                 </div>
                             )}
                         </motion.div>
@@ -638,23 +697,6 @@ export default function ProjectPage() {
                             </div>
                         </motion.div>
                     )}
-
-                    {/* Show "View more projects" button after all messages are displayed */}
-                    {currentMessageIndex >= messagesLength && (
-                        <motion.div
-                            className="flex justify-center mt-8"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <Link href="/">
-                                <Button className="bg-blue-600 hover:bg-blue-700">
-                                    View more projects
-                                    <ChevronRightCircleIcon size={16} className="mr-2" />
-                                </Button>
-                            </Link>
-                        </motion.div>
-                    )}
                 </div>
 
                 {/* Footer */}
@@ -685,24 +727,42 @@ export default function ProjectPage() {
                         )}
                     </AnimatePresence>
                 </div>
+                {/* Scroll to top button */}
+                <AnimatePresence>
+                    {showScrollToTop && (
+                        <motion.button
+                            className="fixed bottom-20 right-4 p-3 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-40"
+                            onClick={scrollToTop}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.2 }}
+                            aria-label="Scroll to top"
+                        >
+                            <ArrowUp size={16} />
+                        </motion.button>
+                    )}
+                </AnimatePresence>
             </div>
+            <FloatingMenu />
 
-            {/* Scroll to top button */}
-            <AnimatePresence>
-                {showScrollToTop && (
-                    <motion.button
-                        className="fixed bottom-6 right-6 p-3 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50"
-                        onClick={scrollToTop}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.2 }}
-                        aria-label="Scroll to top"
+            {showImageModal && (
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+                    <div
+                        ref={imageModalRef}
+                        className="relative max-w-4xl w-full mx-4 rounded-lg overflow-hidden shadow-xl bg-transparent"
                     >
-                        <ArrowUp size={20} />
-                    </motion.button>
-                )}
-            </AnimatePresence>
+                        <button
+                            onClick={() => setShowImageModal(false)}
+                            className="absolute top-3 right-3 text-white bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
+                            aria-label="Close"
+                        >
+                            <X size={24} />
+                        </button>
+                        <img src={activeImage} alt="Preview" className="w-full h-auto rounded-lg" />
+                    </div>
+                </div>
+            )}
         </main>
     );
 }

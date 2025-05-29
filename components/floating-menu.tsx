@@ -59,7 +59,7 @@ export default function FloatingMenu() {
                                     setIsOpen(false);
                                 }}
                                 title="Contact Form"
-                                className="lg:w- flex items-center space-x-2 p-2 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition "
+                                className="flex items-center space-x-2 px-3 py-2 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition"
                             >
                                 <Mail size={20} />
                                 <span className="hidden sm:inline">Contact me</span>
@@ -72,7 +72,7 @@ export default function FloatingMenu() {
                                 href="/documents/namila-cv.pdf"
                                 download
                                 title="Download CV"
-                                className="lg:w-36 flex items-center space-x-2 p-2 rounded-full bg-green-600 text-white shadow-lg hover:bg-green-700 transition"
+                                className="flex items-center space-x-2 px-3 py-2 rounded-full bg-green-600 text-white shadow-lg hover:bg-green-700 transition"
                             >
                                 <Download size={20} />
                                 <span className="hidden sm:inline">Resume CV</span>
