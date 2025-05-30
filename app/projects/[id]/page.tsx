@@ -30,21 +30,21 @@ const projectsData = {
             {
                 id: 2,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content:
                     "It's a mobile app concept that lets users watch movie trailers and directly book tickets — all from one place.",
             },
             {
                 id: 3,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content:
                     "The goal was to create a clean, modern UI that simplifies the movie browsing and booking experience.",
             },
             {
                 id: 4,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content: "Here’s a look at the home screen:",
                 hasImage: true,
                 imageSrc: "/project/frame-1.png",
@@ -59,27 +59,27 @@ const projectsData = {
             {
                 id: 6,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content:
                     "I started with research and user personas, then sketched wireframes, created a clear information structure, and finally designed a modern mobile UI.",
             },
             {
                 id: 7,
                 sender: "user",
-                senderName: "You",
+                senderName: "Namila Preshan",
                 content: "What tools did you use?",
             },
             {
                 id: 8,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content: "I mainly used Figma for UI and prototyping, and Notion for documenting the process.",
                 showTools: true,
             },
             {
                 id: 9,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content: "Here’s the seat selection and booking screen:",
                 hasImage: true,
                 imageSrc: "/project/frame-2.png",
@@ -94,31 +94,31 @@ const projectsData = {
             {
                 id: 12,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content: "• Trailer previews with a clean scroll experience",
             },
             {
                 id: 13,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content: "• Seamless seat booking and showtime selection",
             },
             {
                 id: 14,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content: "• Smooth transitions and dark mode UI",
             },
             {
                 id: 15,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content: "• Lightweight interactions and ticket summary flow",
             },
             {
                 id: 16,
                 sender: "namila",
-                senderName: "Namila",
+                senderName: "Namila Preshan",
                 content: "Would you like to see more projects like this one?",
                 showButton: true,
             },
