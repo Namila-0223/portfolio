@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink, ArrowDown } from "lucide-react";
+import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink, ArrowDown, X } from "lucide-react";
 import { ProfileHeader } from "@/components/profile-header";
 import Lottie from "lottie-react";
 
@@ -31,6 +31,9 @@ export default function Home() {
     const [showNewMessageAlert, setShowNewMessageAlert] = useState(false);
     const [unreadCount, setUnreadCount] = useState(0);
     const [lastViewedMessageIndex, setLastViewedMessageIndex] = useState(-1);
+    const [activeImage, setActiveImage] = useState("");
+    const [showImageModal, setShowImageModal] = useState(false);
+    const imageModalRef = useRef<HTMLDivElement>(null);
 
     const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -67,7 +70,6 @@ export default function Home() {
     };
 
     // Project data
-
     const designer = {
         name: "Namila Preshan",
         title: "UI UX Enginieer at ",
@@ -133,16 +135,16 @@ export default function Home() {
             projectId: null,
             externalUrl: "https://www.behance.net/namilapreshan1",
         },
-        {
-            id: 6,
-            sender: "namila",
-            senderName: "Namila Preshan",
-            content: "A design system I built to deliver consistency, scalability, and impact across digital products.",
-            hasImage: true,
-            imageAlt: "Design System",
-            imageSrc: "/images/design-system.png",
-            projectId: "design-system",
-        },
+        // {
+        //     id: 6,
+        //     sender: "namila",
+        //     senderName: "Namila Preshan",
+        //     content: "A design system I built to deliver consistency, scalability, and impact across digital products.",
+        //     hasImage: true,
+        //     imageAlt: "Design System",
+        //     imageSrc: "/images/design-system.png",
+        //     projectId: "design-system",
+        // },
         {
             id: 7,
             sender: "namila",
@@ -155,45 +157,45 @@ export default function Home() {
             id: 8,
             sender: "user",
             senderName: "You",
-            content: "What tools and skills do you work with?",
+            content: "Which design tools and development technologies do you work with?",
         },
         {
             id: 9,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Great question! Here's a quick overview of the tools and skills I work with regularly.",
+            content: "Great question! Here's a quick overview of the tools and technologies I work with regularly.",
         },
-        {
-            id: 10,
-            sender: "namila",
-            senderName: "Namila Preshan",
-            content: "🧠 UX Skills: ",
-            skill: [
-                { name: "Wireframing" },
-                { name: "Prototyping" },
-                { name: "Interaction Design" },
-                { name: "Usability Testing" },
-                { name: "Information Architecture" },
-            ],
-        },
-        {
-            id: 11,
-            sender: "namila",
-            senderName: "Namila Preshan",
-            content: "🎨 UI Skills: ",
-            skill: [
-                { name: "Design Systems" },
-                { name: "Visual Design" },
-                { name: "Typography" },
-                { name: "Accessibility" },
-                { name: "Responsive Design" },
-            ],
-        },
+        // {
+        //     id: 10,
+        //     sender: "namila",
+        //     senderName: "Namila Preshan",
+        //     content: "🧠 UX Skills: ",
+        //     skill: [
+        //         { name: "Wireframing" },
+        //         { name: "Prototyping" },
+        //         { name: "Interaction Design" },
+        //         { name: "Usability Testing" },
+        //         { name: "Information Architecture" },
+        //     ],
+        // },
+        // {
+        //     id: 11,
+        //     sender: "namila",
+        //     senderName: "Namila Preshan",
+        //     content: "🎨 UI Skills: ",
+        //     skill: [
+        //         { name: "Design Systems" },
+        //         { name: "Visual Design" },
+        //         { name: "Typography" },
+        //         { name: "Accessibility" },
+        //         { name: "Responsive Design" },
+        //     ],
+        // },
         {
             id: 12,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "🛠 Tools I use:",
+            content: "🛠 Design Tools I use:",
             tools: [
                 { name: "Figma", icon: "/icons/Figma.svg" },
                 { name: "Illustrator", icon: "/icons/Illustrator.svg" },
@@ -204,7 +206,7 @@ export default function Home() {
             id: 13,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "💻 language I use:",
+            content: "💻 Technologies I use:",
             tools: [
                 { name: "HTML", icon: "/icons/HTML5.svg" },
                 { name: "SCSS", icon: "/icons/Sass.svg" },
@@ -220,7 +222,7 @@ export default function Home() {
             sender: "namila",
             senderName: "Namila Preshan",
             content:
-                "And I'm always learning—currently diving deeper into design tokens and advanced component systems.",
+                "And I'm always learning-currently diving deeper into design tokens and advanced component systems.",
         },
         {
             id: 15,
@@ -335,6 +337,20 @@ export default function Home() {
             showRestart: true,
         },
     ];
+
+    // Image modal state
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (showImageModal && imageModalRef.current && !imageModalRef.current.contains(event.target as Node)) {
+                setShowImageModal(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showImageModal]);
 
     // Simulate typing and message appearance with slower pace
     useEffect(() => {
@@ -550,7 +566,7 @@ export default function Home() {
                                         )}
 
                                         {/* Skills */}
-                                        {msg.skill && (
+                                        {/* {msg.skill && (
                                             <div className="flex flex-wrap gap-2 mt-2">
                                                 {msg.skill.map((skill, index) => (
                                                     <div
@@ -561,7 +577,7 @@ export default function Home() {
                                                     </div>
                                                 ))}
                                             </div>
-                                        )}
+                                        )} */}
 
                                         {/* Tools list */}
                                         {msg.tools && (
@@ -713,8 +729,12 @@ export default function Home() {
                                                     height={400}
                                                     className="rounded-xl object-cover shadow-lg"
                                                     style={{ aspectRatio: "1/1", height: "auto", maxWidth: "200px" }}
+                                                    onClick={() => {
+                                                        setActiveImage(msg.profileImageSrc || "");
+                                                        setShowImageModal(true);
+                                                    }}
                                                 />
-                                                <p className="text-center mt-2 text-xs text-gray-400">That's me :)</p>
+                                                <p className="text-center mt-2 text-xs text-gray-400">That's me 😎</p>
                                             </div>
                                         )}
 
@@ -924,6 +944,24 @@ export default function Home() {
             </div>
 
             <FloatingMenu />
+
+            {showImageModal && (
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+                    <div
+                        ref={imageModalRef}
+                        className="relative max-w-4xl w-fit mx-12 rounded-lg overflow-hidden shadow-xl bg-transparent"
+                    >
+                        <button
+                            onClick={() => setShowImageModal(false)}
+                            className="absolute top-3 right-3 text-white bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
+                            aria-label="Close"
+                        >
+                            <X size={24} />
+                        </button>
+                        <img src={activeImage} alt="Preview" className="lg:w-96 md:w-96 sm:w-full h-auto rounded-lg" />
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
