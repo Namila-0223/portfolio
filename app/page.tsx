@@ -12,13 +12,9 @@ import Lottie from "lottie-react";
 
 //lottie animations
 import behanceData from "@/public/animations/behance.json";
-import Contact from "@/components/contact-form";
 import FloatingMenu from "@/components/floating-menu";
 
 export default function Home() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("");
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const messageRefs = useRef<(HTMLDivElement | null)[]>([]);
     const [showTyping, setShowTyping] = useState(false);
