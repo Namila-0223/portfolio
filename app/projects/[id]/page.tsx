@@ -9,8 +9,36 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, ArrowUp, ChevronLeft, ChevronRightCircleIcon, X } from "lucide-react";
 import FloatingMenu from "@/components/floating-menu";
 
+// Message type definition
+type ProjectMessage = {
+    id: number;
+    sender: string;
+    senderName: string;
+    content: string | string[];
+    hasImage?: boolean;
+    imageSrc?: string;
+    imageAlt?: string;
+    showTools?: boolean;
+    item?: string[];
+    isfeatureList?: boolean;
+    showButton?: boolean;
+};
+
 // Project data
-const projectsData = {
+const projectsData: {
+    [key: string]: {
+        title: string;
+        description: string;
+        coverImage: string;
+        client: string;
+        duration: string;
+        role: string;
+        year: string;
+        tools: string[];
+        feature: string[];
+        messages: ProjectMessage[];
+    };
+} = {
     "mobile-app-ui": {
         title: "Movie Trailer App UI",
         description: "A sleek mobile app for discovering movie trailers and booking tickets.",
@@ -20,6 +48,12 @@ const projectsData = {
         role: "UI/UX Designer",
         year: "2024",
         tools: ["Figma", "Notion", "Photoshop"],
+        feature: [
+            "Trailer previews with a clean scroll experience",
+            "Seamless seat booking and showtime selection",
+            "Smooth transitions and dark mode UI",
+            "Lightweight interactions and ticket summary flow",
+        ],
         messages: [
             {
                 id: 1,
@@ -95,28 +129,12 @@ const projectsData = {
                 id: 12,
                 sender: "namila",
                 senderName: "Namila Preshan",
-                content: "• Trailer previews with a clean scroll experience",
+                content: "Here are some highlights:",
+                isfeatureList: true,
             },
+
             {
                 id: 13,
-                sender: "namila",
-                senderName: "Namila Preshan",
-                content: "• Seamless seat booking and showtime selection",
-            },
-            {
-                id: 14,
-                sender: "namila",
-                senderName: "Namila Preshan",
-                content: "• Smooth transitions and dark mode UI",
-            },
-            {
-                id: 15,
-                sender: "namila",
-                senderName: "Namila Preshan",
-                content: "• Lightweight interactions and ticket summary flow",
-            },
-            {
-                id: 16,
                 sender: "namila",
                 senderName: "Namila Preshan",
                 content: "Would you like to see more projects like this one?",
@@ -132,6 +150,7 @@ const projectsData = {
         duration: "6 months",
         role: "Design Systems Lead",
         tools: [""],
+        feature: [""],
         year: "2022",
         messages: [
             {
@@ -506,7 +525,7 @@ export default function ProjectPage() {
                                 >
                                     <p className="text-sm text-gray-400 mt-1">{project.description}</p>
 
-                                    <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-3 text-sm text-gray-300">
+                                    <div className="grid grid-cols-2 gap-x-8 justify-items-start gap-y-2 mt-3 text-sm text-gray-300">
                                         <div>
                                             <span className="text-gray-400">Client:</span> {project.client}
                                         </div>
@@ -603,7 +622,7 @@ export default function ProjectPage() {
                                     {msg.showButton && (
                                         <div className="flex flex-col items-center mt-3">
                                             <Link
-                                                href="https://medium.com/@namilapreshan11"
+                                                href="https://www.behance.net/namilapreshan1"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="w-full"
@@ -630,6 +649,16 @@ export default function ProjectPage() {
                                                     {tool}
                                                 </span>
                                             ))}
+                                        </div>
+                                    )}
+
+                                    {msg.isfeatureList && (
+                                        <div className="mt-3 flex flex-wrap gap-2">
+                                            <ul className="list-disc pl-5 space-y-1 text-sm text-white">
+                                                {project.feature.map((item, index) => (
+                                                    <li key={index}>{item}</li>
+                                                ))}
+                                            </ul>
                                         </div>
                                     )}
                                 </div>
