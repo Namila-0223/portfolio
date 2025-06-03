@@ -20,6 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en" suppressHydrationWarning>
             <head>
                 <title>Namila Preshan – UI/UX Engineer & Product Designer Portfolio</title>
+                <link rel="icon" href="/favicon.svg" type="image/x-icon" />
+                <link rel="icon" href="/favicon.png" type="image/x-icon" />
                 <meta name="title" content="Namila Preshan – UI/UX Engineer & Product Designer Portfolio" />
                 <meta
                     name="description"
