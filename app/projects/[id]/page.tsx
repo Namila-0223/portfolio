@@ -447,9 +447,9 @@ export default function ProjectPage() {
     return (
         <main className="min-h-screen bg-[#0f0f0f] text-white">
             {/*this one have to remove after cmomplete site */}
-            <div className="bg-gray-800 text-yellow-500 text-sm text-center py-1 px-4">
+            {/* <div className="bg-gray-800 text-yellow-500 text-sm text-center py-1 px-4">
                 🚧 This site is still under development – some content may be updated soon.
-            </div>
+            </div> */}
             {/* Project header - visible only when not scrolled */}
             <div
                 className={`fixed top-0 left-0 right-0 z-20 will-change-transform ${
@@ -464,9 +464,9 @@ export default function ProjectPage() {
                 }}
             >
                 {/* Optional notice bar */}
-                <div className="bg-gray-800 text-yellow-500 text-sm text-center py-1 px-4">
+                {/* <div className="bg-gray-800 text-yellow-500 text-sm text-center py-1 px-4">
                     🚧 This site is still under development – some content may be updated soon.
-                </div>
+                </div> */}
 
                 <div className="container max-w-2xl mx-auto px-4 relative">
                     {/* Back button */}
@@ -547,31 +547,155 @@ export default function ProjectPage() {
             </div>
 
             {/* Chat container */}
-            <div
-                className="max-w-2xl mx-auto px-4 pb-8 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar"
-                ref={chatContainerRef}
-                style={{ paddingTop: `${headerHeight + 20}px` }}
-            >
-                {/* Date/time separator */}
-                <div className="flex justify-center my-4">
-                    <div className="bg-gray-800 rounded-full px-4 py-1 text-xs text-gray-400">
-                        {formattedDate} • {formattedTime}
+            <div style={{ paddingTop: `${headerHeight + 20}px` }}>
+                <div
+                    className="max-w-2xl mx-auto px-4 pb-8 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar"
+                    ref={chatContainerRef}
+                >
+                    {/* Date/time separator */}
+                    <div className="flex justify-center my-4">
+                        <div className="bg-gray-800 rounded-full px-4 py-1 text-xs text-gray-400">
+                            {formattedDate} • {formattedTime}
+                        </div>
                     </div>
-                </div>
 
-                {/* Chat messages */}
-                <div className="space-y-6 pb-20 pt-4">
-                    {project.messages.slice(0, currentMessageIndex).map((msg) => (
-                        <motion.div
-                            key={msg.id}
-                            className={`flex ${msg.sender === "user" ? "justify-end" : ""}`}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            variants={msg.sender === "user" ? userMessageVariants : namilaMessageVariants}
-                        >
-                            {msg.sender === "namila" && (
-                                <div className="w-8 h-8 mr-2 flex-shrink-0">
+                    {/* Chat messages */}
+                    <div className="space-y-6 pb-20 pt-4">
+                        {project.messages.slice(0, currentMessageIndex).map((msg) => (
+                            <motion.div
+                                key={msg.id}
+                                className={`flex ${msg.sender === "user" ? "justify-end" : ""}`}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                variants={msg.sender === "user" ? userMessageVariants : namilaMessageVariants}
+                            >
+                                {msg.sender === "namila" && (
+                                    <div className="w-8 h-8 mr-2 flex-shrink-0">
+                                        <Image
+                                            src="/images/namila.jpg"
+                                            alt="Namila"
+                                            width={32}
+                                            height={32}
+                                            className="rounded-full object-cover"
+                                        />
+                                    </div>
+                                )}
+
+                                <div className="flex flex-col max-w-[80%]">
+                                    {/* Sender name */}
+                                    <span
+                                        className={`text-xs mb-1 ${
+                                            msg.sender === "user" ? "text-right text-gray-400" : "text-gray-400"
+                                        }`}
+                                    >
+                                        {msg.senderName}
+                                    </span>
+
+                                    <div
+                                        className={`p-4 lg:w-96 md:w-96 ${
+                                            msg.sender === "user"
+                                                ? "bg-[#1a1a1a] rounded-2xl rounded-tr-none message-bubble-user"
+                                                : "bg-[#1a1a1a] rounded-2xl rounded-tl-none message-bubble-namila"
+                                        }`}
+                                    >
+                                        <p className="text-sm">{msg.content}</p>
+
+                                        {msg.hasImage && (
+                                            <div className="mt-3 mb-2">
+                                                <Image
+                                                    src={msg.imageSrc || "/placeholder.svg?height=180&width=280"}
+                                                    alt={msg.imageAlt || "Project"}
+                                                    width={400}
+                                                    height={225}
+                                                    className="rounded-lg w-full object-cover shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                                                    style={{ aspectRatio: "16/9", height: "auto" }}
+                                                    onClick={() => {
+                                                        setActiveImage(msg.imageSrc || "");
+                                                        setShowImageModal(true);
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
+
+                                        {/* follow button */}
+                                        {msg.showButton && (
+                                            <div className="flex flex-col items-center mt-3">
+                                                <Link
+                                                    href="https://www.behance.net/namilapreshan1"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-full"
+                                                >
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333] w-full"
+                                                        type="button"
+                                                    >
+                                                        View more projects
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        )}
+
+                                        {msg.showTools && (
+                                            <div className="mt-3 flex flex-wrap gap-2">
+                                                {project.tools.map((tool, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="bg-[#232323] px-3 py-1 rounded-full text-xs"
+                                                    >
+                                                        {tool}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        {msg.isfeatureList && (
+                                            <div className="mt-3 flex flex-wrap gap-2">
+                                                <ul className="list-disc pl-5 space-y-1 text-sm text-white">
+                                                    {project.feature.map((item, index) => (
+                                                        <li key={index}>{item}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Message time */}
+                                    <span
+                                        className={`text-xs mt-1 ${
+                                            msg.sender === "user" ? "text-right text-gray-500" : "text-gray-500"
+                                        }`}
+                                    >
+                                        {formattedTime}
+                                    </span>
+                                </div>
+
+                                {msg.sender === "user" && (
+                                    <div className="w-8 h-8 ml-2 flex-shrink-0">
+                                        <Image
+                                            src="/images/user.jpg"
+                                            alt="Namila"
+                                            width={64}
+                                            height={64}
+                                            className="rounded-full object-cover"
+                                        />
+                                    </div>
+                                )}
+                            </motion.div>
+                        ))}
+
+                        {/* Typing indicator */}
+                        {showTyping && project.messages[currentMessageIndex]?.sender === "namila" && (
+                            <motion.div
+                                className="flex"
+                                initial={{ opacity: 0, x: -20, scale: 0.9 }}
+                                animate={{ opacity: 1, x: 0, scale: 1 }}
+                                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                            >
+                                <div className="w-8 h-8 mr-2">
                                     <Image
                                         src="/images/namila.jpg"
                                         alt="Namila"
@@ -580,199 +704,77 @@ export default function ProjectPage() {
                                         className="rounded-full object-cover"
                                     />
                                 </div>
-                            )}
-
-                            <div className="flex flex-col max-w-[80%]">
-                                {/* Sender name */}
-                                <span
-                                    className={`text-xs mb-1 ${
-                                        msg.sender === "user" ? "text-right text-gray-400" : "text-gray-400"
-                                    }`}
-                                >
-                                    {msg.senderName}
-                                </span>
-
-                                <div
-                                    className={`p-4 lg:w-96 md:w-96 ${
-                                        msg.sender === "user"
-                                            ? "bg-[#1a1a1a] rounded-2xl rounded-tr-none message-bubble-user"
-                                            : "bg-[#1a1a1a] rounded-2xl rounded-tl-none message-bubble-namila"
-                                    }`}
-                                >
-                                    <p className="text-sm">{msg.content}</p>
-
-                                    {msg.hasImage && (
-                                        <div className="mt-3 mb-2">
-                                            <Image
-                                                src={msg.imageSrc || "/placeholder.svg?height=180&width=280"}
-                                                alt={msg.imageAlt || "Project"}
-                                                width={400}
-                                                height={225}
-                                                className="rounded-lg w-full object-cover shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                                                style={{ aspectRatio: "16/9", height: "auto" }}
-                                                onClick={() => {
-                                                    setActiveImage(msg.imageSrc || "");
-                                                    setShowImageModal(true);
-                                                }}
-                                            />
+                                <div className="flex flex-col">
+                                    <span className="text-xs mb-1 text-gray-400">Namila</span>
+                                    <div className="bg-[#1a1a1a] rounded-2xl rounded-tl-none p-3 typing-indicator">
+                                        <div className="flex space-x-1">
+                                            <div
+                                                className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                                                style={{ animationDelay: "0ms" }}
+                                            ></div>
+                                            <div
+                                                className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                                                style={{ animationDelay: "150ms" }}
+                                            ></div>
+                                            <div
+                                                className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                                                style={{ animationDelay: "300ms" }}
+                                            ></div>
                                         </div>
-                                    )}
-
-                                    {/* follow button */}
-                                    {msg.showButton && (
-                                        <div className="flex flex-col items-center mt-3">
-                                            <Link
-                                                href="https://www.behance.net/namilapreshan1"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="w-full"
-                                            >
-                                                <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333] w-full"
-                                                    type="button"
-                                                >
-                                                    View more projects
-                                                </Button>
-                                            </Link>
-                                        </div>
-                                    )}
-
-                                    {msg.showTools && (
-                                        <div className="mt-3 flex flex-wrap gap-2">
-                                            {project.tools.map((tool, index) => (
-                                                <span
-                                                    key={index}
-                                                    className="bg-[#232323] px-3 py-1 rounded-full text-xs"
-                                                >
-                                                    {tool}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {msg.isfeatureList && (
-                                        <div className="mt-3 flex flex-wrap gap-2">
-                                            <ul className="list-disc pl-5 space-y-1 text-sm text-white">
-                                                {project.feature.map((item, index) => (
-                                                    <li key={index}>{item}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Message time */}
-                                <span
-                                    className={`text-xs mt-1 ${
-                                        msg.sender === "user" ? "text-right text-gray-500" : "text-gray-500"
-                                    }`}
-                                >
-                                    {formattedTime}
-                                </span>
-                            </div>
-
-                            {msg.sender === "user" && (
-                                <div className="w-8 h-8 ml-2 flex-shrink-0">
-                                    <Image
-                                        src="/images/user.jpg"
-                                        alt="Namila"
-                                        width={64}
-                                        height={64}
-                                        className="rounded-full object-cover"
-                                    />
-                                </div>
-                            )}
-                        </motion.div>
-                    ))}
-
-                    {/* Typing indicator */}
-                    {showTyping && project.messages[currentMessageIndex]?.sender === "namila" && (
-                        <motion.div
-                            className="flex"
-                            initial={{ opacity: 0, x: -20, scale: 0.9 }}
-                            animate={{ opacity: 1, x: 0, scale: 1 }}
-                            transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                        >
-                            <div className="w-8 h-8 mr-2">
-                                <Image
-                                    src="/images/namila.jpg"
-                                    alt="Namila"
-                                    width={32}
-                                    height={32}
-                                    className="rounded-full object-cover"
-                                />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-xs mb-1 text-gray-400">Namila</span>
-                                <div className="bg-[#1a1a1a] rounded-2xl rounded-tl-none p-3 typing-indicator">
-                                    <div className="flex space-x-1">
-                                        <div
-                                            className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
-                                            style={{ animationDelay: "0ms" }}
-                                        ></div>
-                                        <div
-                                            className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
-                                            style={{ animationDelay: "150ms" }}
-                                        ></div>
-                                        <div
-                                            className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
-                                            style={{ animationDelay: "300ms" }}
-                                        ></div>
                                     </div>
+                                    <span className="text-xs mt-1 text-gray-500">{formattedTime}</span>
                                 </div>
-                                <span className="text-xs mt-1 text-gray-500">{formattedTime}</span>
-                            </div>
-                        </motion.div>
-                    )}
-                </div>
+                            </motion.div>
+                        )}
+                    </div>
 
-                {/* Footer */}
-                <div className=" text-center text-xs text-gray-500 mt-8 pt-4 border-gray-800">
-                    © 2025 Made with ❤️ by Namila Preshan
-                    {/* <a href="#" className="hover:text-gray-400">
+                    {/* Footer */}
+                    <div className=" text-center text-xs text-gray-500 mt-8 pt-4 border-gray-800">
+                        © 2025 Made with ❤️ by Namila Preshan
+                        {/* <a href="#" className="hover:text-gray-400">
                             Privacy
                         </a> */}
-                </div>
+                    </div>
 
-                <div className="flex justify-center">
+                    <div className="flex justify-center">
+                        <AnimatePresence>
+                            {showNewMessageAlert && unreadCount > 0 && (
+                                <motion.button
+                                    className="fixed bottom-6 mx-auto p-2 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50 flex items-center"
+                                    onClick={scrollToFirstUnread}
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    transition={{ duration: 0.2 }}
+                                    aria-label="Scroll to new message"
+                                >
+                                    <ArrowDown size={12} className="mr-2" />
+                                    <span className="text-sm">
+                                        {unreadCount > 5 ? "5+" : unreadCount} New Message{unreadCount !== 1 ? "s" : ""}
+                                    </span>
+                                </motion.button>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                    {/* Scroll to top button */}
                     <AnimatePresence>
-                        {showNewMessageAlert && unreadCount > 0 && (
+                        {showScrollToTop && (
                             <motion.button
-                                className="fixed bottom-6 mx-auto p-2 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-50 flex items-center"
-                                onClick={scrollToFirstUnread}
+                                className="fixed bottom-20 right-4 p-3 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-40"
+                                onClick={scrollToTop}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.8 }}
                                 transition={{ duration: 0.2 }}
-                                aria-label="Scroll to new message"
+                                aria-label="Scroll to top"
                             >
-                                <ArrowDown size={12} className="mr-2" />
-                                <span className="text-sm">
-                                    {unreadCount > 5 ? "5+" : unreadCount} New Message{unreadCount !== 1 ? "s" : ""}
-                                </span>
+                                <ArrowUp size={16} />
                             </motion.button>
                         )}
                     </AnimatePresence>
                 </div>
-                {/* Scroll to top button */}
-                <AnimatePresence>
-                    {showScrollToTop && (
-                        <motion.button
-                            className="fixed bottom-20 right-4 p-3 bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg z-40"
-                            onClick={scrollToTop}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.2 }}
-                            aria-label="Scroll to top"
-                        >
-                            <ArrowUp size={16} />
-                        </motion.button>
-                    )}
-                </AnimatePresence>
             </div>
+
             <FloatingMenu />
 
             {showImageModal && (
