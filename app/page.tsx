@@ -821,7 +821,7 @@ export default function Home() {
                                             <div className="flex justify-center mt-4">
                                                 <Button
                                                     variant="outline"
-                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333]"
+                                                    className="bg-[#232323] hover:bg-[#2a2a2a] border-[#333] w-full"
                                                     onClick={handleRestart}
                                                 >
                                                     <RefreshCw size={14} className="mr-2" />
