@@ -274,19 +274,19 @@ export default function Home() {
             senderName: "Namila Preshan",
             content: "Occasionally, I share insights on design and development—here’s one of my recent posts.",
         },
-        {
-            id: 22,
-            sender: "namila",
-            senderName: "Namila Preshan",
-            content: "A Comprehensive Guide to Information Architecture Basics in UX Design",
-            isNewsletter: true,
-            number: 1,
-        },
+        // {
+        //     id: 22,
+        //     sender: "namila",
+        //     senderName: "Namila Preshan",
+        //     content: "",
+        //     isNewsletter: true,
+        //     number: "A Comprehensive Guide to Information Architecture Basics in UX Design",
+        // },
         {
             id: 23,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "If you like it, you can follow me for more updates and thoughts.",
+            content: "If you like to see those, you can follow me for more updates and thoughts.",
             isfollowed: true,
         },
         {
@@ -735,13 +735,16 @@ export default function Home() {
                                         )}
 
                                         {/* Newsletter */}
-                                        {msg.isNewsletter && (
+                                        {/* {msg.isNewsletter && (
                                             <div className="flex items-center">
-                                                <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center mr-2 flex-shrink-0">
-                                                    <span className="text-white font-bold">{msg.number}</span>
-                                                </div>
+                                                <a
+                                                    href="https://medium.com/@namilapreshan11"
+                                                    className="text-white font-bold italic"
+                                                >
+                                                    "{msg.number}"
+                                                </a>
                                             </div>
-                                        )}
+                                        )} */}
 
                                         {/* follow button */}
                                         {msg.isfollowed && (
