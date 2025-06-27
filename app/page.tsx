@@ -224,10 +224,16 @@ export default function Home() {
             id: 15,
             sender: "user",
             senderName: "You",
-            content: "Words from the people I’ve collaborated with closely.",
+            content: "I’d love to read what others think about working with you!",
         },
         {
             id: 16,
+            sender: "namila",
+            senderName: "You",
+            content: "Sure! Here are some kind words from people I’ve had the pleasure of working with.",
+        },
+        {
+            id: 17,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
@@ -236,7 +242,7 @@ export default function Home() {
             testimonialAuthor: "- Sajith Bogahawaththa, Tech Lead at Epic Lanka",
         },
         {
-            id: 17,
+            id: 18,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
@@ -245,7 +251,7 @@ export default function Home() {
             testimonialAuthor: "- Oshada S, UI UX Engineer at Epic Lanka",
         },
         {
-            id: 18,
+            id: 19,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
@@ -254,13 +260,13 @@ export default function Home() {
             testimonialAuthor: "- Wathsala Nadeeshan, UI UX Engineer at Epic Lanka",
         },
         {
-            id: 19,
+            id: 20,
             sender: "user",
             senderName: "You",
             content: "I'm very impressed by your work. Anything else you'd like to share?",
         },
         {
-            id: 20,
+            id: 21,
             sender: "namila",
             senderName: "Namila Preshan",
             content:
@@ -269,7 +275,7 @@ export default function Home() {
             profileImageSrc: "/images/profile_3_1.webp",
         },
         {
-            id: 21,
+            id: 22,
             sender: "namila",
             senderName: "Namila Preshan",
             content: "Occasionally, I share insights on design and development—here’s one of my recent posts.",
