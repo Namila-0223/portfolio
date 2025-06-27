@@ -505,7 +505,7 @@ export default function Home() {
 
             <div style={{ paddingTop: `${headerHeight + 20}px` }}>
                 <div
-                    className="max-w-2xl mx-auto px-4 pb-8 pt-4 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar"
+                    className="max-w-2xl mx-auto px-4 pb-8 h-[calc(100vh-80px)] overflow-y-auto hide-scrollbar"
                     ref={chatContainerRef}
                 >
                     <div className="flex justify-center my-4">
