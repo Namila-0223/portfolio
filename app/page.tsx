@@ -96,7 +96,7 @@ export default function Home() {
             id: 1,
             sender: "namila",
             senderName: "Namila Preshan",
-            content: "Hey! It’s me, Namila, a UI UX Engineer based in Colombo. How can I help you today? 😊",
+            content: "Looking for a designer? Let’s chat!😎",
         },
         {
             id: 2,
