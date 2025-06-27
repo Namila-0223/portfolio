@@ -573,7 +573,7 @@ export default function ProjectPage() {
                                 {msg.sender === "namila" && (
                                     <div className="w-8 h-8 mr-2 flex-shrink-0">
                                         <Image
-                                            src="/images/namila.jpg"
+                                            src="/images/namila_1.webp"
                                             alt="Namila"
                                             width={32}
                                             height={32}
@@ -676,7 +676,7 @@ export default function ProjectPage() {
                                 {msg.sender === "user" && (
                                     <div className="w-8 h-8 ml-2 flex-shrink-0">
                                         <Image
-                                            src="/images/user.jpg"
+                                            src="/images/user_1.webp"
                                             alt="Namila"
                                             width={64}
                                             height={64}
@@ -697,7 +697,7 @@ export default function ProjectPage() {
                             >
                                 <div className="w-8 h-8 mr-2">
                                     <Image
-                                        src="/images/namila.jpg"
+                                        src="/images/namila_1.webp"
                                         alt="Namila"
                                         width={32}
                                         height={32}
