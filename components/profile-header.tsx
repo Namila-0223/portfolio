@@ -107,9 +107,9 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                                     <p className="text-xs text-gray-400 mt-2">
                                         {designer.personality} · {designer.location} · {designer.email}
                                     </p>
-                                    <div className="text-xs text-gray-400 mt-1">
+                                    {/* <div className="text-xs text-gray-400 mt-1">
                                         <p>👋 Hi! Let’s create something meaningful together.</p>
-                                    </div>
+                                    </div> */}
                                 </motion.div>
                             )}
                         </AnimatePresence>
