@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 interface Designer {
     name: string;
     title: string;
-    workplace: string;
+    // workplace: string;
     tagline: string;
     location: string;
     email: string;
@@ -51,7 +51,7 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                             }}
                         >
                             <img
-                                src={designer.avatar || "/images/namila.jpg"}
+                                src={designer.avatar || "/images/namila_1.webp"}
                                 alt={designer.name}
                                 className="w-full h-full object-cover"
                                 style={{ transform: "translateZ(0)" }}
@@ -98,9 +98,9 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                                     {/* <p className="text-gray-400 text-sm mt-1 mb-2">{designer.pronouns}</p> */}
                                     <p className="text-sm text-gray-200">
                                         {designer.title}
-                                        <a href="#" className="text-blue-400">
+                                        {/* <a href="#" className="text-blue-400">
                                             {designer.workplace}
-                                        </a>
+                                        </a> */}
                                     </p>
                                     {/* <p className="text-sm text-gray-400"></p> */}
                                     <p className="text-sm text-gray-300 mt-1">{designer.tagline}</p>
@@ -108,7 +108,7 @@ export function ProfileHeader({ designer, isScrolled }: ProfileHeaderProps) {
                                         {designer.personality} · {designer.location} · {designer.email}
                                     </p>
                                     <div className="text-xs text-gray-400 mt-1">
-                                        <p>👋 Hey, how are you?</p>
+                                        <p>👋 Hi! Let’s create something meaningful together.</p>
                                     </div>
                                 </motion.div>
                             )}

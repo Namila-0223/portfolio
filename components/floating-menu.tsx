@@ -83,7 +83,8 @@ export default function FloatingMenu() {
 
                 <Button
                     onClick={toggleMenu}
-                    className="p-3 rounded-full bg-black text-white shadow-xl hover:bg-gray-800 transition "
+                    className="p-3 rounded-full bg-black text-white shadow-xl hover:bg-gray-800 transition"
+                    aria-label="See More"
                 >
                     {isOpen ? <X size={16} /> : <Plus size={16} />}
                 </Button>

@@ -68,13 +68,13 @@ export default function Home() {
     // Project data
     const designer = {
         name: "Namila Preshan",
-        title: "UI UX Enginieer at ",
-        workplace: "@Epic lanka",
-        tagline: "Crafting interfaces that matter ✨",
+        title: "UI/UX Engineer & Experience Designer",
+        // workplace: "@Epic lanka",
+        tagline: "CDesigning seamless, human-centered products ✨",
         location: "Sri Lanka",
         email: "hello@namila.me",
         personality: "ENFJ-T",
-        avatar: "/images/namila.jpg?height=250&width=250",
+        avatar: "/images/namila_1.webp?height=250&width=250",
         isOnline: true,
     };
 
@@ -266,7 +266,7 @@ export default function Home() {
             content:
                 "I'm passionate about making digital experiences easier and more enjoyable for people. With over a year of hands-on experience in design and UI development, I focus on creating interfaces that not only look great but also work smoothly and make sense to users.",
             hasProfileImage: true,
-            profileImageSrc: "/images/profile-3.jpg",
+            profileImageSrc: "/images/profile_3_1.webp",
         },
         {
             id: 21,
@@ -365,7 +365,7 @@ export default function Home() {
                         }
                         return newIndex;
                     });
-                }, 3500 + Math.random() * 1500);
+                }, 2000 + Math.random() * 1500);
                 return () => clearTimeout(typingTimer);
             } else {
                 const userMsgTimer = setTimeout(() => {
@@ -503,7 +503,7 @@ export default function Home() {
                     ref={chatContainerRef}
                 >
                     <div className="flex justify-center my-4">
-                        <div className="bg-gray-800 rounded-full px-4 py-1 text-xs text-gray-400">
+                        <div className="bg-gray-950 rounded-full px-4 py-1 text-xs text-gray-400">
                             {formattedDate} • {formattedTime}
                         </div>
                     </div>
@@ -524,7 +524,7 @@ export default function Home() {
                                 {msg.sender === "namila" && (
                                     <div className="w-8 h-8 mr-2 flex-shrink-0">
                                         <Image
-                                            src="/images/namila.jpg"
+                                            src="/images/namila_1.webp"
                                             alt="Namila"
                                             width={64}
                                             height={64}
@@ -719,7 +719,7 @@ export default function Home() {
                                         {msg.hasProfileImage && (
                                             <div className="mt-3 flex flex-col items-center">
                                                 <Image
-                                                    src={msg.profileImageSrc || "/images/profile-3.jpg"}
+                                                    src={msg.profileImageSrc || "/images/profile_3_1.webp"}
                                                     alt="Profile"
                                                     width={400}
                                                     height={400}
@@ -847,7 +847,7 @@ export default function Home() {
                                 {msg.sender === "user" && (
                                     <div className="w-8 h-8 ml-2 flex-shrink-0">
                                         <Image
-                                            src="/images/user.jpg"
+                                            src="/images/user_1.webp"
                                             alt="Namila"
                                             width={64}
                                             height={64}
@@ -867,7 +867,7 @@ export default function Home() {
                             >
                                 <div className="w-8 h-8 mr-2">
                                     <Image
-                                        src="/images/namila.jpg"
+                                        src="/images/namila_1.webp"
                                         alt="Namila"
                                         width={32}
                                         height={32}
