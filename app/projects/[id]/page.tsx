@@ -34,20 +34,25 @@ const projectsData: {
         duration: string;
         role: string;
         year: string;
-        tools: string[];
+        tools: { name: string; icon: string }[];
         feature: string[];
         messages: ProjectMessage[];
     };
 } = {
     "mobile-app-ui": {
         title: "Movie Trailer App UI",
-        description: "A sleek mobile app for discovering movie trailers and booking tickets.",
+        description: "A Sleek mobile app for movie trailers and ticket booking.",
         coverImage: "/images/movie-app-cover.png",
-        client: "Personal Concept Project",
+        client: "Personal Concept",
         duration: "4 weeks",
         role: "UI/UX Designer",
         year: "2024",
-        tools: ["Figma", "Notion", "Photoshop"],
+        // tools: ["Figma", "Notion", "Photoshop"],
+        tools: [
+            { name: "Figma", icon: "/icons/Figma.svg" },
+            { name: "Illustrator", icon: "/icons/Illustrator.svg" },
+            { name: "Photoshop", icon: "/icons/Photoshop.svg" },
+        ],
         feature: [
             "Trailer previews with a clean scroll experience",
             "Seamless seat booking and showtime selection",
@@ -149,7 +154,7 @@ const projectsData: {
         client: "Self-initiated",
         duration: "6 months",
         role: "Design Systems Lead",
-        tools: [""],
+        tools: [],
         feature: [""],
         year: "2022",
         messages: [
@@ -642,12 +647,19 @@ export default function ProjectPage() {
                                         {msg.showTools && (
                                             <div className="mt-3 flex flex-wrap gap-2">
                                                 {project.tools.map((tool, index) => (
-                                                    <span
+                                                    <div
                                                         key={index}
-                                                        className="bg-[#232323] px-3 py-1 rounded-full text-xs"
+                                                        className="flex items-center bg-gray-800 rounded-full px-3 py-1"
                                                     >
-                                                        {tool}
-                                                    </span>
+                                                        <Image
+                                                            src={tool.icon}
+                                                            alt={tool.name}
+                                                            width={24}
+                                                            height={24}
+                                                            className="mr-1"
+                                                        />
+                                                        <span className="text-xs">{tool.name}</span>
+                                                    </div>
                                                 ))}
                                             </div>
                                         )}
