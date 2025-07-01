@@ -70,7 +70,7 @@ export default function Home() {
         name: "Namila Preshan",
         title: "UI/UX Engineer & Experience Designer",
         // workplace: "@Epic lanka",
-        tagline: "CDesigning seamless, human-centered products ✨",
+        tagline: "Designing seamless, human-centered products ✨",
         location: "Sri Lanka",
         email: "hello@namila.me",
         personality: "ENFJ-T",
