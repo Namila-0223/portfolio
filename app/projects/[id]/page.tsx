@@ -729,12 +729,12 @@ export default function ProjectPage() {
                     </div>
 
                     {/* Footer */}
-                    <div className=" text-center text-xs text-gray-500 mt-8 pt-4 border-gray-800">
+                    {/* <div className=" text-center text-xs text-gray-500 mt-8 pt-4 border-gray-800">
                         © 2025 Made with ❤️ by Namila Preshan
-                        {/* <a href="#" className="hover:text-gray-400">
+                        <a href="#" className="hover:text-gray-400">
                             Privacy
-                        </a> */}
-                    </div>
+                        </a>
+                    </div> */}
 
                     <div className="flex justify-center">
                         <AnimatePresence>
@@ -773,6 +773,12 @@ export default function ProjectPage() {
                         )}
                     </AnimatePresence>
                 </div>
+            </div>
+            <div className="fixed bottom-0 h-[48px] w-full text-center text-xs bg-[#0f0f0f]  text-gray-500 mt-8 pt-4 border-gray-800">
+                © 2025 Made with ❤️ by Namila Preshan
+                {/* <a href="#" className="hover:text-gray-400">
+                            Privacy
+                        </a> */}
             </div>
 
             <FloatingMenu />
