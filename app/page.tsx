@@ -6,12 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink, ArrowDown, X } from 'lucide-react';
+import { Linkedin, Copy, Calendar, Send, RefreshCw, ArrowUp, ExternalLink, ArrowDown, X } from "lucide-react";
 import { ProfileHeader } from "@/components/profile-header";
 import Lottie from "lottie-react";
 
 //lottie animations
-import behanceData from "../public/animations/behance.json";
+import behanceData from "@/public/animations/behance.json";
 import FloatingMenu from "@/components/floating-menu";
 
 export default function Home() {
@@ -590,7 +590,7 @@ export default function Home() {
                                                         className="flex items-center bg-gray-800 rounded-full px-3 py-1"
                                                     >
                                                         <Image
-                                                            src={tool.icon || "/placeholder.svg"}
+                                                            src={tool.icon}
                                                             alt={tool.name}
                                                             width={24}
                                                             height={24}
@@ -642,7 +642,7 @@ export default function Home() {
                                                                         src={
                                                                             msg.imageSrc ||
                                                                             "/placeholder.svg?height=180&width=280"
-                                                                         || "/placeholder.svg"}
+                                                                        }
                                                                         alt={msg.imageAlt || "Project"}
                                                                         width={400}
                                                                         height={225}
@@ -688,7 +688,7 @@ export default function Home() {
                                                                         src={
                                                                             msg.imageSrc ||
                                                                             "/placeholder.svg?height=180&width=280"
-                                                                         || "/placeholder.svg"}
+                                                                        }
                                                                         alt={msg.imageAlt || "Project"}
                                                                         width={400}
                                                                         height={225}
@@ -969,7 +969,7 @@ export default function Home() {
                         >
                             <X size={24} />
                         </button>
-                        <img src={activeImage || "/placeholder.svg"} alt="Preview" className="lg:w-96 md:w-96 sm:w-full h-auto rounded-lg" />
+                        <img src={activeImage} alt="Preview" className="lg:w-96 md:w-96 sm:w-full h-auto rounded-lg" />
                     </div>
                 </div>
             )}
