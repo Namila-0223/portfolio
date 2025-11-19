@@ -11,7 +11,7 @@ import { ProfileHeader } from "@/components/profile-header";
 import Lottie from "lottie-react";
 
 //lottie animations
-//import behanceData from "../public/animations/behance.json";
+import behanceData from "../public/animations/behance.json";
 import FloatingMenu from "@/components/floating-menu";
 
 export default function Home() {
@@ -120,27 +120,27 @@ export default function Home() {
             imageSrc: "/project/project-1.png",
             projectId: "mobile-app-ui",
         },
-        //{
-           // id: 5,
-           // sender: "namila",
-           // senderName: "Namila Preshan",
-           // content: "Take a look at my creative explorations on Behance.",
-           // hasLottie: true,
-            //lottieSrc: "/animations/behance.json",
-           // lottieAlt: "Behance animation",
-           // projectId: null,
-           // externalUrl: "https://www.behance.net/namilapreshan1",
+        {
+           id: 5,
+           sender: "namila",
+           senderName: "Namila Preshan",
+           content: "Take a look at my creative explorations on Behance.",
+           hasLottie: true,
+            lottieSrc: "/animations/behance.json",
+           lottieAlt: "Behance animation",
+           projectId: null,
+           externalUrl: "https://www.behance.net/namilapreshan1",
         },
-        // {
-        //     id: 6,
-        //     sender: "namila",
-        //     senderName: "Namila Preshan",
-        //     content: "A design system I built to deliver consistency, scalability, and impact across digital products.",
-        //     hasImage: true,
-        //     imageAlt: "Design System",
-        //     imageSrc: "/images/design-system.png",
-        //     projectId: "design-system",
-        // },
+        {
+            id: 6,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content: "A design system I built to deliver consistency, scalability, and impact across digital products.",
+            hasImage: true,
+            imageAlt: "Design System",
+            imageSrc: "/images/design-system.png",
+            projectId: "design-system",
+        },
         {
             id: 7,
             sender: "namila",
@@ -161,32 +161,32 @@ export default function Home() {
             senderName: "Namila Preshan",
             content: "Great question! Here's a quick overview of the tools and technologies I work with regularly.",
         },
-        // {
-        //     id: 10,
-        //     sender: "namila",
-        //     senderName: "Namila Preshan",
-        //     content: "🧠 UX Skills: ",
-        //     skill: [
-        //         { name: "Wireframing" },
-        //         { name: "Prototyping" },
-        //         { name: "Interaction Design" },
-        //         { name: "Usability Testing" },
-        //         { name: "Information Architecture" },
-        //     ],
-        // },
-        // {
-        //     id: 11,
-        //     sender: "namila",
-        //     senderName: "Namila Preshan",
-        //     content: "🎨 UI Skills: ",
-        //     skill: [
-        //         { name: "Design Systems" },
-        //         { name: "Visual Design" },
-        //         { name: "Typography" },
-        //         { name: "Accessibility" },
-        //         { name: "Responsive Design" },
-        //     ],
-        // },
+        {
+            id: 10,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content: "🧠 UX Skills: ",
+            skill: [
+                { name: "Wireframing" },
+                { name: "Prototyping" },
+                { name: "Interaction Design" },
+                { name: "Usability Testing" },
+                { name: "Information Architecture" },
+            ],
+        },
+        {
+            id: 11,
+            sender: "namila",
+            senderName: "Namila Preshan",
+            content: "🎨 UI Skills: ",
+            skill: [
+                { name: "Design Systems" },
+                { name: "Visual Design" },
+                { name: "Typography" },
+                { name: "Accessibility" },
+                { name: "Responsive Design" },
+            ],
+        },
         {
             id: 12,
             sender: "namila",
@@ -280,14 +280,6 @@ export default function Home() {
             senderName: "Namila Preshan",
             content: "Occasionally, I share insights on design and development—here’s one of my recent posts.",
         },
-        // {
-        //     id: 22,
-        //     sender: "namila",
-        //     senderName: "Namila Preshan",
-        //     content: "",
-        //     isNewsletter: true,
-        //     number: "A Comprehensive Guide to Information Architecture Basics in UX Design",
-        // },
         {
             id: 23,
             sender: "namila",
@@ -568,7 +560,7 @@ export default function Home() {
                                         )}
 
                                         {/* Skills */}
-                                        {/* {msg.skill && (
+                                        {msg.skill && (
                                             <div className="flex flex-wrap gap-2 mt-2">
                                                 {msg.skill.map((skill, index) => (
                                                     <div
@@ -579,7 +571,7 @@ export default function Home() {
                                                     </div>
                                                 ))}
                                             </div>
-                                        )} */}
+                                        )}
 
                                         {/* Tools list */}
                                         {msg.tools && (
@@ -741,7 +733,7 @@ export default function Home() {
                                         )}
 
                                         {/* Newsletter */}
-                                        {/* {msg.isNewsletter && (
+                                        {msg.isNewsletter && (
                                             <div className="flex items-center">
                                                 <a
                                                     href="https://medium.com/@namilapreshan11"
@@ -750,7 +742,7 @@ export default function Home() {
                                                     "{msg.number}"
                                                 </a>
                                             </div>
-                                        )} */}
+                                        )}
 
                                         {/* follow button */}
                                         {msg.isfollowed && (
