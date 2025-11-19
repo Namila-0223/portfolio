@@ -11,7 +11,7 @@ import { ProfileHeader } from "@/components/profile-header";
 import Lottie from "lottie-react";
 
 //lottie animations
-import behanceData from "@/public/animations/behance.json";
+
 import FloatingMenu from "@/components/floating-menu";
 
 export default function Home() {
@@ -126,7 +126,6 @@ export default function Home() {
             senderName: "Namila Preshan",
             content: "Take a look at my creative explorations on Behance.",
             hasLottie: true,
-            lottieSrc: "/animations/behance.json",
             lottieAlt: "Behance animation",
             projectId: null,
             externalUrl: "https://www.behance.net/namilapreshan1",
