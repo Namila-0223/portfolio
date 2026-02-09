@@ -1,153 +1,67 @@
-// // /data/qa.ts
-// export type QAItem = {
-//     id: number;
-//     topic: string;
-//     keywords: string[];
-//     answer: string; // supports simple HTML like <strong> and <br/>
-//     metadata?: Record<string, any>;
-//   };
-  
-//   export const QA_DATA: QAItem[] = [
-//     {
-//       id: 1,
-//       topic: "projects",
-//       keywords: ["project", "projects", "case study", "case studies", "work", "portfolio", "show me your work"],
-//       answer:
-//         "Here are a few featured case studies:<br/><br/>• <strong>Movie Trailer Booking App</strong> — trailer browsing & seat booking flow.<br/>• <strong>Design System</strong> — tokens, components, and docs for reuse.<br/>• <strong>Movie Trailer App UI</strong> — mobile UI for trailer browsing and booking.<br/><br/>Pick a project and I’ll show key screens and process.",
-//     },
-//     {
-//       id: 2,
-//       topic: "tools",
-//       keywords: ["tool", "tools", "figma", "figjam", "notion", "illustrator", "photoshop", "framer", "tailwind", "nextjs", "react"],
-//       answer:
-//         "I use: <strong>Figma</strong> (UI & prototyping), <strong>FigJam</strong> (workshops), <strong>Adobe</strong> (Illustrator/Photoshop), <strong>Next.js + React</strong> (frontend), <strong>Tailwind/SCSS</strong> (styles), and <strong>Framer Motion</strong> for interactions.",
-//     },
-//     {
-//       id: 3,
-//       topic: "experience",
-//       keywords: ["experience", "background", "work experience", "years", "role"],
-//       answer:
-//         "I’m a UI/UX Engineer focused on designing and shipping web & mobile interfaces. I build design systems, collaborate with engineers, and iterate based on user feedback.",
-//     },
-//     {
-//       id: 4,
-//       topic: "design-process",
-//       keywords: ["process", "design process", "workflow", "how you design", "approach"],
-//       answer:
-//         "My process: <strong>Research → Define → Wireframe → Visual Design → Prototype → Test → Handoff</strong>. I iterate quickly and validate with lightweight testing.",
-//     },
-//     {
-//       id: 5,
-//       topic: "design-system",
-//       keywords: ["design system", "tokens", "components", "component library", "design tokens"],
-//       answer:
-//         "I create design systems with tokens, component variants, spacing scales, and docs so teams can scale designs consistently.",
-//     },
-//     {
-//       id: 6,
-//       topic: "contact",
-//       keywords: ["contact", "email", "hire", "reach", "work with you"],
-//       answer: "You can email me at <strong>hello@namila.me</strong> or use the contact button on the site to send a message.",
-//     },
-//     {
-//       id: 7,
-//       topic: "cv",
-//       keywords: ["cv", "resume", "download cv", "download resume"],
-//       answer: "You can download my CV using the floating download button at the bottom-right of the site.",
-//     },
-//     {
-//       id: 8,
-//       topic: "behance",
-//       keywords: ["behance", "behance link"],
-//       answer: "Behance: https://www.behance.net/namilapreshan1",
-//     },
-//     {
-//       id: 9,
-//       topic: "linkedin",
-//       keywords: ["linkedin", "profile", "linkedin link"],
-//       answer: "LinkedIn: https://www.linkedin.com/in/namila-preshan",
-//     },
-//     {
-//       id: 10,
-//       topic: "availability",
-//       keywords: ["availability", "freelance", "open to work", "available"],
-//       answer: "I’m open to freelance and contract work — please share project details and timeline and I’ll respond via email.",
-//     },
-//   ];
-  
-// /data/qa.ts
+import { ABOUT_YOU } from "./aboutYou";
+import { COMPANY_ROLE } from "./companyRole";
+import { CONTACT } from "./contact";
+import { EDUCATION } from "./education";
+import { EXPERIENCE } from "./experience";
+import { FUN } from "./fun";
+import { PROJECTS } from "./projects";
+import { TOOLS } from "./tools";
+import { UIUX_THEORY } from "./uiuxTheory";
+
 export type QAItem = {
   id: number;
   topic: string;
   keywords: string[];
   answer: string; // supports simple HTML like <strong> and <br/>
   metadata?: Record<string, any>;
+  hasImage?: boolean; // Optional property for image support
+  imageSrc?: string;
+  imageAlt?: string;
+  projectId?: string;
+  hasLottie?: boolean;
+  lottieData?: any;
+  externalUrl?: string;
+  hasProfileImage?: boolean;
+  profileImageSrc?: string;
+  tools?: { name: string; icon: string }[];
+  contentType?: string;
 };
 
 export const QA_DATA: QAItem[] = [
+  // --- 0. GREETINGS & SMALL TALK ---
   {
-    id: 1,
-    topic: "projects",
-    keywords: ["project", "projects", "case study", "case studies", "work", "portfolio", "show me your work"],
-    answer:
-      "Here are a few featured case studies:<br/><br/>• <strong>Movie Trailer Booking App</strong> — trailer browsing & seat booking flow.<br/>• <strong>Design System</strong> — tokens, components, and docs for reuse.<br/>• <strong>Movie Trailer App UI</strong> — mobile UI for trailer browsing and booking.<br/><br/>Pick a project and I’ll show key screens and process.",
+    id: 100,
+    topic: "greeting",
+    keywords: ["hi", "hello", "hey", "good morning", "good afternoon", "good evening", "yo", "namaste", "ayubowan"],
+    answer: "Hi there! 👋 How can I help you today?",
   },
   {
-    id: 2,
-    topic: "tools",
-    keywords: ["tool", "tools", "figma", "figjam", "notion", "illustrator", "photoshop", "framer", "tailwind", "nextjs", "react"],
-    answer:
-      "I use: <strong>Figma</strong> (UI & prototyping), <strong>FigJam</strong> (workshops), <strong>Adobe</strong> (Illustrator/Photoshop), <strong>Next.js + React</strong> (frontend), <strong>Tailwind/SCSS</strong> (styles), and <strong>Framer Motion</strong> for interactions.",
+    id: 101,
+    topic: "appreciation",
+    keywords: ["thanks", "thank you", "thx", "good job", "great", "cool", "awesome", "wow", "nice"],
+    answer: "You're welcome! 😊 Glad you liked it.",
   },
   {
-    id: 3,
-    topic: "experience",
-    keywords: ["experience", "background", "work experience", "years", "role"],
-    answer:
-      "I’m a UI/UX Engineer focused on designing and shipping web & mobile interfaces. I build design systems, collaborate with engineers, and iterate based on user feedback.",
+    id: 102,
+    topic: "bye",
+    keywords: ["bye", "goodbye", "see you", "later", "cya"],
+    answer: "Bye! Thanks for stopping by. Feel free to reach out anytime.",
   },
   {
-    id: 4,
-    topic: "design-process",
-    keywords: ["process", "design process", "workflow", "how you design", "approach"],
-    answer:
-      "My process: <strong>Research → Define → Wireframe → Visual Design → Prototype → Test → Handoff</strong>. I iterate quickly and validate with lightweight testing.",
+    id: 103,
+    topic: "how-are-you",
+    keywords: ["how are you", "how are you doing", "what's up"],
+    answer: "I'm just a portfolio bot, but I'm doing great! 🚀 How about you?",
   },
-  {
-    id: 5,
-    topic: "design-system",
-    keywords: ["design system", "tokens", "components", "component library", "design tokens"],
-    answer:
-      "I create design systems with tokens, component variants, spacing scales, and docs so teams can scale designs consistently.",
-  },
-  {
-    id: 6,
-    topic: "contact",
-    keywords: ["contact", "email", "hire", "reach", "work with you"],
-    answer: "You can email me at <strong>hello@namila.me</strong> or use the contact button on the site to send a message.",
-  },
-  {
-    id: 7,
-    topic: "cv",
-    keywords: ["cv", "resume", "download cv", "download resume"],
-    answer: "You can download my CV using the floating download button at the bottom-right of the site.",
-  },
-  {
-    id: 8,
-    topic: "behance",
-    keywords: ["behance", "behance link"],
-    answer: "Behance: https://www.behance.net/namilapreshan1",
-  },
-  {
-    id: 9,
-    topic: "linkedin",
-    keywords: ["linkedin", "profile", "linkedin link"],
-    answer: "LinkedIn: https://www.linkedin.com/in/namila-preshan",
-  },
-  {
-    id: 10,
-    topic: "availability",
-    keywords: ["availability", "freelance", "open to work", "available"],
-    answer: "I’m open to freelance and contract work — please share project details and timeline and I’ll respond via email.",
-  },
+
+  // --- MERGED DATA SOURCES ---
+  ...ABOUT_YOU,
+  ...COMPANY_ROLE,
+  ...CONTACT,
+  ...EDUCATION,
+  ...EXPERIENCE,
+  ...FUN,
+  ...PROJECTS,
+  ...TOOLS,
+  ...UIUX_THEORY
 ];

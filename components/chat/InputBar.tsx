@@ -121,28 +121,19 @@ export default function InputBar({
           </div>
         )}
       </div> */}
-       <div className="flex items-end">
+      <div className="flex items-end">
         <FloatingMenu />
       </div>
 
       {/* textarea */}
       <textarea
-  value={value}
-  onChange={(e) => onChange(e.target.value)}
-  onKeyDown={handleKeyDown}
-  placeholder="Type a message..."
-  className="
-    flex-1
-    bg-transparent 
-    outline-none 
-    resize-none 
-    text-sm 
-    text-white 
-    leading-tight
-    max-h-16
-  "
-  rows={1}
-/>
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder="Type a message..."
+        className="flex-1 bg-transparent outline-none resize-none text-sm text-white leading-tight max-h-16"
+        rows={1}
+      />
 
       {/* send */}
       <button onClick={() => onSend(undefined)} aria-label="Send message" className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition flex-shrink-0 ml-2">

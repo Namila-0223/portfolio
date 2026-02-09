@@ -1,545 +1,3 @@
-// "use client";
-
-// import React, { useEffect, useRef, useState } from "react";
-// import MessageBubble from "./MessageBubble";
-// import Suggestions from "./Suggestions";
-// import FloatingInputBar from "./FloatingInputBar";
-// import { QA_DATA } from "@/data/qa";
-// import { findTopicMatch, getTopicSuggestions } from "@/lib/qa-engine";
-// import { motion, AnimatePresence } from "framer-motion";
-
-// type ChatMsg = {
-//   id: string;
-//   sender: "namila" | "user" | "system";
-//   content: string;
-//   time?: string;
-// };
-
-// const INTRO = [
-//   "Hi — welcome to my portfolio! 👋",
-//   "I’m Namila, a UI/UX Engineer based in Colombo.",
-//   "Ask me about my projects, tools, or process — I’ll keep it short and clear.",
-// ];
-
-// export default function ChatLayout() {
-//   const [messages, setMessages] = useState<ChatMsg[]>([]);
-//   const [isIntroPlaying, setIsIntroPlaying] = useState(true);
-//   const [userTyped, setUserTyped] = useState(false);
-//   const [isTyping, setIsTyping] = useState(false);
-//   const [suggestions, setSuggestions] = useState<{ id: number; text: string; topic: string }[]>([]);
-//   const scrollRef = useRef<HTMLDivElement | null>(null);
-//   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
-
-//   // Play intro (up to 3 messages), interrupt if user types
-//   useEffect(() => {
-//     if (!isIntroPlaying) return;
-//     let cancelled = false;
-//     let idx = 0;
-
-//     const playNext = () => {
-//       if (cancelled || userTyped) {
-//         setIsIntroPlaying(false);
-//         return;
-//       }
-//       if (idx >= INTRO.length) {
-//         setIsIntroPlaying(false);
-//         return;
-//       }
-
-//       const delayMs = 600 + INTRO[idx].length * 14;
-//       setTimeout(() => {
-//         if (cancelled || userTyped) {
-//           setIsIntroPlaying(false);
-//           return;
-//         }
-//         pushMessage("namila", INTRO[idx]);
-//         idx++;
-//         playNext();
-//       }, delayMs);
-//     };
-
-//     playNext();
-//     return () => {
-//       cancelled = true;
-//     };
-//   }, [isIntroPlaying, userTyped]);
-
-//   // Scroll to bottom on new messages (smooth)
-//   useEffect(() => {
-//     const node = messagesContainerRef.current;
-//     if (!node) return;
-//     // small timeout to wait for DOM update
-//     requestAnimationFrame(() => {
-//       node.scrollTo({ top: node.scrollHeight + 200, behavior: "smooth" });
-//     });
-//   }, [messages]);
-
-//   function pushMessage(sender: ChatMsg["sender"], content: string) {
-//     const time = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-//     setMessages((s) => [...s, { id: `${Date.now()}-${Math.random()}`, sender, content, time }]);
-//   }
-
-//   function handleTyping(text: string) {
-//     if (text && !userTyped) {
-//       setUserTyped(true);
-//       setIsIntroPlaying(false);
-//     }
-//     const sug = getTopicSuggestions(text, 6);
-//     setSuggestions(sug);
-//   }
-
-//   async function handleSend(text: string) {
-//     if (!text || !text.trim()) return;
-//     pushMessage("user", text);
-//     setSuggestions([]);
-//     setIsTyping(true);
-
-//     // small natural delay
-//     await delay(400);
-
-//     const matched = findTopicMatch(text);
-//     if (matched) {
-//       await delay(300 + Math.min(900, matched.answer.length * 6));
-//       pushMessage("namila", matched.answer);
-//     } else {
-//       await delay(600);
-//       pushMessage("namila", "I’m not sure I understood — could you rephrase? Or try a suggestion below.");
-//     }
-//     setIsTyping(false);
-//   }
-
-//   function handleSelectSuggestion(topicOrText: string) {
-//     handleSend(topicOrText);
-//   }
-
-//   return (
-//     <div className="flex flex-col h-full">
-//       {/* Messages area (scrollable) */}
-//       <div
-//         ref={messagesContainerRef}
-//         className="flex-1 overflow-y-auto hide-scrollbar px-2 pt-4 pb-36" /* big bottom padding to avoid overlap with floating input */
-//       >
-//         <div className="space-y-6">
-//           <AnimatePresence initial={false}>
-//             {messages.map((m) => (
-//               <motion.div key={m.id} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-//                 <MessageBubble msg={{ id: m.id, sender: m.sender as any, content: m.content, time: m.time }} />
-//               </motion.div>
-//             ))}
-//           </AnimatePresence>
-
-//           {isTyping && (
-//             <div className="flex">
-//               <div className="w-8 h-8 mr-2">
-//                 <img src="/images/namila.jpg" className="rounded-full object-cover" alt="Namila" />
-//               </div>
-//               <div className="bg-[#1a1a1a] rounded-2xl p-3">
-//                 <div className="flex space-x-1">
-//                   <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: "0ms" }} />
-//                   <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: "150ms" }} />
-//                   <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: "300ms" }} />
-//                 </div>
-//               </div>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-
-//       {/* Suggestions area placed just above the floating input (so it stays visible) */}
-//       <div className="absolute left-0 right-0 bottom-24 flex justify-center pointer-events-none">
-//         <div className="w-[min(720px,92%)] max-w-3xl pointer-events-auto px-4">
-//           <Suggestions items={suggestions} onSelect={handleSelectSuggestion} />
-//         </div>
-//       </div>
-
-//       {/* Floating input bar (centered) */}
-//       <FloatingInputBar
-//         onSend={handleSend}
-//       />
-//     </div>
-//   );
-// }
-
-// function delay(ms: number) {
-//   return new Promise((res) => setTimeout(res, ms));
-// }
-
-// 2nd generated code
-// components/chat/ChatContainer.tsx
-// "use client";
-
-// import React, { useEffect, useRef, useState } from "react";
-// import MessageBubble from "./MessageBubble";
-// import InputBar from "./InputBar";
-// import Suggestions from "./Suggestions";
-// import AutoIntro from "./AutoIntro";
-// import { INTRO_MESSAGES } from "@/data/introMessages";
-// import { QA_DATA } from "@/data/qa";
-// import { findTopicMatch, getTopicSuggestions } from "@/lib/qa-engine";
-
-// type Message = {
-//   id: string;
-//   sender: "namila" | "user";
-//   senderName?: string;
-//   content?: string;
-//   time?: string;
-//   // optional UI fields...
-// };
-
-// export default function ChatContainer({ footerHeight }: { footerHeight: number }) {
-//   const [messages, setMessages] = useState<Message[]>([]);
-//   const [introPlaying, setIntroPlaying] = useState(true);
-//   const [userTyped, setUserTyped] = useState(false);
-//   const [isTyping, setIsTyping] = useState(false);
-//   const [inputValue, setInputValue] = useState("");
-//   const [suggestions, setSuggestions] = useState<{ id: number; text: string }[]>([]);
-//   const messagesRef = useRef<HTMLDivElement | null>(null);
-
-//   // format time helper
-//   function formatTime(date = new Date()) {
-//     return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", hour12: true }).format(date);
-//   }
-
-//   function pushMessage(sender: "namila" | "user", content: string) {
-//     setMessages((prev) => [
-//       ...prev,
-//       {
-//         id: `${Date.now()}-${Math.random()}`,
-//         sender,
-//         senderName: sender === "namila" ? "Namila Preshan" : "You",
-//         content,
-//         time: formatTime(),
-//       },
-//     ]);
-//   }
-
-//   // initialize default suggestions (before typing)
-//   useEffect(() => {
-//     setSuggestions(QA_DATA.slice(0, 6).map((i) => ({ id: i.id, text: i.topic })));
-//   }, []);
-
-//   // Auto scroll
-//   useEffect(() => {
-//     const node = messagesRef.current;
-//     if (!node) return;
-//     requestAnimationFrame(() => {
-//       node.scrollTo({ top: node.scrollHeight, behavior: "smooth" });
-//     });
-//   }, [messages.length, isTyping]);
-
-//   // AutoIntro pushes messages into chat via onPush
-//   function handleIntroPush(msg: any) {
-//     // Convert IntroMsg into Message shape and push
-//     pushMessage(msg.sender, msg.content || "");
-//   }
-
-//   function handleIntroComplete() {
-//     setIntroPlaying(false);
-//   }
-
-//   // Typing and suggestions handler
-//   function handleTyping(value: string) {
-//     setInputValue(value);
-//     if (!userTyped && value.length > 0) {
-//       setUserTyped(true);
-//       setIntroPlaying(false);
-//     }
-//     if (value.trim() === "") {
-//       setSuggestions(QA_DATA.slice(0, 6).map((i) => ({ id: i.id, text: i.topic })));
-//     } else {
-//       // realtime suggestions using qa-engine
-//       const s = getTopicSuggestions(value, 6);
-//       setSuggestions(s);
-//     }
-//   }
-
-//   // send handler
-//   async function handleSend(raw?: string) {
-//     const text = (raw ?? inputValue ?? "").trim();
-//     if (!text) return;
-//     if (introPlaying) setIntroPlaying(false);
-//     if (!userTyped) setUserTyped(true);
-
-//     // add user message
-//     pushMessage("user", text);
-//     setInputValue("");
-//     setSuggestions([]);
-
-//     // simulate typing & generate reply via QA engine
-//     setIsTyping(true);
-//     await new Promise((r) => setTimeout(r, 350));
-//     const matched = findTopicMatch(text);
-//     let reply = "";
-//     if (matched) {
-//       reply = matched.answer;
-//     } else {
-//       // fallback: try direct keyword search across QA_DATA
-//       const token = text.toLowerCase().split(/\s+/)[0] || text;
-//       const fallback = QA_DATA.find((i) => i.keywords.some((k) => k.includes(token)));
-//       if (fallback) reply = fallback.answer;
-//       else reply = "Thanks — I'll reply shortly. If you want, try one of the suggestions below.";
-//     }
-
-//     // small delay to make it feel natural
-//     await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
-//     pushMessage("namila", reply);
-//     setIsTyping(false);
-//   }
-
-//   // suggestion click -> send
-//   function handleSuggestionClick(text: string) {
-//     handleSend(text);
-//   }
-
-//   return (
-//     <div className="flex flex-col" style={{ height: `calc(100vh - ${footerHeight + 140}px)` }}>
-//       {/* messages area */}
-//       <div
-//         ref={messagesRef}
-//         className="flex-1 overflow-y-auto hide-scrollbar pr-1 pb-6"
-//         aria-live="polite"
-//         role="log"
-//       >
-//         <div className="space-y-6 pt-4">
-//           {messages.map((msg) => (
-//             <MessageBubble
-//               key={msg.id}
-//               msg={{ id: msg.id, sender: msg.sender as any, content: msg.content, time: msg.time }}
-//             />
-//           ))}
-
-//           {/* typing indicator */}
-//           {isTyping && (
-//             <div className="flex px-2">
-//               <div className="w-8 h-8 mr-3 flex-shrink-0">
-//                 <img src="/images/namila_1.webp" alt="Namila" className="rounded-full object-cover w-8 h-8" />
-//               </div>
-//               <div className="bg-[#121212] rounded-2xl p-3">
-//                 <div className="flex space-x-1">
-//                   <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-//                   <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-//                   <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-//                 </div>
-//               </div>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-
-//       {/* Suggestions above input */}
-//       <div className="px-2">
-//         {inputValue.trim() === "" && suggestions.length > 0 && (
-//           <div className="flex gap-2 overflow-x-auto hide-scrollbar py-2">
-//             {suggestions.map((s) => (
-//               <button
-//                 key={s.id}
-//                 onClick={() => handleSuggestionClick(s.text)}
-//                 className="whitespace-nowrap bg-[#1a1a1a] px-3 py-2 rounded-full text-sm border border-gray-800 hover:bg-[#222] flex-shrink-0"
-//               >
-//                 {s.text}
-//               </button>
-//             ))}
-//           </div>
-//         )}
-
-//         {/* While typing show dynamic suggestions */}
-//         {inputValue.trim() !== "" && suggestions.length > 0 && (
-//           <div className="flex gap-2 overflow-x-auto hide-scrollbar py-2">
-//             {suggestions.map((s) => (
-//               <button
-//                 key={s.id}
-//                 onClick={() => handleSuggestionClick(s.text)}
-//                 className="whitespace-nowrap bg-[#111111] px-3 py-2 rounded-full text-sm border border-gray-800 hover:bg-[#222] flex-shrink-0"
-//               >
-//                 {s.text}
-//               </button>
-//             ))}
-//           </div>
-//         )}
-//       </div>
-
-//       {/* Input bar fixed above footer */}
-//       <div
-//         className="fixed left-1/2 transform -translate-x-1/2 z-50 w-full max-w-2xl px-4"
-//         style={{ bottom: `${footerHeight + 18}px`, pointerEvents: "none" }}
-//       >
-//         <div
-//           className="pointer-events-auto backdrop-blur-lg bg-black/40 rounded-2xl px-3 py-2 shadow-lg border border-white/5 flex items-center gap-3"
-//           style={{
-//             transition: "height 160ms ease, transform 160ms ease",
-//           }}
-//         >
-//           <InputBar value={inputValue} onChange={handleTyping} onSend={handleSend} />
-//         </div>
-//       </div>
-
-//       {/* Autointro (non-visual, pushes messages when playing) */}
-//       {introPlaying && <AutoIntro onPush={handleIntroPush} onComplete={handleIntroComplete} playing={introPlaying} />}
-
-//       <style jsx>{`
-//         @media (max-height: 600px) {
-//           main {
-//             padding-bottom: ${footerHeight + 12}px;
-//           }
-//         }
-//       `}</style>
-//     </div>
-//   );
-// }
-
-// -----------------------------
-
-// // components/chat/ChatContainer.tsx
-// "use client";
-// import React, { useEffect, useRef, useState } from "react";
-// import MessageBubble from "./MessageBubble";
-// import InputBar from "./InputBar";
-// import Suggestions from "./Suggestions";
-// import AutoIntro from "./AutoIntro";
-// import { getTopicSuggestions, findTopicMatch } from "@/lib/qa-engine";
-// import { QA_DATA } from "@/data/qa";
-
-// type Message = { id: string; sender: "namila" | "user"; content?: string; time?: string; };
-
-// export default function ChatContainer({ headerHeight  }: { headerHeight: number }) {
-//   const [messages, setMessages] = useState<Message[]>([]);
-//   const [introPlaying, setIntroPlaying] = useState(true);
-//   const [userTyped, setUserTyped] = useState(false);
-//   const [isTyping, setIsTyping] = useState(false);
-//   const [inputValue, setInputValue] = useState("");
-//   const [suggestions, setSuggestions] = useState<{ id: number; text: string }[]>([]);
-//   const messagesRef = useRef<HTMLDivElement | null>(null);
-//   const bottomRef = useRef<HTMLDivElement | null>(null);
-
-//   function formatTime(date = new Date()) {
-//     return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", hour12: true }).format(date);
-//   }
-
-//   function pushMessage(sender: "namila" | "user", content: string) {
-//     setMessages(prev => [...prev, { id: `${Date.now()}-${Math.random()}`, sender, content, time: formatTime() }]);
-//   }
-
-//   useEffect(() => {
-//     setSuggestions(QA_DATA.slice(0, 6).map(i => ({ id: i.id, text: i.topic })));
-//   }, []);
-
-//   // WhatsApp-style smooth scrolling: always scroll to bottomRef when messages change
-//   useEffect(() => {
-//     const node = messagesRef.current;
-//     if (!node) return;
-//     // wait until DOM updated
-//     requestAnimationFrame(() => {
-//       bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-//     });
-//   }, [messages.length, isTyping]);
-
-//   function handleIntroPush(msg: any) {
-//     pushMessage(msg.sender, msg.content || "");
-//   }
-//   function handleIntroComplete() {
-//     setIntroPlaying(false);
-//   }
-
-//   function handleTyping(value: string) {
-//     setInputValue(value);
-//     if (!userTyped && value.length > 0) {
-//       setUserTyped(true);
-//       setIntroPlaying(false);
-//     }
-//     if (value.trim() === "") setSuggestions(QA_DATA.slice(0, 6).map(i => ({ id: i.id, text: i.topic })));
-//     else {
-//       setSuggestions(getTopicSuggestions(value, 6));
-//     }
-//   }
-
-//   async function handleSend(raw?: string) {
-//     const text = (raw ?? inputValue ?? "").trim();
-//     if (!text) return;
-//     if (introPlaying) setIntroPlaying(false);
-//     if (!userTyped) setUserTyped(true);
-
-//     pushMessage("user", text);
-//     setInputValue("");
-//     setSuggestions([]);
-
-//     // show typing
-//     setIsTyping(true);
-//     await new Promise(r => setTimeout(r, 350));
-//     const matched = findTopicMatch(text);
-//     let reply = "";
-//     if (matched) reply = matched.answer;
-//     else {
-//       // fallback search by token
-//       const token = text.toLowerCase().split(/\s+/)[0] || text;
-//       const fallback = QA_DATA.find(i => i.keywords.some(k => k.includes(token)));
-//       reply = fallback ? fallback.answer : "Thanks — I'll reply shortly. Try one of the suggestions.";
-//     }
-//     // small realistic delay
-//     await new Promise(r => setTimeout(r, Math.min(900, reply.length * 6)));
-//     pushMessage("namila", reply);
-//     setIsTyping(false);
-//   }
-
-//   function handleSuggestionClick(text: string) {
-//     handleSend(text);
-//   }
-
-//   // compute chat container height so suggestions + input never overlap content
-//   // The parent page has padding; chat container is in the main column — we keep this component's outer style flexible.
-//   return (
-//     <div className="flex flex-col" style={{ height: `calc(100vh - ${headerHeight  + 20}px)` }}>
-//       <div ref={messagesRef} className="flex-1 overflow-y-auto hide-scrollbar pr-1 pb-6" aria-live="polite" role="log">
-//         <div className="space-y-6 pt-4">
-//           {messages.map(m => <MessageBubble key={m.id} msg={m as any} />)}
-//           {isTyping && (
-//             <div className="flex px-2">
-//               <div className="w-8 h-8 mr-3 flex-shrink-0">
-//                 <img src="/images/namila_1.webp" alt="Namila" className="rounded-full object-cover w-8 h-8" />
-//               </div>
-//               <div className="bg-[#121212] rounded-2xl p-3">
-//                 <div className="flex space-x-1">
-//                   <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-//                   <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-//                   <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-//                 </div>
-//               </div>
-//             </div>
-//           )}
-//           <div ref={bottomRef} />
-//         </div>
-//       </div>
-
-//       {/* suggestions (above input) */}
-//       <div className="px-2">
-//         {suggestions.length > 0 && (
-//           <div className="flex gap-2 overflow-x-auto hide-scrollbar py-2">
-//             {suggestions.map(s => (
-//               <button key={s.id} onClick={() => handleSuggestionClick(s.text)} className="whitespace-nowrap bg-[#1a1a1a] px-3 py-2 rounded-full text-sm border border-gray-800 hover:bg-[#222] flex-shrink-0">
-//                 {s.text}
-//               </button>
-//             ))}
-//           </div>
-//         )}
-//       </div>
-
-//       {/* input fixed above footer (but inside component wrapper so layout adjusts) */}
-//       <div className="fixed left-1/2 transform -translate-x-1/2 z-50 w-full max-w-2xl px-4" style={{ bottom: `${headerHeight + 18}px`, pointerEvents: "none" }}>
-//         <div className="pointer-events-auto backdrop-blur-lg bg-black/40 rounded-2xl px-3 py-2 shadow-lg border border-white/5 flex items-center gap-3" style={{ transition: "height 160ms ease, transform 160ms ease" }}>
-//           <InputBar value={inputValue} onChange={handleTyping} onSend={handleSend} />
-//         </div>
-//       </div>
-
-//       {introPlaying && <AutoIntro onPush={handleIntroPush} playing={introPlaying} onComplete={handleIntroComplete} />}
-
-//       <style jsx>{`
-//         @media (max-height: 600px) {
-//           main { padding-bottom: ${headerHeight + 12}px; }
-//         }
-//       `}</style>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
@@ -584,13 +42,14 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
     new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" }).format(d);
 
   /** NORMAL MESSAGE */
-  const pushMessage = (sender: "namila" | "user", content: string) => {
+  const pushMessage = (sender: "namila" | "user", content: string, tools?: { name: string; icon: string }[]) => {
     setMessages((prev) => [
       ...prev,
       {
         id: `${Date.now()}-${Math.random()}`,
         sender,
         content,
+        tools,
         time: formatTime(),
       },
     ]);
@@ -790,24 +249,6 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
       return;
     }
 
-    if (/tools|design tools|figma|software/i.test(text)) {
-      setMessages(prev => [
-        ...prev,
-        {
-          id: `${Date.now()}-tools`,
-          sender: "namila",
-          content: "🛠 Design Tools I use:",
-          tools: [
-            { name: "Figma", icon: "/icons/Figma.svg" },
-            { name: "Illustrator", icon: "/icons/Illustrator.svg" },
-            { name: "Photoshop", icon: "/icons/Photoshop.svg" },
-          ],
-          time: formatTime(),
-        },
-      ]);
-      return;
-    }
-   
     if (/tech|technology|stack|frontend|coding/i.test(text)) {
       setMessages(prev => [
         ...prev,
@@ -816,6 +257,9 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
           sender: "namila",
           content: "💻 Technologies I use:",
           tools: [
+            { name: "Figma", icon: "/icons/Figma.svg" },
+            { name: "Illustrator", icon: "/icons/Illustrator.svg" },
+            { name: "Photoshop", icon: "/icons/Photoshop.svg" },
             { name: "HTML", icon: "/icons/HTML5.svg" },
             { name: "SCSS", icon: "/icons/Sass.svg" },
             { name: "Tailwind CSS", icon: "/icons/Tailwind.svg" },
@@ -829,24 +273,99 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
       ]);
       return;
     }
-    
+
 
     /** NORMAL QA FLOW */
     setIsTyping(true);
     await new Promise((r) => setTimeout(r, 300));
 
+    // Determine complexity
+    const wordCount = text.trim().split(/\s+/).length;
     const matched = findTopicMatch(text);
+
+    // Heuristic: 
+    // - If it's a short query (< 4 words) and we have a match, use predefined.
+    // - If it's a long query, we prefer AI UNLESS the match is exact/strong (score > 100).
+    // - If no match, use AI.
+
     let reply = "";
 
-    if (matched) reply = matched.answer;
-    else {
-      const token = text.toLowerCase().split(/\s+/)[0];
-      const fallback = QA_DATA.find((i) =>
-        i.keywords.some((k) => k.includes(token))
-      );
-      reply = fallback
-        ? fallback.answer
-        : "I’ll get back to you soon. Try one of the suggestions.";
+    // Check if we should use predefined answer
+    const isGreeting = matched?.topic === "greeting" || matched?.topic === "appreciation" || matched?.topic === "bye";
+    const hasSpecialContent = matched?.tools || matched?.hasImage || matched?.hasLottie || (matched as any)?.triggerProject || (matched as any)?.triggerContactForm;
+
+    // Use predefined answer if:
+    // 1. It's a greeting/short query (< 4 words)
+    // 2. It has special content (tools, images, projects)
+    // 3. It's a topic-specific match (tools, projects, contact, etc.)
+    const shouldUsePredefined = matched && (
+      wordCount < 4 ||
+      isGreeting ||
+      hasSpecialContent ||
+      matched.topic === "tools" ||
+      matched.topic === "projects" ||
+      matched.topic === "contact"
+    );
+
+    if (shouldUsePredefined) {
+      reply = matched.answer;
+
+      // If matched item has tools, add them to the message
+      if (matched.tools && matched.tools.length > 0) {
+        pushMessage("namila", reply, matched.tools);
+        setIsTyping(false);
+        return;
+      }
+    } else {
+      // AI FALLBACK (Google Gemini)
+      try {
+        // console.log("Calling AI with:", text);
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text }),
+        });
+
+        const data = await res.json();
+        // console.log("AI reply:", data);
+
+        if (data.reply) {
+          reply = data.reply;
+
+          // Handle additional messages (split long responses into multiple bubbles)
+          if (data.additionalMessages && data.additionalMessages.length > 0) {
+            // Send first message
+            await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
+            pushMessage("namila", reply);
+            setIsTyping(false);
+
+            // Send additional messages with delays
+            for (let i = 0; i < data.additionalMessages.length; i++) {
+              const additionalMsg = data.additionalMessages[i];
+
+              // Show typing indicator
+              await new Promise((r) => setTimeout(r, 800));
+              setIsTyping(true);
+
+              // Send message
+              await new Promise((r) => setTimeout(r, Math.min(900, additionalMsg.length * 6)));
+              pushMessage("namila", additionalMsg);
+              setIsTyping(false);
+            }
+            return; // Exit early since we've handled all messages
+          }
+        } else if (matched) {
+          // If AI fails but we had a sort-of match, fallback to it
+          reply = matched.answer;
+        } else {
+          reply = "I'm having trouble connecting to my brain right now. 🧠 Try asking about my **Projects** or **Skills**.";
+        }
+
+      } catch (e) {
+        console.error("AI Error:", e);
+        if (matched) reply = matched.answer;
+        else reply = "I’m focused on Namila’s work — ask me about his *Design System* or *Mobile Apps*.";
+      }
     }
 
     await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
@@ -876,9 +395,9 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
               <img src="/images/namila_1.webp" alt="namila" className="w-8 h-8 rounded-full mr-3" />
               <div className="bg-[#121212] rounded-2xl p-3">
                 <div className="flex space-x-1">
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" />
+                  <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
               </div>
             </div>

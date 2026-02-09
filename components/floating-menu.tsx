@@ -161,7 +161,7 @@ export default function FloatingMenu() {
             className="absolute bottom-12 left-0 w-40 bg-[#111] border border-gray-800 rounded-xl shadow-xl p-2 z-50"
           >
             {/* Contact me */}
-            <button
+            {/* <button
               onClick={() => {
                 setShowContact(true);
                 setIsOpen(false);
@@ -171,7 +171,7 @@ export default function FloatingMenu() {
             >
               <Mail size={16} />
               Contact me
-            </button>
+            </button> */}
 
             {/* Download CV */}
             <a
@@ -190,27 +190,30 @@ export default function FloatingMenu() {
       {/* -------------------- CONTACT FORM MODAL ---------------------- */}
       {showContact && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div
-            ref={modalRef}
-            className="relative bg-[#1a1a1a] rounded-xl shadow-lg p-6 lg:w-100 md:w-96 sm:w-80 max-w-lg"
-          >
-            <div className="flex justify-between w-full">
-              <h2 className="text-lg font-semibold text-white">Contact Me</h2>
-              <Button
-                onClick={() => setShowContact(false)}
-                className="bg-transparent hover:bg-gray-500/10 text-gray-500 hover:text-white transition"
-              >
-                <X size={20} />
-              </Button>
-            </div>
+          <div ref={modalRef} className="relative lg:w-100 md:w-96 sm:w-80 max-w-lg bottom-374px backdrop-blur-sm">
+            <div
 
-            {/* Contact form */}
-            {!isMessageSent ? (
-              <Contact onMessageSent={() => setIsMessageSent(true)} />
-            ) : (
-              <p className="text-green-500 text-center">✅ Message sent! I’ll get back to you soon.</p>
-            )}
+              className="relative bg-[#1a1a1a] rounded-xl shadow-lg p-6 lg:w-100 md:w-96 sm:w-80 max-w-lg"
+            >
+              <div className="flex justify-between w-full">
+                <h2 className="text-lg font-semibold text-white">Contact Me</h2>
+                <Button
+                  onClick={() => setShowContact(false)}
+                  className="bg-transparent hover:bg-gray-500/10 text-gray-500 hover:text-white transition"
+                >
+                  <X size={20} />
+                </Button>
+              </div>
+
+              {/* Contact form */}
+              {!isMessageSent ? (
+                <Contact onMessageSent={() => setIsMessageSent(true)} />
+              ) : (
+                <p className="text-green-500 text-center">✅ Message sent! I’ll get back to you soon.</p>
+              )}
+            </div>
           </div>
+
         </div>
       )}
     </>
