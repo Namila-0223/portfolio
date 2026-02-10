@@ -86,9 +86,13 @@ export function findTopicMatch(query: string): QAItem | null {
 
 export function getTopicSuggestions(query: string, limit = 6) {
   const q = (query || "").trim().toLowerCase();
-  if (!q) return QA_DATA.slice(0, limit).map(i => ({ id: i.id, text: i.topic }));
   const tokens = tokenize(q);
-  if (tokens.length === 0) return QA_DATA.slice(0, limit).map(i => ({ id: i.id, text: i.topic }));
+  // Use the first keyword as the display text for better UX and matching
+  const formatSuggestion = (item: QAItem) => {
+    const text = item.keywords[0];
+    return { id: item.id, text: text.charAt(0).toUpperCase() + text.slice(1) };
+  };
+
   const scored = QA_DATA.map(item => {
     let score = 0; const topic = item.topic.toLowerCase();
     if (topic.includes(q)) score += 6;
@@ -107,7 +111,10 @@ export function getTopicSuggestions(query: string, limit = 6) {
     }
     return { item, score };
   });
-  const results = scored.filter(s => s.score > 0).sort((a, b) => b.score - a.score).slice(0, limit).map(s => ({ id: s.item.id, text: s.item.topic }));
-  if (results.length === 0) return QA_DATA.slice(0, limit).map(i => ({ id: i.id, text: i.topic }));
+
+  const results = scored.filter(s => s.score > 0).sort((a, b) => b.score - a.score).slice(0, limit).map(s => formatSuggestion(s.item));
+
+  if (results.length === 0) return QA_DATA.slice(0, limit).map(i => formatSuggestion(i));
+
   return results;
 }

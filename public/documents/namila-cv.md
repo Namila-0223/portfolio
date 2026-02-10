@@ -68,3 +68,23 @@ UI/UX Engineer with 2 years of experience specializing in user-centric design an
 * **Angular Certification Course** – Sololearn
 * **Figma for UX Design** – LinkedIn
 * **HTML, CSS, & Bootstrap Certification** – Udemy
+
+
+---
+
+## Professional Knowledge & Philosophy
+
+### Core Design Philosophy
+I believe that great design is invisible—it should feel effortless and intuitive. My approach centers on **Human-Centered Design (HCD)**, ensuring that every interface solves a real user problem while being aesthetically pleasing. I prioritize **usability, accessibility, and clarity**, striving to reduce cognitive load so users can achieve their goals with minimal friction.
+
+### My Design Process (The "Double Diamond" Approach)
+1.  **Discover:** I start by understanding the problem space. This involves stakeholder interviews, competitor analysis, and gathering requirements to ensure we're solving the *right* problem.
+2.  **Define:** I synthesize research into user personas and journey maps. This helps in visualising the user's pain points and opportunities for improvement.
+3.  **Design:** I begin with low-fidelity sketches and wireframes to iterate quickly on layout and flow. Once the improved user flow is validated, I move to high-fidelity UI design in **Figma**.
+4.  **Deliver:** I create interactive prototypes to test interactions. Finally, I prepare a comprehensive developer handoff with design tokens, ensuring the final code matches the design vision pixel-perfectly.
+
+### Approach to Problem Solving
+When facing a complex UI challenge, I break it down into smaller, manageable components. I ask: *"What is the user trying to achieve here?"* and *"What is currently blocking them?"*. I use **A/B testing concepts** and **usability heuristics** to evaluate potential solutions, choosing the one that balances user needs with technical feasibility.
+
+### Technical & Design Synergy
+Being both a designer and a developer gives me a unique advantage. I design with implementation in mind. I understand how a `border-radius` in Figma translates to CSS, or how a complex animation might impact React performance. This allows me to create **feasible, scalable design systems** that developers love to implement.

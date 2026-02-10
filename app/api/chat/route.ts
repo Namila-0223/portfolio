@@ -16,8 +16,7 @@ export async function POST(req: NextRequest) {
 
     try {
         const genAI = new GoogleGenerativeAI(API_KEY);
-        // Using gemini-2.5-flash-lite as requested
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
         const { message } = await req.json();
 
@@ -132,6 +131,9 @@ export async function POST(req: NextRequest) {
 
     } catch (error: any) {
         console.error("Gemini API Error:", error);
+        if (error.response) {
+            console.error("Error response:", JSON.stringify(error.response, null, 2));
+        }
 
         return NextResponse.json({
             reply: "I'm having trouble connecting to my brain right now. Please check my API key configuration."

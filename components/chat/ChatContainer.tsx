@@ -114,7 +114,7 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
   }, [introPlaying]);
 
   useEffect(() => {
-    setSuggestions(QA_DATA.slice(0, 6).map((i) => ({ id: i.id, text: i.topic })));
+    setSuggestions(getTopicSuggestions("", 6));
   }, []);
 
   /** HEIGHT CALCULATION */
@@ -173,7 +173,7 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
     }
 
     if (!v.trim()) {
-      setSuggestions(QA_DATA.slice(0, 6).map((i) => ({ id: i.id, text: i.topic })));
+      setSuggestions(getTopicSuggestions("", 6));
       return;
     }
 
@@ -191,37 +191,73 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
     setInputValue("");
     setSuggestions([]);
 
-    /** 🔥 Contact form trigger */
-    if (/contact|email|hire|reach|message you/i.test(text)) {
-      pushSystemMessage("__contact_form__");
+    /** NORMAL QA FLOW */
+    setIsTyping(true);
+    await new Promise((r) => setTimeout(r, 300));
+
+    let matched = findTopicMatch(text);
+    // If the matched item tracks to AI (e.g. detailed workflow questions), ignore the static answer and force AI.
+    if (matched?.forceAI) matched = null;
+
+    // --- SPECIAL CONTENT HANDLERS (based on QA match properties) ---
+
+    // 1. CONTACT FORM TRIGGER
+    if (matched && (matched as any).triggerContactForm) {
+      pushMessage("namila", matched.answer);
+      setTimeout(() => pushSystemMessage("__contact_form__"), 300);
+      setIsTyping(false);
       return;
     }
 
-    /** 🔥 PROFILE TRIGGER */
-    if (/about you|yourself|who are you|your bio|who is namila/i.test(text)) {
+    // 2. PROFILE IMAGE TRIGGER
+    if (matched && matched.hasProfileImage) {
       setMessages((prev) => [
         ...prev,
         {
           id: `${Date.now()}-profile`,
           sender: "namila",
-          content: "Here’s a little about me!, I'm passionate about making digital experiences easier and more enjoyable for people. With over a year of hands-on experience in design and UI development, I focus on creating interfaces that not only look great but also work smoothly and make sense to users.",
+          content: matched.answer,
           hasProfileImage: true,
-          profileImageSrc: "/images/profile_3_1.webp",
+          profileImageSrc: matched.profileImageSrc || "/images/profile_3_1.webp",
           time: formatTime(),
         },
       ]);
+      setIsTyping(false);
       return;
     }
 
-    /** 🔥 PROJECT TRIGGER */
-    if (/project|portfolio|app design|ui design/i.test(text)) {
-      // First project
+    // 3. PROJECT PREVIEW (image or lottie)
+    if (matched && (matched as any).preview) {
+      const preview = (matched as any).preview;
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `${Date.now()}-project`,
+          sender: "namila",
+          content: matched.answer,
+          hasImage: preview.hasImage || false,
+          imageSrc: preview.imageSrc,
+          imageAlt: preview.imageAlt,
+          projectId: preview.projectId,
+          hasLottie: preview.hasLottie || false,
+          lottieData: preview.lottieData,
+          externalUrl: preview.externalUrl,
+          time: formatTime(),
+        },
+      ]);
+      setIsTyping(false);
+      return;
+    }
+
+    // 4. PROJECT TRIGGER (generic project showcase)
+    if (matched && (matched as any).triggerProject) {
+      // Show first project as default
       setMessages((prev) => [
         ...prev,
         {
           id: `${Date.now()}-p1`,
           sender: "namila",
-          content: "This is a mobile app I created for discovering and watching movie trailers.",
+          content: matched.answer,
           hasImage: true,
           imageSrc: "/project/project-1.png",
           imageAlt: "Movie Trailer App UI Design",
@@ -246,131 +282,72 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
         ]);
       }, 400);
 
+      setIsTyping(false);
       return;
     }
 
-    if (/tech|technology|stack|frontend|coding/i.test(text)) {
-      setMessages(prev => [
-        ...prev,
-        {
-          id: `${Date.now()}-tech`,
-          sender: "namila",
-          content: "💻 Technologies I use:",
-          tools: [
-            { name: "Figma", icon: "/icons/Figma.svg" },
-            { name: "Illustrator", icon: "/icons/Illustrator.svg" },
-            { name: "Photoshop", icon: "/icons/Photoshop.svg" },
-            { name: "HTML", icon: "/icons/HTML5.svg" },
-            { name: "SCSS", icon: "/icons/Sass.svg" },
-            { name: "Tailwind CSS", icon: "/icons/Tailwind.svg" },
-            { name: "JavaScript", icon: "/icons/JS.svg" },
-            { name: "Angular", icon: "/icons/Angular.svg" },
-            { name: "Next.js", icon: "/icons/nextjs.png" },
-            { name: "TypeScript", icon: "/icons/TypeScript.svg" },
-          ],
-          time: formatTime(),
-        },
-      ]);
+    // 5. TOOLS DISPLAY
+    if (matched && matched.tools && matched.tools.length > 0) {
+      await new Promise((r) => setTimeout(r, Math.min(900, matched.answer.length * 6)));
+      pushMessage("namila", matched.answer, matched.tools);
+      setIsTyping(false);
       return;
     }
 
+    // 6. REGULAR PREDEFINED ANSWER (text-only match)
+    if (matched) {
+      const reply = matched.answer;
+      await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
+      pushMessage("namila", reply);
+      setIsTyping(false);
+      return;
+    }
 
-    /** NORMAL QA FLOW */
-    setIsTyping(true);
-    await new Promise((r) => setTimeout(r, 300));
+    // 7. AI FALLBACK (Google Gemini) — only when no predefined answer found
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text }),
+      });
 
-    // Determine complexity
-    const wordCount = text.trim().split(/\s+/).length;
-    const matched = findTopicMatch(text);
+      const data = await res.json();
+      let reply = "";
 
-    // Heuristic: 
-    // - If it's a short query (< 4 words) and we have a match, use predefined.
-    // - If it's a long query, we prefer AI UNLESS the match is exact/strong (score > 100).
-    // - If no match, use AI.
+      if (data.reply) {
+        reply = data.reply;
 
-    let reply = "";
+        // Handle additional messages (split long responses into multiple bubbles)
+        if (data.additionalMessages && data.additionalMessages.length > 0) {
+          await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
+          pushMessage("namila", reply);
+          setIsTyping(false);
 
-    // Check if we should use predefined answer
-    const isGreeting = matched?.topic === "greeting" || matched?.topic === "appreciation" || matched?.topic === "bye";
-    const hasSpecialContent = matched?.tools || matched?.hasImage || matched?.hasLottie || (matched as any)?.triggerProject || (matched as any)?.triggerContactForm;
-
-    // Use predefined answer if:
-    // 1. It's a greeting/short query (< 4 words)
-    // 2. It has special content (tools, images, projects)
-    // 3. It's a topic-specific match (tools, projects, contact, etc.)
-    const shouldUsePredefined = matched && (
-      wordCount < 4 ||
-      isGreeting ||
-      hasSpecialContent ||
-      matched.topic === "tools" ||
-      matched.topic === "projects" ||
-      matched.topic === "contact"
-    );
-
-    if (shouldUsePredefined) {
-      reply = matched.answer;
-
-      // If matched item has tools, add them to the message
-      if (matched.tools && matched.tools.length > 0) {
-        pushMessage("namila", reply, matched.tools);
-        setIsTyping(false);
-        return;
-      }
-    } else {
-      // AI FALLBACK (Google Gemini)
-      try {
-        // console.log("Calling AI with:", text);
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text }),
-        });
-
-        const data = await res.json();
-        // console.log("AI reply:", data);
-
-        if (data.reply) {
-          reply = data.reply;
-
-          // Handle additional messages (split long responses into multiple bubbles)
-          if (data.additionalMessages && data.additionalMessages.length > 0) {
-            // Send first message
-            await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
-            pushMessage("namila", reply);
+          for (let i = 0; i < data.additionalMessages.length; i++) {
+            const additionalMsg = data.additionalMessages[i];
+            await new Promise((r) => setTimeout(r, 800));
+            setIsTyping(true);
+            await new Promise((r) => setTimeout(r, Math.min(900, additionalMsg.length * 6)));
+            pushMessage("namila", additionalMsg);
             setIsTyping(false);
-
-            // Send additional messages with delays
-            for (let i = 0; i < data.additionalMessages.length; i++) {
-              const additionalMsg = data.additionalMessages[i];
-
-              // Show typing indicator
-              await new Promise((r) => setTimeout(r, 800));
-              setIsTyping(true);
-
-              // Send message
-              await new Promise((r) => setTimeout(r, Math.min(900, additionalMsg.length * 6)));
-              pushMessage("namila", additionalMsg);
-              setIsTyping(false);
-            }
-            return; // Exit early since we've handled all messages
           }
-        } else if (matched) {
-          // If AI fails but we had a sort-of match, fallback to it
-          reply = matched.answer;
-        } else {
-          reply = "I'm having trouble connecting to my brain right now. 🧠 Try asking about my **Projects** or **Skills**.";
+          return;
         }
-
-      } catch (e) {
-        console.error("AI Error:", e);
-        if (matched) reply = matched.answer;
-        else reply = "I’m focused on Namila’s work — ask me about his *Design System* or *Mobile Apps*.";
+      } else {
+        reply = "I'm having trouble connecting right now. 🧠 Try asking about my <b>Projects</b> or <b>Skills</b>.";
       }
-    }
 
-    await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
-    pushMessage("namila", reply);
-    setIsTyping(false);
+      await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
+      pushMessage("namila", reply);
+      setIsTyping(false);
+
+    } catch (e) {
+      console.error("AI Error:", e);
+      const fallback = "I'm focused on Namila's work — ask me about his <b>Design System</b> or <b>Mobile Apps</b>.";
+      await new Promise((r) => setTimeout(r, 500));
+      pushMessage("namila", fallback);
+      setIsTyping(false);
+    }
   };
 
   return (

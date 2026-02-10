@@ -20,7 +20,6 @@ export const CONTACT_DATA: ContactItem[] = [
     triggerContactForm: true,
   },
 
-
   {
     id: 301,
     topic: "contact",
@@ -31,8 +30,8 @@ export const CONTACT_DATA: ContactItem[] = [
 
   {
     id: 302,
-    topic: "contact",
-    keywords: ["hire you", "work with you", "hire u", "work together", "want to hire", "hiring", "employ you", "work with"],
+    topic: "hire",
+    keywords: ["hire you", "work with you", "hire u", "work together", "want to hire", "hiring", "employ you"],
     answer: "I'd love to hear about your project! Share a few details using the form below 👇",
     triggerContactForm: true,
   },
@@ -42,7 +41,7 @@ export const CONTACT_DATA: ContactItem[] = [
     --------------------------------------------------- */
   {
     id: 303,
-    topic: "contact",
+    topic: "project-inquiry",
     keywords: ["start project", "new project", "can you do a project", "i have a project", "project inquiry", "begin project", "project request"],
     answer: "Great! Tell me a bit about your project using the form and I'll get in touch.",
     triggerContactForm: true,
@@ -50,9 +49,9 @@ export const CONTACT_DATA: ContactItem[] = [
 
   {
     id: 304,
-    topic: "contact",
-    keywords: ["ui ux project", "design project", "ui project", "ux project", "design work"],
-    answer: "I’d be happy to help with your design project. Send me some details through the form below!",
+    topic: "project-inquiry",
+    keywords: ["ui ux project", "design project", "ux project", "design work for me"],
+    answer: "I'd be happy to help with your design project. Send me some details through the form below!",
     triggerContactForm: true,
   },
 
@@ -64,7 +63,7 @@ export const CONTACT_DATA: ContactItem[] = [
     topic: "pricing",
     keywords: ["price", "pricing", "cost", "how much", "your rates", "what do you charge", "fees", "budget", "quote", "estimate"],
     answer:
-      "My pricing depends on the project scope. Share the details through the form and I’ll send you a tailored estimate 😊",
+      "My pricing depends on the project scope. Share the details through the form and I'll send you a tailored estimate 😊",
     triggerContactForm: true,
   },
 
@@ -82,19 +81,19 @@ export const CONTACT_DATA: ContactItem[] = [
     --------------------------------------------------- */
   {
     id: 307,
-    topic: "availability",
-    keywords: ["are you available", "your availability", "free now", "available now", "availability", "can you start", "when available"],
+    topic: "project-availability",
+    keywords: ["your availability", "free now", "available now", "can you start", "when available"],
     answer:
-      "I take on a limited number of projects each month, but feel free to send your details — I’ll confirm availability asap.",
+      "I take on a limited number of projects each month, but feel free to send your details. I'll confirm availability asap.",
     triggerContactForm: true,
   },
 
   {
     id: 308,
-    topic: "availability",
+    topic: "project-availability",
     keywords: ["when can you start", "start date", "starting date", "when to start", "project start"],
     answer:
-      "Start dates vary depending on ongoing work. Share your project details and I’ll get back with a timeline!",
+      "Start dates vary depending on ongoing work. Share your project details and I'll get back with a timeline!",
     triggerContactForm: true,
   },
 
@@ -103,17 +102,9 @@ export const CONTACT_DATA: ContactItem[] = [
     --------------------------------------------------- */
   {
     id: 309,
-    topic: "collab",
-    keywords: ["collab", "collaboration", "partner", "join project", "collaborate", "work together", "partnership"],
-    answer: "I’m open to collaborations! Tell me more about your idea through the form below.",
-    triggerContactForm: true,
-  },
-
-  {
-    id: 310,
-    topic: "collab",
-    keywords: ["team up", "work together on", "join forces", "collaborate on"],
-    answer: "Sounds interesting! Share some details and I’ll get back to you soon.",
+    topic: "collaboration",
+    keywords: ["collab", "collaboration", "partner", "join project", "collaborate", "partnership"],
+    answer: "I'm open to collaborations! Tell me more about your idea through the form below.",
     triggerContactForm: true,
   },
 
@@ -122,9 +113,9 @@ export const CONTACT_DATA: ContactItem[] = [
     --------------------------------------------------- */
   {
     id: 311,
-    topic: "business",
-    keywords: ["business inquiry", "proposal", "offer", "partnership", "business proposal", "business offer"],
-    answer: "Please share your inquiry through the contact form — I usually respond within 24 hours.",
+    topic: "business-inquiry",
+    keywords: ["business inquiry", "proposal", "offer", "business proposal", "business offer"],
+    answer: "Please share your inquiry through the contact form. I usually respond within 24 hours.",
     triggerContactForm: true,
   },
 
@@ -135,18 +126,7 @@ export const CONTACT_DATA: ContactItem[] = [
     id: 312,
     topic: "support",
     keywords: ["help me", "support", "need assistance", "need help", "can you help", "assistance"],
-    answer: "I’d be happy to help — let me know what you need using the form!",
-    triggerContactForm: true,
-  },
-
-  /* ---------------------------------------------------
-       FREELANCE STATUS
-    --------------------------------------------------- */
-  {
-    id: 313,
-    topic: "freelance",
-    keywords: ["are you freelance", "freelance designer", "freelancer", "freelance", "do you freelance"],
-    answer: "Yes! I do freelance work. You can contact me using the form below 👇",
+    answer: "I'd be happy to help. let me know what you need using the form!",
     triggerContactForm: true,
   },
 
@@ -155,9 +135,9 @@ export const CONTACT_DATA: ContactItem[] = [
     --------------------------------------------------- */
   {
     id: 314,
-    topic: "contact",
+    topic: "email",
     keywords: ["email", "your email", "email address", "contact email", "email id"],
-    answer: "You can reach me directly through this form — I respond quickly 😊",
+    answer: "You can reach me directly through this form. I respond quickly 😊",
     triggerContactForm: true,
   },
 
@@ -171,28 +151,20 @@ export const CONTACT_DATA: ContactItem[] = [
 
   {
     id: 316,
-    topic: "contact",
+    topic: "booking",
     keywords: ["book", "booking", "schedule", "book you", "schedule meeting", "appointment"],
     answer: "You can book a project by sharing your info in the contact form.",
     triggerContactForm: true,
   },
 
   /* ---------------------------------------------------
-       100% CUSTOM ANSWERS (NO FORM TRIGGER)
+       NO FORM TRIGGER
     --------------------------------------------------- */
   {
-    id: 317,
-    topic: "contact",
-    keywords: ["just saying hi", "hi", "hello", "hey", "greetings"],
-    answer: "Hey! 😊 How can I help you today?",
-    triggerContactForm: false,
-  },
-
-  {
     id: 318,
-    topic: "contact",
+    topic: "skip-form",
     keywords: ["i don't want to fill", "no form", "skip form", "without form", "don't want form"],
-    answer: "No problem! You can tell me here — but for project inquiries, I may still ask some details 😊",
+    answer: "No problem! You can tell me here. but for project inquiries, I may still ask some details 😊",
     triggerContactForm: false,
   },
 ];

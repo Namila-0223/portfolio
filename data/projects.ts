@@ -23,15 +23,15 @@ export type ProjectQA = {
 
 export const PROJECTS_QA: ProjectQA[] = [
   {
-    id: 100,
+    id: 700,
     topic: "projects",
-    keywords: ["project", "your projects", "portfolio", "show me your projects", "work samples", "projects", "show projects", "view projects", "see your projects", "what projects", "project examples", "work examples", "case studies"],
+    keywords: ["project", "your projects", "show me your projects", "projects", "show projects", "view projects", "see your projects", "what projects", "project examples", "work examples", "case studies"],
     answer: "Sure! Here's one of my featured projects 👇",
     triggerProject: true
   },
   {
-    id: 101,
-    topic: "projects",
+    id: 701,
+    topic: "movie-app",
     keywords: ["movie app", "trailer app", "mobile app ui", "app design", "mobile ui", "app ui", "mobile design", "movie trailer"],
     preview: {
       hasImage: true,
@@ -42,26 +42,26 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "This is a mobile app I designed for discovering and watching movie trailers. Clean layout, rich visuals, and smooth interactions."
   },
   {
-    id: 102,
-    topic: "projects",
+    id: 702,
+    topic: "behance",
     keywords: ["behance", "show me behance", "your behance", "behance profile", "behance link", "view behance", "behance portfolio"],
     preview: {
       hasLottie: true,
       externalUrl: "https://www.behance.net/namilapreshan1",
       lottieData: behanceData
     },
-    answer: "Here's my Behance — you’ll find animations, UI explorations, and full layouts."
+    answer: "Here's my Behance. You'll find animations, UI explorations, and full layouts."
   },
   {
-    id: 103,
-    topic: "projects",
+    id: 703,
+    topic: "ui-samples",
     keywords: ["ui design samples", "ui examples", "show ui", "ui work", "interface design", "user interface", "ui designs"],
-    answer: "Here’s a UI design from my portfolio 👇",
+    answer: "Here's a UI design from my portfolio 👇",
     triggerProject: true
   },
   {
-    id: 104,
-    topic: "projects",
+    id: 704,
+    topic: "dashboard",
     keywords: ["dashboard", "admin ui", "analytics ui", "admin panel", "dashboard design", "admin dashboard", "analytics dashboard"],
     preview: {
       hasImage: true,
@@ -72,8 +72,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A modern admin dashboard focusing on clarity, charts, and business insights."
   },
   {
-    id: 105,
-    topic: "projects",
+    id: 705,
+    topic: "ecommerce",
     keywords: ["ecommerce ui", "shopping app", "ecommerce design", "online store", "shop ui", "ecommerce", "shopping ui", "store design"],
     preview: {
       hasImage: true,
@@ -84,8 +84,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A clean and minimal ecommerce mobile UI focusing on product visibility and easy checkout."
   },
   {
-    id: 106,
-    topic: "projects",
+    id: 706,
+    topic: "travel-app",
     keywords: ["travel app", "booking ui", "travel design", "hotel booking", "travel ui", "booking app", "trip planner"],
     preview: {
       hasImage: true,
@@ -96,8 +96,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A travel and hotel booking app with strong emphasis on visuals and smooth filtering."
   },
   {
-    id: 107,
-    topic: "projects",
+    id: 707,
+    topic: "finance-app",
     keywords: ["finance app", "banking ui", "wallet ui", "fintech", "banking app", "finance ui", "payment app", "money app"],
     preview: {
       hasImage: true,
@@ -108,8 +108,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A fintech concept focusing on transactions, budgeting, and a clean financial overview."
   },
   {
-    id: 108,
-    topic: "projects",
+    id: 708,
+    topic: "landing-page",
     keywords: ["landing page", "web design", "website ui", "landing", "web page", "website design", "landing page design"],
     preview: {
       hasImage: true,
@@ -120,8 +120,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A minimal landing page designed with strong visual hierarchy and clean storytelling."
   },
   {
-    id: 109,
-    topic: "projects",
+    id: 709,
+    topic: "food-app",
     keywords: ["food app", "restaurant app", "food delivery ui", "food delivery", "restaurant ui", "food ordering", "delivery app"],
     preview: {
       hasImage: true,
@@ -132,15 +132,15 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A food delivery mobile UI focusing on browsing, customizing, and tracking orders."
   },
   {
-    id: 110,
-    topic: "projects",
+    id: 710,
+    topic: "prototype-example",
     keywords: ["prototype project", "show prototype", "prototype example", "interactive prototype example", "clickable prototype example"],
     answer: "Here is a prototype-focused project 👇",
     triggerProject: true
   },
   {
-    id: 111,
-    topic: "projects",
+    id: 711,
+    topic: "dark-mode",
     keywords: ["dark mode design", "dark ui", "dark theme", "dark mode", "night mode", "dark interface"],
     preview: {
       hasImage: true,
@@ -151,8 +151,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A sleek dark-mode UI created with focus on contrast & clarity."
   },
   {
-    id: 112,
-    topic: "projects",
+    id: 712,
+    topic: "design-system-project",
     keywords: ["design system project", "design system example", "show design system", "design system case study", "ui kit project", "component library project"],
     preview: {
       hasImage: true,
@@ -163,8 +163,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A custom design system with typography, spacing, grids, components, and interaction states."
   },
   {
-    id: 113,
-    topic: "projects",
+    id: 713,
+    topic: "3d-concept",
     keywords: ["3d ui", "3d elements", "visual concept", "3d design", "3d interface", "dimensional ui"],
     preview: {
       hasImage: true,
@@ -175,16 +175,16 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A fun 3D-inspired UI focused on depth, lighting, and playful interactions."
   },
   {
-    id: 114,
-    topic: "projects",
-    keywords: ["animations", "motion design", "ui animation", "micro animations", "motion", "animated ui", "transitions"],
-    answer: "Here’s one of my motion/animation showcases 👇",
+    id: 714,
+    topic: "animations",
+    keywords: ["animations", "motion design", "ui animation", "micro animations", "animated ui", "transitions"],
+    answer: "Here's one of my motion/animation showcases 👇",
     triggerProject: true
   },
   {
-    id: 115,
-    topic: "projects",
-    keywords: ["figma prototype", "figma animation", "figma motion", "figma interactions", "figma design"],
+    id: 715,
+    topic: "figma-motion",
+    keywords: ["figma prototype", "figma animation", "figma motion", "figma interactions"],
     preview: {
       hasImage: true,
       imageSrc: "/project/project-11.png",
@@ -194,9 +194,9 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "An advanced motion exploration built using interactive Figma prototyping."
   },
   {
-    id: 116,
-    topic: "projects",
-    keywords: ["portfolio website", "your website", "web ui", "this website", "this portfolio", "your site", "portfolio site"],
+    id: 716,
+    topic: "portfolio-website",
+    keywords: ["portfolio website", "your website", "this website", "this portfolio", "your site", "portfolio site"],
     preview: {
       hasImage: true,
       imageSrc: "/project/project-12.png",
@@ -206,9 +206,9 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A clean and modern portfolio website with smooth animations."
   },
   {
-    id: 117,
-    topic: "projects",
-    keywords: ["product page", "product landing", "product ui", "product design", "product showcase"],
+    id: 717,
+    topic: "product-page",
+    keywords: ["product page", "product landing", "product ui", "product showcase"],
     preview: {
       hasImage: true,
       imageSrc: "/project/project-13.png",
@@ -218,8 +218,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A product landing page focused on storytelling, visuals, and smooth interactions."
   },
   {
-    id: 118,
-    topic: "projects",
+    id: 718,
+    topic: "saas-dashboard",
     keywords: ["saas", "saas ui", "subscription ui", "saas dashboard", "saas design", "software as service"],
     preview: {
       hasImage: true,
@@ -230,8 +230,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A full SaaS dashboard design with user management, analytics, and real-time data UI."
   },
   {
-    id: 119,
-    topic: "projects",
+    id: 719,
+    topic: "component-ui",
     keywords: ["card ui", "component ui", "card design", "ui cards", "card components"],
     preview: {
       hasImage: true,
@@ -242,8 +242,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A collection of reusable, clean UI components."
   },
   {
-    id: 120,
-    topic: "projects",
+    id: 720,
+    topic: "auth-ui",
     keywords: ["login design", "auth ui", "authentication", "login ui", "sign in", "login page", "auth design"],
     preview: {
       hasImage: true,
@@ -254,8 +254,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A minimal authentication UI with modern gradients & clean structure."
   },
   {
-    id: 121,
-    topic: "projects",
+    id: 721,
+    topic: "profile-ui",
     keywords: ["profile ui", "user profile page", "profile design", "user profile", "profile page", "account page"],
     preview: {
       hasImage: true,
@@ -266,8 +266,8 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "A fresh profile UI layout with cover image, stats, and smooth grouping."
   },
   {
-    id: 122,
-    topic: "projects",
+    id: 722,
+    topic: "more-projects",
     keywords: ["more projects", "show more", "show all", "more designs", "see more", "additional projects", "other projects", "all projects"],
     preview: {
       hasLottie: true,
@@ -277,27 +277,26 @@ export const PROJECTS_QA: ProjectQA[] = [
     answer: "Explore the full collection on Behance 👇"
   },
   {
-    id: 123,
-    topic: "projects",
+    id: 723,
+    topic: "best-project",
     keywords: ["best project", "favorite project", "top project", "best work", "favorite work", "top work", "proudest project"],
     answer: "My top project is this one 👇",
     triggerProject: true
   },
   {
-    id: 124,
-    topic: "projects",
+    id: 724,
+    topic: "recent-project",
     keywords: ["recent project", "latest work", "latest project", "recent work", "newest project", "new work", "current project"],
     answer: "Here's one of my latest explorations 👇",
     triggerProject: true
   },
   {
-    id: 125,
-    topic: "projects",
+    id: 725,
+    topic: "case-study",
     keywords: ["ui case study", "case study", "design case study", "project case study", "detailed project", "project breakdown"],
-    answer: "Here’s a UI case study from my portfolio 👇",
+    answer: "Here's a UI case study from my portfolio 👇",
     triggerProject: true
   }
-  // ... (content remains the same)
 ];
 
 export const PROJECTS = PROJECTS_QA;
