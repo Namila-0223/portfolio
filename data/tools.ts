@@ -34,7 +34,7 @@ export const toolsData: ToolsQA[] = [
     id: 201,
     topic: "tools",
     keywords: ["figma", "use figma", "do you use figma", "can you use figma", "know figma", "figma skills", "good at figma", "figma expert", "rate yourself figma", "figma rating", "how good figma", "figma proficiency"],
-    answer: "🎨 Figma is my main design tool — I use it daily for UI, prototyping, and design systems.",
+    answer: "Yes, 🎨 Figma is my main design tool - I use it daily for UI, prototyping, and design systems.",
     tools: [{ name: "Figma", icon: "/icons/Figma.svg" }]
   },
   {
@@ -58,7 +58,7 @@ export const toolsData: ToolsQA[] = [
   {
     id: 204,
     topic: "ux",
-    keywords: ["ux process", "ui ux", "ux methodology", "ux design process", "ux phases", "ux workflow"],
+    keywords: ["ux phases"],
     answer: "Here are the key UX phases I usually follow:",
     tools: [
       { name: "Wireframes", icon: "/icons/wireframe.svg" },
@@ -221,7 +221,7 @@ export const toolsData: ToolsQA[] = [
   {
     id: 217,
     topic: "education",
-    keywords: ["certifications", "design certificates"],
+    keywords: ["design certificates", "skill certificates"],
     answer: "📜 I’ve completed these certificates:",
     tools: [
       { name: "Google UX Design", icon: "/icons/google.svg" },

@@ -25,6 +25,7 @@ export type QAItem = {
   profileImageSrc?: string;
   tools?: { name: string; icon: string }[];
   contentType?: string;
+  forceAI?: boolean;
 };
 
 export const QA_DATA: QAItem[] = [
