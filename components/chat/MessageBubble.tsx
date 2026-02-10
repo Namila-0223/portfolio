@@ -103,7 +103,7 @@ export default function MessageBubble({
         <div className="max-w-[76%]">
           <div
             className={`
-              p-3 rounded-2xl bg-[#121212] rounded-tl-none text-gray-100 text-sm 
+              p-3 rounded-2xl bg-[#1A1A1A] rounded-tl-none text-gray-100 text-sm 
               transition-all duration-500 ease-out
               ${hideForm ? "opacity-0 -translate-y-2" : "opacity-100"}
             `}
@@ -174,11 +174,10 @@ export default function MessageBubble({
       <div className="max-w-[64%]">
         {/* 🔥 EVERYTHING INSIDE ONE BUBBLE */}
         <div
-          className={`p-3 rounded-2xl text-sm ${
-            isUser
+          className={`p-3 rounded-2xl text-sm ${isUser
               ? "bg-[#1f1f1f] rounded-tr-none text-gray-100"
-              : "bg-[#121212] rounded-tl-none text-gray-100"
-          }`}
+              : "bg-[#1A1A1A] rounded-tl-none text-gray-100"
+            }`}
         >
           {/* TEXT MESSAGE */}
           <div dangerouslySetInnerHTML={{ __html: msg.content || "" }} />

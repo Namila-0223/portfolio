@@ -393,8 +393,8 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
           {isTyping && (
             <div className="flex px-2">
               <img src="/images/namila_1.webp" alt="namila" className="w-8 h-8 rounded-full mr-3" />
-              <div className="bg-[#121212] rounded-2xl p-3">
-                <div className="flex space-x-1">
+              <div className="bg-[#1A1A1A] rounded-2xl p-3">
+                <div className="flex items-center space-x-1">
                   <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" />
                   <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
                   <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
