@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import MessageBubble from "./MessageBubble";
 import InputBar from "./InputBar";
@@ -24,7 +22,12 @@ type Message = {
   profileImageSrc?: string;
 };
 
-export default function ChatContainer({ headerHeight }: { headerHeight: number }) {
+interface ChatContainerProps {
+  headerHeight: number;
+  onScrollChange: (isScrolled: boolean) => void;
+}
+
+export default function ChatContainer({ headerHeight, onScrollChange }: ChatContainerProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [introPlaying, setIntroPlaying] = useState(true);
   const [userTyped, setUserTyped] = useState(false);
@@ -117,6 +120,21 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
     setSuggestions(getTopicSuggestions("", 6));
   }, []);
 
+  /** SCROLL DETECTION for Header */
+  useEffect(() => {
+    const el = messagesRef.current;
+    if (!el) return;
+
+    const handleScroll = () => {
+      // Collapse header if scrolled more than 50px
+      const scrolled = el.scrollTop > 50;
+      onScrollChange(scrolled);
+    };
+
+    el.addEventListener("scroll", handleScroll);
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, [onScrollChange]);
+
   /** HEIGHT CALCULATION */
   const recomputeHeight = useCallback(() => {
     const vh = window.innerHeight;
@@ -130,6 +148,7 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
       ? suggestionsWrapperRef.current.getBoundingClientRect().height
       : 0;
 
+    // Total height available for the scrollable container
     const available = vh - header - inputH - suggH - 16;
     setMessagesHeight(Math.max(140, available));
   }, [headerHeight]);
@@ -161,7 +180,7 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
         block: "end",
       });
     });
-  }, [messages.length, isTyping]);
+  }, [messages.length, isTyping, messagesHeight]);
 
   /** TYPING */
   const handleTyping = (v: string) => {
@@ -196,10 +215,7 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
     await new Promise((r) => setTimeout(r, 300));
 
     let matched = findTopicMatch(text);
-    // If the matched item tracks to AI (e.g. detailed workflow questions), ignore the static answer and force AI.
     if (matched?.forceAI) matched = null;
-
-    // --- SPECIAL CONTENT HANDLERS (based on QA match properties) ---
 
     // 1. CONTACT FORM TRIGGER
     if (matched && (matched as any).triggerContactForm) {
@@ -251,7 +267,6 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
 
     // 4. PROJECT TRIGGER (generic project showcase)
     if (matched && (matched as any).triggerProject) {
-      // Show first project as default
       setMessages((prev) => [
         ...prev,
         {
@@ -266,7 +281,6 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
         },
       ]);
 
-      // Behance showcase
       setTimeout(() => {
         setMessages((prev) => [
           ...prev,
@@ -294,7 +308,7 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
       return;
     }
 
-    // 6. REGULAR PREDEFINED ANSWER (text-only match)
+    // 6. REGULAR PREDEFINED ANSWER
     if (matched) {
       const reply = matched.answer;
       await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
@@ -303,7 +317,7 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
       return;
     }
 
-    // 7. AI FALLBACK (Google Gemini) — only when no predefined answer found
+    // 7. AI FALLBACK
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -316,13 +330,10 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
 
       if (data.reply) {
         reply = data.reply;
-
-        // Handle additional messages (split long responses into multiple bubbles)
         if (data.additionalMessages && data.additionalMessages.length > 0) {
           await new Promise((r) => setTimeout(r, Math.min(900, reply.length * 6)));
           pushMessage("namila", reply);
           setIsTyping(false);
-
           for (let i = 0; i < data.additionalMessages.length; i++) {
             const additionalMsg = data.additionalMessages[i];
             await new Promise((r) => setTimeout(r, 800));
@@ -352,7 +363,6 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
 
   return (
     <div className="w-full relative">
-
       <div
         ref={messagesRef}
         className="hide-scrollbar overflow-y-auto pr-3"
@@ -366,7 +376,6 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
               onSubmitContact={handleSubmitContact}
             />
           ))}
-
           {isTyping && (
             <div className="flex px-2">
               <img src="/images/namila_1.webp" alt="namila" className="w-8 h-8 rounded-full mr-3" />
@@ -379,7 +388,6 @@ export default function ChatContainer({ headerHeight }: { headerHeight: number }
               </div>
             </div>
           )}
-
           <div ref={bottomRef} />
         </div>
       </div>
