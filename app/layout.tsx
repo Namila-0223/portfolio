@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import MaintenanceBanner from "@/components/maintenance-banner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body className={`${inter.className} bg-[#0f0f0f] text-white antialiased`}>
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
                     {children}
+                    <MaintenanceBanner />
                     <SpeedInsights />
                     <Analytics />
                 </ThemeProvider>
