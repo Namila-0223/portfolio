@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Geist:wght@100..900&family=Inter:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0a0a0a;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection {
+    background-color: #ff4925;
+    color: #fff;
+  }
+}
+
+/* Noise overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 9999;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Text outline for large ghost headings */
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.08);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #ff4925; }
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* React Bits - ShinyText animation */
+@keyframes shine {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+.animate-shine {
+  animation: shine 5s linear infinite;
+}
+
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smoothly slide out the global header when viewing project overlays */
+body.hide-header header {
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+}
+header {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease !important;
+}
+
+/* ── VIEW TRANSITIONS CUSTOM STYLING ── */
+
+/* Root page transition timing & easing */
+::view-transition-group(root) {
+  animation-duration: 0.65s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root) {
+  animation: 0.65s cubic-bezier(0.16, 1, 0.3, 1) both fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 0.65s cubic-bezier(0.16, 1, 0.3, 1) both fade-in;
+}
+
+/* Custom easing, duration & morphing for project detail hero images */
+::view-transition-group(project-image-0),
+::view-transition-group(project-image-1),
+::view-transition-group(project-image-2),
+::view-transition-group(project-image-3),
+::view-transition-group(project-image-4),
+::view-transition-group(project-image-5) {
+  animation-duration: 0.75s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Prevent image stretching/distortion (taffy effect) during transition */
+::view-transition-old(project-image-0),
+::view-transition-new(project-image-0),
+::view-transition-old(project-image-1),
+::view-transition-new(project-image-1),
+::view-transition-old(project-image-2),
+::view-transition-new(project-image-2),
+::view-transition-old(project-image-3),
+::view-transition-new(project-image-3),
+::view-transition-old(project-image-4),
+::view-transition-new(project-image-4),
+::view-transition-old(project-image-5),
+::view-transition-new(project-image-5) {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+
