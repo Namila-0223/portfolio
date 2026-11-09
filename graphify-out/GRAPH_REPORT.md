@@ -1,15 +1,16 @@
-# Graph Report - .  (2026-07-10)
+# Graph Report - portfolio  (2026-11-09)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 25 files · ~645,594 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 96 nodes · 106 edges · 19 communities (17 shown, 2 thin omitted)
+- 83 nodes · 87 edges · 15 communities (13 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `918b8d74`
+- Built from commit: `c52c7782`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,30 +20,25 @@
 - page.jsx
 - page.jsx
 - page.jsx
-- cn
 - layout.jsx
 - scripts
 - next.config.js
 
 ## God Nodes (most connected - your core abstractions)
-1. `cn()` - 7 edges
-2. `scripts` - 6 edges
-3. `buildScene()` - 6 edges
-4. `PROJECTS` - 5 edges
-5. `About()` - 4 edges
-6. `PageTransition()` - 3 edges
-7. `ShinyText()` - 3 edges
-8. `renderIcon()` - 2 edges
-9. `renderStackIcon()` - 2 edges
-10. `renderSkillIcon()` - 2 edges
+1. `scripts` - 6 edges
+2. `buildScene()` - 6 edges
+3. `PROJECTS` - 5 edges
+4. `About()` - 4 edges
+5. `PageTransition()` - 3 edges
+6. `cn()` - 3 edges
+7. `renderIcon()` - 2 edges
+8. `renderStackIcon()` - 2 edges
+9. `renderSkillIcon()` - 2 edges
+10. `Footer()` - 2 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `FloatingIcon()` --calls--> `cn()`  [EXTRACTED]
-  src/app/page.jsx → src/utils/cn.js
 - `ProjectDetails()` --references--> `PROJECTS`  [EXTRACTED]
   src/app/works/[id]/page.jsx → src/data/projects.js
-- `FollowerPointerCard()` --calls--> `cn()`  [EXTRACTED]
-  src/components/FollowingPointer.jsx → src/utils/cn.js
 - `buildScene()` --references--> `PROJECTS`  [EXTRACTED]
   src/app/works/page.jsx → src/data/projects.js
 - `PageTransition()` --calls--> `cn()`  [EXTRACTED]
@@ -51,7 +47,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (19 total, 2 thin omitted)
+## Communities (15 total, 2 thin omitted)
 
 ### Community 0 - "dependencies"
 Cohesion: 0.13
@@ -66,23 +62,19 @@ Cohesion: 0.38
 Nodes (7): ProjectDetails(), buildScene(), createTextTexture(), GHOSTS, ROWS, Works(), PROJECTS
 
 ### Community 4 - "page.jsx"
-Cohesion: 0.36
-Nodes (6): About(), renderIcon(), renderSkillIcon(), renderStackIcon(), SpotlightCard(), Timeline()
-
-### Community 5 - "cn"
-Cohesion: 0.39
-Nodes (4): FloatingIcon(), FollowerPointerCard(), PageTransition(), cn()
+Cohesion: 0.48
+Nodes (5): About(), renderIcon(), renderSkillIcon(), renderStackIcon(), Timeline()
 
 ### Community 6 - "layout.jsx"
-Cohesion: 0.38
-Nodes (3): metadata, Footer(), Header()
+Cohesion: 0.27
+Nodes (5): metadata, Footer(), Header(), PageTransition(), cn()
 
 ### Community 7 - "scripts"
 Cohesion: 0.33
 Nodes (6): scripts, build, dev, lint, preview, start
 
 ## Knowledge Gaps
-- **31 isolated node(s):** `nextConfig`, `name`, `private`, `version`, `type` (+26 more)
+- **31 isolated node(s):** `ABOUT_ICONS`, `nextConfig`, `name`, `private`, `version` (+26 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -90,12 +82,10 @@ Nodes (6): scripts, build, dev, lint, preview, start
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `dependencies` to `package.json`?**
-  _High betweenness centrality (0.074) - this node is a cross-community bridge._
-- **Why does `cn()` connect `cn` to `page.jsx`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+  _High betweenness centrality (0.099) - this node is a cross-community bridge._
 - **Why does `scripts` connect `scripts` to `package.json`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **What connects `nextConfig`, `name`, `private` to the rest of the system?**
+  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+- **What connects `ABOUT_ICONS`, `nextConfig`, `name` to the rest of the system?**
   _31 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._

@@ -1,1 +1,17 @@
-{"0": "dependencies", "1": "package.json", "2": "page.jsx", "3": "page.jsx", "4": "page.jsx", "5": "cn", "6": "layout.jsx", "7": "scripts", "8": "next.config.js", "9": "page.jsx", "10": "page.jsx", "11": "template.jsx", "12": "Accordion.jsx", "13": "MarqueeLogos.jsx", "14": "PricingCard.jsx", "15": "ServiceCard.jsx", "16": "WorkCard.jsx", "17": "postcss.config.js", "18": "tailwind.config.js"}
+{
+  "0": "dependencies",
+  "1": "package.json",
+  "2": "page.jsx",
+  "3": "page.jsx",
+  "4": "page.jsx",
+  "5": "cn",
+  "6": "layout.jsx",
+  "7": "scripts",
+  "8": "next.config.js",
+  "9": "page.jsx",
+  "10": "page.jsx",
+  "11": "template.jsx",
+  "12": "Accordion.jsx",
+  "17": "postcss.config.js",
+  "18": "tailwind.config.js"
+}
