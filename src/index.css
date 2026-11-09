@@ -135,3 +135,9 @@ header {
   to { opacity: 0; }
 }
 
+
+/* The canvas preview has its own navigation. */
+body:has(#portfolio-canvas) header,
+body:has(#portfolio-canvas) footer {
+  display: none;
+}
