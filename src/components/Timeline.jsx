@@ -23,7 +23,7 @@ export function Timeline({ data }) {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
-    <div className="w-full font-geist md:px-10" ref={containerRef}>
+    <div className="w-full font-geist md:px-10 relative" ref={containerRef}>
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, index) => (
           <div

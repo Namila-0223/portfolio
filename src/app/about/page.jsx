@@ -610,6 +610,8 @@ export default function About() {
           />
           {/* Gradients to blend into background */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a] z-10" />
+          {/* Extra bottom scrim so the body text stays legible over the photo on narrow screens, where the text block covers more of the image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent z-10 md:hidden" />
         </div>
 
         {/* Hero */}

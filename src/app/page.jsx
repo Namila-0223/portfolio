@@ -39,7 +39,7 @@ function Counter({ value, suffix = "" }) {
   }, [isInView, value, motionValue]);
 
   useEffect(() => {
-    return springValue.onChange((latest) => {
+    return springValue.on("change", (latest) => {
       if (ref.current) {
         ref.current.textContent = Math.floor(latest);
       }
@@ -69,6 +69,7 @@ function ScrollRevealText({ text, sectionRef }) {
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
+    layoutEffect: false,
   });
 
   const words = text.split(" ");
@@ -147,7 +148,7 @@ function LatestWorkCard({ index, work, setActiveWork }) {
   const cardScale = useTransform(scrollYProgress, [0, 1], [0.92, 1.06]);
 
   return (
-    <div ref={ref} className="w-full flex flex-col gap-6 select-none">
+    <div ref={ref} className="relative w-full flex flex-col gap-6 select-none">
       {/* Mockup Card image */}
       <div className="w-full aspect-[16/9] max-h-[660px] relative origin-bottom-right">
         <motion.div

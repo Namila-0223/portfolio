@@ -32,7 +32,7 @@ export default function Footer() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-anton text-[12vw] md:text-[8vw] text-black uppercase leading-[0.9] tracking-tight"
+              className="font-anton text-[12vw] md:text-[8vw] text-black uppercase leading-[0.9] tracking-tight pr-14 md:pr-0"
             >
               LET'S WORK<br/>TOGETHER
             </motion.h2>

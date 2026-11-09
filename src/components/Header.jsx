@@ -13,6 +13,7 @@ import {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [time, setTime] = useState("");
+  const [monthYear, setMonthYear] = useState("");
   const pathname = usePathname();
   const { scrollY } = useScroll();
   const [showLogo, setShowLogo] = useState(pathname !== "/");
@@ -27,12 +28,20 @@ export default function Header() {
   useEffect(() => {
     if (!isHome) return;
     const handleResize = () => {
-      if (window.innerWidth < 768) {
+      const w = window.innerWidth;
+      if (w < 768) {
         scaleMV.set(2.6);
         xMV.set(8);
         yMV.set(24);
       } else {
-        scaleMV.set(6.0);
+        // Ramp the scale up gradually between the tablet breakpoint and the
+        // desktop container width, instead of jumping straight to 6.0 at 768px.
+        // A hard jump made the logo collide with the status badges/CTA in the
+        // header on tablet-width screens (768px-1400px), where both the
+        // desktop logo scale and the desktop header content are visible
+        // together but there isn't enough room for the full-size logo yet.
+        const t = Math.min(1, Math.max(0, (w - 768) / (1400 - 768)));
+        scaleMV.set(2.6 + t * (6.0 - 2.6));
         xMV.set(12);
         yMV.set(24);
       }
@@ -63,7 +72,7 @@ export default function Header() {
     }
     // Set initial value
     setShowLogo(scrollY.get() > 200);
-    const unsub = scrollY.onChange((latest) => {
+    const unsub = scrollY.on("change", (latest) => {
       setShowLogo(latest > 200);
     });
     return () => unsub();
@@ -71,13 +80,23 @@ export default function Header() {
 
   useEffect(() => {
     const update = () => {
+      const now = new Date();
       setTime(
         new Intl.DateTimeFormat("en-US", {
           timeZone: "Asia/Colombo",
           hour: "2-digit",
           minute: "2-digit",
           hour12: true,
-        }).format(new Date()),
+        }).format(now),
+      );
+      setMonthYear(
+        new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Colombo",
+          month: "short",
+          year: "numeric",
+        })
+          .format(now)
+          .toUpperCase(),
       );
     };
     update();
@@ -134,7 +153,7 @@ export default function Header() {
                   Available for project
                 </span>
               </div>
-              <span className="text-[11px] text-muted">MAY 2026</span>
+              <span className="text-[11px] text-muted">{monthYear}</span>
             </div>
 
             {/* Time */}
