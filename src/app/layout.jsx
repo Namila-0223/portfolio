@@ -1,7 +1,5 @@
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import PageTransition from '../components/PageTransition'
+import SiteChrome from '../components/SiteChrome'
 import '../index.css'
 
 export const metadata = {
@@ -14,16 +12,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body className="bg-[#0a0a0a] text-white antialiased overflow-x-hidden" style={{ fontFamily: "'Geist', 'Inter', sans-serif" }}>
-        <div className="noise-overlay" />
-        <PageTransition>
-          <Header />
-          <main className="min-h-screen relative z-10">
-            {children}
-          </main>
-          <Footer />
-        </PageTransition>
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   )

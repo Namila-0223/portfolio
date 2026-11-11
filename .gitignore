@@ -6,6 +6,8 @@
 
 # next.js
 /.next/
+/.next-portfolio/
+/.next-portfolio-*/
 /out/
 
 # production
