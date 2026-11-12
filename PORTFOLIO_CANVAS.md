@@ -71,3 +71,13 @@ The user supplied `portfolio-chat-history.md` on November 9, 2026. It records ea
 - Client projects and metrics: not cleared merely because they exist in the old repository. Await the user's selection before carrying them over.
 - Experience: roles and dates from the existing `src/app/about/page.jsx`, without numerical performance claims. Confirm against the current CV before release.
 - Forma, Waymark, and Index: original illustrative interfaces, not claims of shipped client work. The user explicitly requested demo projects for now.
+
+## Collage hero iteration
+
+- Checkpoint `b7c4064` preserves the complete app before this hero change. It was committed locally on `portfolio-canvas` at the user's request.
+- The approved hero concept is being translated into responsive elements in `CollageHero.jsx`, rather than a screenshot used as the entire interface.
+- Keep the existing header/navigation and all other story frames. The user explicitly rejected rulers; none are implemented.
+- The hero combines brush-style live lettering, the unchanged original portrait with a CSS paper-cut outline, blue selection details, a capabilities note, a taped idea note, and a working Design/Build inspector.
+- [Kaushan Script](https://github.com/google/fonts/tree/main/ofl/kaushanscript) is served locally for the hero's brush lettering. Its OFL license is included alongside the font. Existing Syne and Space Grotesk usage outside the hero remains unchanged.
+- The mobile composition stacks and pairs elements for reading; decorative notes are simplified on compact screens. Hero actions remain clear of the floating cards.
+- The new iteration remains separate from the checkpoint commit for review. No push, merge, or deployment is part of this change.

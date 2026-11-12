@@ -52,6 +52,7 @@
 .frameLabel { position: absolute; bottom: calc(100% + 10px); left: 0; right: 0; display: flex; align-items: center; gap: 6px; font: 10px monospace; color: #727886; }
 .frameLabel > span { margin-left: auto; font-size: 8px; opacity: .7; }
 .intro { display: flex; flex-direction: column; }
+.frame.intro { padding: 0; }
 .introTop { display: flex; justify-content: space-between; color: var(--muted); font: 10px monospace; letter-spacing: .08em; }
 .heroLayout { display: grid; grid-template-columns: 1.12fr 1fr; gap: 28px; align-items: center; flex: 1; min-height: 0; }
 .introBody { min-width: 0; }

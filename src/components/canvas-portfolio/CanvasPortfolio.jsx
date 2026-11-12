@@ -6,7 +6,8 @@ import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronDown, Gri
 import styles from "./CanvasPortfolio.module.css";
 import WorkGallery from "./WorkGallery";
 import CanvasCursor from "./CanvasCursor";
-import { ContactGraphic, CopyEmail, CraftMark, CraftWidget, HeroGraphic } from "./CanvasGraphics";
+import { ContactGraphic, CopyEmail, CraftMark } from "./CanvasGraphics";
+import CollageHero from "./CollageHero";
 import useMotionPreference from "./useMotionPreference";
 
 const labels = ["Intro", "Selected Work", "About", "Capabilities", "Experience", "Contact"];
@@ -175,23 +176,7 @@ export default function CanvasPortfolio() {
           <div className={styles.connector} aria-hidden="true"><span>next chapter →</span></div>
           <section id="intro" ref={node => { frames.current[0] = node; }} className={`${styles.frame} ${styles.intro}`} aria-labelledby="intro-title" inert={!plain && active !== 0 ? "" : undefined}>
             <div className={styles.frameLabel}><Grid2X2 size={11} /> 01 — Intro <span>DESIGN / ENGINEERING</span></div>
-            <div className={styles.introTop}><span>UI/UX ENGINEER</span><span>BASED IN SRI LANKA ↗</span></div>
-            <div className={styles.heroLayout}>
-              <div className={styles.introBody}>
-                <p className={styles.eyebrow}><span className={styles.fileDot} /> A designer who builds.</p>
-                <div className={styles.nameSelection} data-cursor-note="Hey, I’m Namila."><h1 id="intro-title" tabIndex={-1}>Namila<br /><span>Preshan.</span></h1><i /><i /><i /><i /><span className={styles.selectionTag}>A little curious. Very intentional.</span></div>
-                <div className={styles.introDescription}><p>I turn complicated things into<br /><strong>interfaces that feel simple.</strong><br /><span>UI/UX design, design systems, and the code that brings it together.</span></p></div>
-                <div className={styles.heroActions}><button onClick={() => goTo(1)}>Explore selected work <ArrowUpRight size={16} /></button><a href="mailto:Namilapreshan11@gmail.com">Say hello <span>↗</span></a></div>
-              </div>
-              <div className={styles.heroVisual}>
-                <HeroGraphic />
-                <figure className={styles.portrait}><span className={styles.portraitLabel}>The person behind the pixels.</span><img src="/images/namila1.png" alt="Namila Preshan" width="433" height="577" /><figcaption>Namila / Sri Lanka ↗</figcaption></figure>
-                <CraftWidget />
-                <span className={styles.visualCaption}>A designer’s eye.<br /><em>An engineer’s mindset.</em></span>
-              </div>
-            </div>
-            <div className={styles.craftStrip}><span>01 <b>Understand</b></span><i aria-hidden="true">↗</i><span>02 <b>Make it clear</b></span><i aria-hidden="true">↗</i><span>03 <b>Bring it to life</b></span><span className={styles.stripNote}>THINKING IN FLOWS. CARING ABOUT DETAILS.</span></div>
-            <footer className={styles.frameFooter}><span>PERSONAL PORTFOLIO / DESIGN & ENGINEERING</span><button onClick={() => goTo(1)}>The work, this way <ArrowDown size={14} /></button></footer>
+            <CollageHero onExplore={() => goTo(1)} />
           </section>
           <section id="selected-work" ref={node => { frames.current[1] = node; }} className={`${styles.frame} ${styles.work}`} aria-labelledby="work-title" inert={!plain && active !== 1 ? "" : undefined}>
             <div className={styles.frameLabel}><Grid2X2 size={11} /> 02 — Selected Work <span>PRODUCT / INTERFACE</span></div>
