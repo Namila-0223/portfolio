@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "src/app/page.jsx": {
-    "mtime": 1794372395.2565205,
-    "ast_hash": "1140cc3dc0539376f83f7dd52f8c8605",
+    "mtime": 1794376586.6965337,
+    "ast_hash": "1268f8a1072bb9201b5f9ed28e3cc587",
     "semantic_hash": ""
   },
   "src/app/template.jsx": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "src/components/canvas-portfolio/CanvasPortfolio.jsx": {
-    "mtime": 1794372849.6224804,
-    "ast_hash": "f9818d76f1de34d230ea512f1ac1bbf3",
+    "mtime": 1794376605.7894924,
+    "ast_hash": "61a5c9b765db5958a263fa35f5c3f085",
     "semantic_hash": ""
   },
   "src/components/canvas-portfolio/WorkGallery.jsx": {
@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "PORTFOLIO_CANVAS.md": {
-    "mtime": 1794373131.241776,
-    "ast_hash": "c1da5b20edb7223a0f9d71c056323516",
+    "mtime": 1794376873.3989785,
+    "ast_hash": "486b4b6643f07c3e6225e1c2222a594b",
     "semantic_hash": ""
   },
   "README.md": {
@@ -352,6 +352,16 @@
   "public/videos/hero-bg.mp4": {
     "mtime": 1783587628.5712192,
     "ast_hash": "1ea60ee9378b231f0fa95329f5b3d344",
+    "semantic_hash": ""
+  },
+  "src/components/canvas-portfolio/CollageHero.jsx": {
+    "mtime": 1794376728.8652103,
+    "ast_hash": "23fea8265037dd405b86c27b78d71efe",
+    "semantic_hash": ""
+  },
+  "public/fonts/KaushanScript-OFL.txt": {
+    "mtime": 1794376475.5477562,
+    "ast_hash": "7555d0424df39c6284aa3526a78d1450",
     "semantic_hash": ""
   }
 }

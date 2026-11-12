@@ -84,74 +84,14 @@
       "norm_label": "content status"
     },
     {
-      "label": "next.config.js",
-      "file_type": "code",
-      "source_file": "next.config.js",
-      "source_location": "L1",
+      "label": "Collage hero iteration",
+      "file_type": "document",
+      "source_file": "PORTFOLIO_CANVAS.md",
+      "source_location": "L75",
       "_origin": "ast",
-      "id": "next_config",
-      "community": 6,
-      "norm_label": "next.config.js"
-    },
-    {
-      "label": "nextConfig",
-      "file_type": "code",
-      "source_file": "next.config.js",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "next_config_nextconfig",
-      "community": 6,
-      "norm_label": "nextconfig"
-    },
-    {
-      "label": "page.jsx",
-      "file_type": "code",
-      "source_file": "src/app/canvas/page.jsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_app_canvas_page",
-      "community": 7,
-      "norm_label": "page.jsx"
-    },
-    {
-      "label": "CanvasPage()",
-      "file_type": "code",
-      "source_file": "src/app/canvas/page.jsx",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "src_app_canvas_page_canvaspage",
-      "community": 7,
-      "norm_label": "canvaspage()"
-    },
-    {
-      "label": "layout.jsx",
-      "file_type": "code",
-      "source_file": "src/app/layout.jsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_app_layout",
-      "community": 5,
-      "norm_label": "layout.jsx"
-    },
-    {
-      "label": "metadata",
-      "file_type": "code",
-      "source_file": "src/app/layout.jsx",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "src_app_layout_metadata",
-      "community": 5,
-      "norm_label": "metadata"
-    },
-    {
-      "label": "RootLayout()",
-      "file_type": "code",
-      "source_file": "src/app/layout.jsx",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "src_app_layout_rootlayout",
-      "community": 5,
-      "norm_label": "rootlayout()"
+      "id": "portfolio_canvas_collage_hero_iteration",
+      "community": 1,
+      "norm_label": "collage hero iteration"
     },
     {
       "label": "page.jsx",
@@ -184,10 +124,20 @@
       "norm_label": "body"
     },
     {
+      "label": "brush",
+      "file_type": "code",
+      "source_file": "src/app/page.jsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_app_page_brush",
+      "community": 2,
+      "norm_label": "brush"
+    },
+    {
       "label": "metadata",
       "file_type": "code",
       "source_file": "src/app/page.jsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "src_app_page_metadata",
       "community": 2,
@@ -197,111 +147,11 @@
       "label": "HomePage()",
       "file_type": "code",
       "source_file": "src/app/page.jsx",
-      "source_location": "L12",
+      "source_location": "L13",
       "_origin": "ast",
       "id": "src_app_page_homepage",
       "community": 2,
       "norm_label": "homepage()"
-    },
-    {
-      "label": "SiteChrome.jsx",
-      "file_type": "code",
-      "source_file": "src/components/SiteChrome.jsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_sitechrome",
-      "community": 5,
-      "norm_label": "sitechrome.jsx"
-    },
-    {
-      "label": "SiteChrome()",
-      "file_type": "code",
-      "source_file": "src/components/SiteChrome.jsx",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "src_components_sitechrome_sitechrome",
-      "community": 5,
-      "norm_label": "sitechrome()"
-    },
-    {
-      "label": "CanvasCursor.jsx",
-      "file_type": "code",
-      "source_file": "src/components/canvas-portfolio/CanvasCursor.jsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_canvas_portfolio_canvascursor",
-      "community": 3,
-      "norm_label": "canvascursor.jsx"
-    },
-    {
-      "label": "CanvasCursor()",
-      "file_type": "code",
-      "source_file": "src/components/canvas-portfolio/CanvasCursor.jsx",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "src_components_canvas_portfolio_canvascursor_canvascursor",
-      "community": 3,
-      "norm_label": "canvascursor()"
-    },
-    {
-      "label": "CanvasGraphics.jsx",
-      "file_type": "code",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_canvas_portfolio_canvasgraphics",
-      "community": 4,
-      "norm_label": "canvasgraphics.jsx"
-    },
-    {
-      "label": "HeroGraphic()",
-      "file_type": "code",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "src_components_canvas_portfolio_canvasgraphics_herographic",
-      "community": 4,
-      "norm_label": "herographic()"
-    },
-    {
-      "label": "CraftWidget()",
-      "file_type": "code",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "src_components_canvas_portfolio_canvasgraphics_craftwidget",
-      "community": 4,
-      "norm_label": "craftwidget()"
-    },
-    {
-      "label": "ContactGraphic()",
-      "file_type": "code",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L31",
-      "_origin": "ast",
-      "id": "src_components_canvas_portfolio_canvasgraphics_contactgraphic",
-      "community": 4,
-      "norm_label": "contactgraphic()"
-    },
-    {
-      "label": "CraftMark()",
-      "file_type": "code",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L44",
-      "_origin": "ast",
-      "id": "src_components_canvas_portfolio_canvasgraphics_craftmark",
-      "community": 4,
-      "norm_label": "craftmark()"
-    },
-    {
-      "label": "CopyEmail()",
-      "file_type": "code",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L48",
-      "_origin": "ast",
-      "id": "src_components_canvas_portfolio_canvasgraphics_copyemail",
-      "community": 4,
-      "norm_label": "copyemail()"
     },
     {
       "label": "CanvasPortfolio.jsx",
@@ -317,7 +167,7 @@
       "label": "labels",
       "file_type": "code",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L12",
+      "source_location": "L13",
       "_origin": "ast",
       "id": "src_components_canvas_portfolio_canvasportfolio_labels",
       "community": 3,
@@ -327,7 +177,7 @@
       "label": "positions",
       "file_type": "code",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "src_components_canvas_portfolio_canvasportfolio_positions",
       "community": 3,
@@ -337,7 +187,7 @@
       "label": "demoProjects",
       "file_type": "code",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "_origin": "ast",
       "id": "src_components_canvas_portfolio_canvasportfolio_demoprojects",
       "community": 3,
@@ -347,17 +197,17 @@
       "label": "smooth()",
       "file_type": "code",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L20",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "src_components_canvas_portfolio_canvasportfolio_smooth",
-      "community": 2,
+      "community": 3,
       "norm_label": "smooth()"
     },
     {
       "label": "InterfaceStudy()",
       "file_type": "code",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L25",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "src_components_canvas_portfolio_canvasportfolio_interfacestudy",
       "community": 3,
@@ -367,11 +217,211 @@
       "label": "CanvasPortfolio()",
       "file_type": "code",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L54",
+      "source_location": "L55",
       "_origin": "ast",
       "id": "src_components_canvas_portfolio_canvasportfolio_canvasportfolio",
-      "community": 2,
+      "community": 3,
       "norm_label": "canvasportfolio()"
+    },
+    {
+      "label": "CollageHero.jsx",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CollageHero.jsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_canvas_portfolio_collagehero",
+      "community": 3,
+      "norm_label": "collagehero.jsx"
+    },
+    {
+      "label": "BrushLine()",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CollageHero.jsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_components_canvas_portfolio_collagehero_brushline",
+      "community": 3,
+      "norm_label": "brushline()"
+    },
+    {
+      "label": "CollageHero()",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CollageHero.jsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "src_components_canvas_portfolio_collagehero_collagehero",
+      "community": 3,
+      "norm_label": "collagehero()"
+    },
+    {
+      "label": "next.config.js",
+      "file_type": "code",
+      "source_file": "next.config.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "next.config.js",
+      "id": "next_config"
+    },
+    {
+      "label": "nextConfig",
+      "file_type": "code",
+      "source_file": "next.config.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "nextconfig",
+      "id": "next_config_nextconfig"
+    },
+    {
+      "label": "page.jsx",
+      "file_type": "code",
+      "source_file": "src/app/canvas/page.jsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "page.jsx",
+      "id": "src_app_canvas_page"
+    },
+    {
+      "label": "CanvasPage()",
+      "file_type": "code",
+      "source_file": "src/app/canvas/page.jsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "canvaspage()",
+      "id": "src_app_canvas_page_canvaspage"
+    },
+    {
+      "label": "layout.jsx",
+      "file_type": "code",
+      "source_file": "src/app/layout.jsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "layout.jsx",
+      "id": "src_app_layout"
+    },
+    {
+      "label": "metadata",
+      "file_type": "code",
+      "source_file": "src/app/layout.jsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "metadata",
+      "id": "src_app_layout_metadata"
+    },
+    {
+      "label": "RootLayout()",
+      "file_type": "code",
+      "source_file": "src/app/layout.jsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "rootlayout()",
+      "id": "src_app_layout_rootlayout"
+    },
+    {
+      "label": "SiteChrome.jsx",
+      "file_type": "code",
+      "source_file": "src/components/SiteChrome.jsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "sitechrome.jsx",
+      "id": "src_components_sitechrome"
+    },
+    {
+      "label": "SiteChrome()",
+      "file_type": "code",
+      "source_file": "src/components/SiteChrome.jsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "sitechrome()",
+      "id": "src_components_sitechrome_sitechrome"
+    },
+    {
+      "label": "CanvasCursor.jsx",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CanvasCursor.jsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "canvascursor.jsx",
+      "id": "src_components_canvas_portfolio_canvascursor"
+    },
+    {
+      "label": "CanvasCursor()",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CanvasCursor.jsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 8,
+      "norm_label": "canvascursor()",
+      "id": "src_components_canvas_portfolio_canvascursor_canvascursor"
+    },
+    {
+      "label": "CanvasGraphics.jsx",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "canvasgraphics.jsx",
+      "id": "src_components_canvas_portfolio_canvasgraphics"
+    },
+    {
+      "label": "HeroGraphic()",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "herographic()",
+      "id": "src_components_canvas_portfolio_canvasgraphics_herographic"
+    },
+    {
+      "label": "CraftWidget()",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L22",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "craftwidget()",
+      "id": "src_components_canvas_portfolio_canvasgraphics_craftwidget"
+    },
+    {
+      "label": "ContactGraphic()",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L31",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "contactgraphic()",
+      "id": "src_components_canvas_portfolio_canvasgraphics_contactgraphic"
+    },
+    {
+      "label": "CraftMark()",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L44",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "craftmark()",
+      "id": "src_components_canvas_portfolio_canvasgraphics_craftmark"
+    },
+    {
+      "label": "CopyEmail()",
+      "file_type": "code",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L48",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "copyemail()",
+      "id": "src_components_canvas_portfolio_canvasgraphics_copyemail"
     },
     {
       "label": "WorkGallery.jsx",
@@ -379,9 +429,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_workgallery",
       "community": 0,
-      "norm_label": "workgallery.jsx"
+      "norm_label": "workgallery.jsx",
+      "id": "src_components_canvas_portfolio_workgallery"
     },
     {
       "label": "decisions",
@@ -389,9 +439,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_workgallery_decisions",
       "community": 0,
-      "norm_label": "decisions"
+      "norm_label": "decisions",
+      "id": "src_components_canvas_portfolio_workgallery_decisions"
     },
     {
       "label": "sceneSize",
@@ -399,9 +449,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_workgallery_scenesize",
       "community": 0,
-      "norm_label": "scenesize"
+      "norm_label": "scenesize",
+      "id": "src_components_canvas_portfolio_workgallery_scenesize"
     },
     {
       "label": "projectLayout",
@@ -409,9 +459,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_workgallery_projectlayout",
       "community": 0,
-      "norm_label": "projectlayout"
+      "norm_label": "projectlayout",
+      "id": "src_components_canvas_portfolio_workgallery_projectlayout"
     },
     {
       "label": "ScaledPreview()",
@@ -419,9 +469,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_workgallery_scaledpreview",
       "community": 0,
-      "norm_label": "scaledpreview()"
+      "norm_label": "scaledpreview()",
+      "id": "src_components_canvas_portfolio_workgallery_scaledpreview"
     },
     {
       "label": "WorkGallery()",
@@ -429,9 +479,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L36",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_workgallery_workgallery",
       "community": 0,
-      "norm_label": "workgallery()"
+      "norm_label": "workgallery()",
+      "id": "src_components_canvas_portfolio_workgallery_workgallery"
     },
     {
       "label": "useMotionPreference.js",
@@ -439,9 +489,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_usemotionpreference",
       "community": 0,
-      "norm_label": "usemotionpreference.js"
+      "norm_label": "usemotionpreference.js",
+      "id": "src_components_canvas_portfolio_usemotionpreference"
     },
     {
       "label": "subscribe()",
@@ -449,9 +499,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_usemotionpreference_subscribe",
       "community": 0,
-      "norm_label": "subscribe()"
+      "norm_label": "subscribe()",
+      "id": "src_components_canvas_portfolio_usemotionpreference_subscribe"
     },
     {
       "label": "snapshot()",
@@ -459,9 +509,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_usemotionpreference_snapshot",
       "community": 0,
-      "norm_label": "snapshot()"
+      "norm_label": "snapshot()",
+      "id": "src_components_canvas_portfolio_usemotionpreference_snapshot"
     },
     {
       "label": "serverSnapshot()",
@@ -469,9 +519,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_usemotionpreference_serversnapshot",
       "community": 0,
-      "norm_label": "serversnapshot()"
+      "norm_label": "serversnapshot()",
+      "id": "src_components_canvas_portfolio_usemotionpreference_serversnapshot"
     },
     {
       "label": "useMotionPreference()",
@@ -479,9 +529,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference",
       "community": 0,
-      "norm_label": "usemotionpreference()"
+      "norm_label": "usemotionpreference()",
+      "id": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference"
     }
   ],
   "links": [
@@ -493,6 +543,16 @@
       "weight": 1.0,
       "source": "portfolio_canvas",
       "target": "portfolio_canvas_portfolio_canvas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "PORTFOLIO_CANVAS.md",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "portfolio_canvas_portfolio_canvas",
+      "target": "portfolio_canvas_collage_hero_iteration",
       "confidence_score": 1.0
     },
     {
@@ -558,73 +618,21 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "next.config.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "next_config",
-      "target": "next_config_nextconfig",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/canvas/page.jsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "src_app_canvas_page",
-      "target": "src_app_canvas_page_canvaspage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.jsx",
+      "source_file": "src/app/page.jsx",
       "source_location": "L5",
       "weight": 1.0,
-      "source": "src_app_layout",
-      "target": "src_app_layout_metadata",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.jsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "src_app_layout",
-      "target": "src_app_layout_rootlayout",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.jsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "src_app_layout",
-      "target": "src_components_sitechrome",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.jsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "src_app_layout",
-      "target": "src_components_sitechrome_sitechrome",
+      "source": "src_app_page",
+      "target": "src_app_page_body",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/page.jsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "source": "src_app_page",
-      "target": "src_app_page_body",
+      "target": "src_app_page_brush",
       "confidence_score": 1.0
     },
     {
@@ -641,7 +649,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/page.jsx",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "source": "src_app_page",
       "target": "src_app_page_homepage",
@@ -651,7 +659,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/page.jsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "source": "src_app_page",
       "target": "src_app_page_metadata",
@@ -682,166 +690,8 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/components/SiteChrome.jsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "src_components_sitechrome",
-      "target": "src_components_sitechrome_sitechrome",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasCursor.jsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvascursor",
-      "target": "src_components_canvas_portfolio_canvascursor_canvascursor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_canvascursor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_canvascursor_canvascursor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L31",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasgraphics",
-      "target": "src_components_canvas_portfolio_canvasgraphics_contactgraphic",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L48",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasgraphics",
-      "target": "src_components_canvas_portfolio_canvasgraphics_copyemail",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L44",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasgraphics",
-      "target": "src_components_canvas_portfolio_canvasgraphics_craftmark",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasgraphics",
-      "target": "src_components_canvas_portfolio_canvasgraphics_craftwidget",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasgraphics",
-      "target": "src_components_canvas_portfolio_canvasgraphics_herographic",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_canvasgraphics",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_canvasgraphics_herographic",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_canvasgraphics_craftwidget",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_canvasgraphics_contactgraphic",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_canvasgraphics_craftmark",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_canvasgraphics_copyemail",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L54",
+      "source_location": "L55",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio",
       "target": "src_components_canvas_portfolio_canvasportfolio_canvasportfolio",
@@ -851,7 +701,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio",
       "target": "src_components_canvas_portfolio_canvasportfolio_demoprojects",
@@ -861,7 +711,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio",
       "target": "src_components_canvas_portfolio_canvasportfolio_interfacestudy",
@@ -871,7 +721,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio",
       "target": "src_components_canvas_portfolio_canvasportfolio_labels",
@@ -881,7 +731,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio",
       "target": "src_components_canvas_portfolio_canvasportfolio_positions",
@@ -891,7 +741,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio",
       "target": "src_components_canvas_portfolio_canvasportfolio_smooth",
@@ -905,7 +755,7 @@
       "source_location": "L10",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_usemotionpreference",
+      "target": "src_components_canvas_portfolio_collagehero",
       "confidence_score": 1.0
     },
     {
@@ -916,29 +766,7 @@
       "source_location": "L10",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_workgallery",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_workgallery_workgallery",
+      "target": "src_components_canvas_portfolio_collagehero_collagehero",
       "confidence_score": 1.0
     },
     {
@@ -946,22 +774,163 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L73",
+      "source_location": "L74",
       "weight": 1.0,
       "source": "src_components_canvas_portfolio_canvasportfolio_canvasportfolio",
       "target": "src_components_canvas_portfolio_canvasportfolio_smooth",
       "confidence_score": 1.0
     },
     {
-      "relation": "calls",
-      "context": "call",
+      "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/canvas-portfolio/CollageHero.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_components_canvas_portfolio_collagehero",
+      "target": "src_components_canvas_portfolio_collagehero_brushline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/canvas-portfolio/CollageHero.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "src_components_canvas_portfolio_collagehero",
+      "target": "src_components_canvas_portfolio_collagehero_collagehero",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "next.config.js",
+      "source_location": "L2",
+      "weight": 1.0,
       "confidence_score": 1.0,
-      "source_file": "src/components/canvas-portfolio/CanvasPortfolio.jsx",
-      "source_location": "L63",
+      "source": "next_config",
+      "target": "next_config_nextconfig"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/canvas/page.jsx",
+      "source_location": "L3",
       "weight": 1.0,
-      "source": "src_components_canvas_portfolio_canvasportfolio_canvasportfolio",
-      "target": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference"
+      "confidence_score": 1.0,
+      "source": "src_app_canvas_page",
+      "target": "src_app_canvas_page_canvaspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/layout.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_layout",
+      "target": "src_app_layout_metadata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/layout.jsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_layout",
+      "target": "src_app_layout_rootlayout"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/layout.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_layout",
+      "target": "src_components_sitechrome"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/layout.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_layout",
+      "target": "src_components_sitechrome_sitechrome"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/SiteChrome.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_sitechrome",
+      "target": "src_components_sitechrome_sitechrome"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/canvas-portfolio/CanvasCursor.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_canvas_portfolio_canvascursor",
+      "target": "src_components_canvas_portfolio_canvascursor_canvascursor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_canvas_portfolio_canvasgraphics",
+      "target": "src_components_canvas_portfolio_canvasgraphics_contactgraphic"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L48",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_canvas_portfolio_canvasgraphics",
+      "target": "src_components_canvas_portfolio_canvasgraphics_copyemail"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_canvas_portfolio_canvasgraphics",
+      "target": "src_components_canvas_portfolio_canvasgraphics_craftmark"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_canvas_portfolio_canvasgraphics",
+      "target": "src_components_canvas_portfolio_canvasgraphics_craftwidget"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/canvas-portfolio/CanvasGraphics.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_canvas_portfolio_canvasgraphics",
+      "target": "src_components_canvas_portfolio_canvasgraphics_herographic"
     },
     {
       "relation": "imports_from",
@@ -970,9 +939,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_workgallery",
-      "target": "src_components_canvas_portfolio_usemotionpreference",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_usemotionpreference"
     },
     {
       "relation": "imports",
@@ -981,9 +950,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_workgallery",
-      "target": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference"
     },
     {
       "relation": "contains",
@@ -991,9 +960,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_workgallery",
-      "target": "src_components_canvas_portfolio_workgallery_decisions",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_workgallery_decisions"
     },
     {
       "relation": "contains",
@@ -1001,9 +970,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_workgallery",
-      "target": "src_components_canvas_portfolio_workgallery_projectlayout",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_workgallery_projectlayout"
     },
     {
       "relation": "contains",
@@ -1011,9 +980,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_workgallery",
-      "target": "src_components_canvas_portfolio_workgallery_scaledpreview",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_workgallery_scaledpreview"
     },
     {
       "relation": "contains",
@@ -1021,9 +990,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_workgallery",
-      "target": "src_components_canvas_portfolio_workgallery_scenesize",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_workgallery_scenesize"
     },
     {
       "relation": "contains",
@@ -1031,9 +1000,9 @@
       "source_file": "src/components/canvas-portfolio/WorkGallery.jsx",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_workgallery",
-      "target": "src_components_canvas_portfolio_workgallery_workgallery",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_workgallery_workgallery"
     },
     {
       "relation": "calls",
@@ -1052,9 +1021,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_usemotionpreference",
-      "target": "src_components_canvas_portfolio_usemotionpreference_serversnapshot",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_usemotionpreference_serversnapshot"
     },
     {
       "relation": "contains",
@@ -1062,9 +1031,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_usemotionpreference",
-      "target": "src_components_canvas_portfolio_usemotionpreference_snapshot",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_usemotionpreference_snapshot"
     },
     {
       "relation": "contains",
@@ -1072,9 +1041,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_usemotionpreference",
-      "target": "src_components_canvas_portfolio_usemotionpreference_subscribe",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_usemotionpreference_subscribe"
     },
     {
       "relation": "contains",
@@ -1082,9 +1051,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_canvas_portfolio_usemotionpreference",
-      "target": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference",
-      "confidence_score": 1.0
+      "target": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference"
     },
     {
       "relation": "indirect_call",
@@ -1093,9 +1062,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 0.5,
       "source": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference",
-      "target": "src_components_canvas_portfolio_usemotionpreference_subscribe",
-      "confidence_score": 0.5
+      "target": "src_components_canvas_portfolio_usemotionpreference_subscribe"
     },
     {
       "relation": "indirect_call",
@@ -1104,9 +1073,9 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 0.5,
       "source": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference",
-      "target": "src_components_canvas_portfolio_usemotionpreference_snapshot",
-      "confidence_score": 0.5
+      "target": "src_components_canvas_portfolio_usemotionpreference_snapshot"
     },
     {
       "relation": "indirect_call",
@@ -1115,11 +1084,11 @@
       "source_file": "src/components/canvas-portfolio/useMotionPreference.js",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 0.5,
       "source": "src_components_canvas_portfolio_usemotionpreference_usemotionpreference",
-      "target": "src_components_canvas_portfolio_usemotionpreference_serversnapshot",
-      "confidence_score": 0.5
+      "target": "src_components_canvas_portfolio_usemotionpreference_serversnapshot"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b7c4064913d82f7192325b093499b4130e763d4e"
+  "built_at_commit": "746192ae5313569cd911e6d128ffc47b0e565fb1"
 }
