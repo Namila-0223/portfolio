@@ -2,12 +2,9 @@
 
 # dependencies
 /node_modules
-/package-lock.json
 
 # next.js
 /.next/
-/.next-portfolio/
-/.next-portfolio-*/
 /out/
 
 # production
@@ -28,3 +25,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local tooling output
+/graphify-out/
+
+# My Skills: begin
+AGENTS.md
+# My Skills: end

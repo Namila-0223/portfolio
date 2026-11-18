@@ -1,0 +1,11 @@
+.signal { animation: signal 12s linear infinite; animation-play-state: var(--motion-play, paused); }
+.rotor, .stamp { transform-box: fill-box; transform-origin: center; animation: rotate 36s linear infinite; animation-play-state: var(--motion-play, paused); }
+.plane { transform-box: fill-box; transform-origin: center; animation: float 7s ease-in-out infinite; animation-play-state: var(--motion-play, paused); }
+.contactGraphic { width: 100%; max-height: 260px; }
+.craftMark { position: absolute; top: 50px; right: 46px; width: 80px; height: 80px; color: #315cea55; pointer-events: none; }
+.copy { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid #d0d8e9; border-radius: 5px; color: #687b9e; font-size: 11px; white-space: nowrap; }
+@keyframes signal { to { stroke-dashoffset: -900; } }
+@keyframes rotate { to { transform: rotate(360deg); } }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-9px) rotate(2deg); } }
+@media (max-width: 800px), (max-height: 660px) { .craftMark { width: 44px; height: 44px; top: 18px; right: 16px; opacity: .5; } }
+@media (prefers-reduced-motion: reduce) { .signal, .rotor, .stamp, .plane { animation: none; } }

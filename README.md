@@ -1,67 +1,64 @@
-# Interactive Developer Portfolio
+# Namila Preshan — Portfolio
 
-A high-fidelity, premium developer portfolio site built using **Next.js**, **Three.js (WebGL)**, and **Framer Motion**. It showcases projects using a 3D interactive card carousel and features smooth, native browser page transitions.
+A personal portfolio for a UI/UX Engineer, built as a single scroll-driven canvas. Six fixed frames share one world: the camera pulls back, glides, and settles as you scroll, with a page-view fallback for small screens and reduced-motion preferences.
 
-## 🚀 Tech Stack
-- **Framework**: Next.js 14 (App Router)
-- **3D Graphics**: Three.js (via custom WebGL canvas integrations)
-- **Animations**: Framer Motion & CSS Transitions
-- **Styling**: Tailwind CSS & Vanilla CSS
-- **Typography**: Geist Sans & Anton
+## Tech stack
 
----
+- **Framework:** Next.js 14 (App Router)
+- **UI:** React 18
+- **Motion:** Framer Motion
+- **Styling:** CSS Modules, with Tailwind used only for its base reset
+- **Type:** Syne (display), Space Grotesk (body), Kaushan Script (brush lettering), served locally through `next/font/local`
+- **Icons:** lucide-react
 
-## ✨ Core Features
-1. **Interactive 3D WebGL Carousel**: Displays projects on a 3D cylindrical carousel that responds to mouse dragging, trackpad scrolling, and keyboard arrow keys.
-2. **Native View Transitions**: Navigates from 3D WebGL cards to dynamic 2D project detail pages by smoothly morphing the image layout across routes.
-3. **Responsive Grid**: Built for all device ranges from mobile mockups to desktop displays.
-4. **Scroll-triggered Revealing**: Dynamic layout entry animations triggered as elements enter the viewport.
+## Getting started
 
----
-
-## 🛠️ Recent Updates (`2026-v1` Branch)
-
-We have restructured the project details layout and upgraded the transition pipeline to deliver an extremely polished, high-performance experience:
-
-### 1. Visual-First 8-Section Layout
-Restructured the dynamic project details page (`/works/[id]`) into a visual-first layout:
-- **Hero**: Full-bleed parallax-scrolled device mockup with dynamic metadata (Role, Timeline, Industry).
-- **Overview**: Under-100-words concise summary.
-- **Challenge & Solution**: Clean 2-column problem/resolution split.
-- **Process Snapshot**: 3-column graphic pipeline displaying User Flow, Wireframes, and Design System.
-- **Final UI Showcase**: A dedicated showcase taking up 50% of the page length, displaying mockups, desk setups, and typographic styles.
-- **Key Results**: Staggered cards displaying project metrics.
-- **Behance CTA**: Glow-on-hover card linking to full external case studies.
-- **Simple Footer Navigation**: Seamless wrap-around navigation to the next project.
-
-### 2. High-Fidelity View Transitions
-- **WebGL-to-DOM Morphing**: Integrated the native browser **View Transitions API** to seamlessly scale and morph the 3D works card directly into the details page parallax hero background.
-- **Aspect Ratio Protection**: Applied `object-fit: cover` and custom scaling overrides to the transition pseudo-elements (`::view-transition-old` and `::view-transition-new`) to eliminate the "taffy" stretching distortion.
-- **Zero-Lag Triggering**: Replaced React rendering queue delays with synchronous DOM injection on card clicks, initiating the transition instantly without input lag.
-
-### 3. Route Change Synchronization
-- **Navigation Lifecycle Hooking**: Intercepted route changes using a custom Promise structure in the global router. The transition callback awaits page mounting before completing, ensuring the browser captures the correct destination DOM state.
-- **Entrance Animation Delaying**: Delayed header texts, back buttons, and gradient overlays to slide/fade in gently *after* the `0.75s` morph transition completes, preventing overlapping visual clutter.
-
-### 4. Interactive Details Animations
-- Added viewport-triggered entries (`whileInView`) to all details page sections so elements rise and fade in progressively as the user scrolls.
-- Combined the hero image and gradient shadow overlay into a single view transition container, so they animate together as a unified visual layer.
-
----
-
-## 📦 Getting Started
-
-### 1. Install Dependencies
 ```bash
 npm install
-```
-
-### 2. Run Development Server
-```bash
 npm run dev
 ```
 
-### 3. Build for Production
+Open [http://localhost:3000](http://localhost:3000).
+
 ```bash
-npm run build
+npm run build    # production build
+npm run start    # serve the production build
+npm run lint     # ESLint (next/core-web-vitals)
+npm run format   # Prettier for JS, JSX, JSON, and Markdown
 ```
+
+## Project structure
+
+```text
+src/
+├─ app/
+│  ├─ layout.jsx                 Root shell: fonts, metadata, global stylesheet
+│  └─ page.jsx                   Homepage (server component)
+├─ features/
+│  └─ canvas-portfolio/
+│     ├─ CanvasPortfolio.jsx     Scroll/camera controller and six sections
+│     ├─ CollageHero.jsx         Intro frame
+│     ├─ WorkGallery.jsx         Draggable project board and dialog
+│     ├─ CanvasGraphics.jsx      SVG artwork and interactive demos
+│     ├─ CanvasCursor.jsx        Custom desktop cursor
+│     ├─ hooks/                  useMotionPreference
+│     └─ styles/                 Component-scoped CSS Modules
+├─ assets/fonts/                 Local font files and OFL licenses
+└─ styles/globals.css            Reset, page background, selection, scrollbar
+```
+
+Public assets are limited to the favicon and the portrait used by the intro frame (`public/images/namila1.png`).
+
+## Design and behavior notes
+
+- Section order: Intro → Selected Work → About → Capabilities → Experience → Contact.
+- Scroll controls a shared camera; direct navigation and Page view preserve the selected section.
+- Narrow screens, short viewports, and reduced motion use a stacked page instead of the canvas.
+- Selected Work is an illustrative project board, clearly labeled as concept work rather than client work.
+- A pause/play control stops decorative motion, and OS reduced-motion changes are observed live.
+
+See [`docs/PORTFOLIO_CANVAS.md`](docs/PORTFOLIO_CANVAS.md) for the design history, interaction decisions, and iteration notes.
+
+## Branch scope
+
+This branch is the canvas portfolio only. The earlier Tailwind site (`/about`, `/contact`, `/blog`, `/works`, `/works/[id]`), the Three.js project carousel, the case-study data, and the old `portfolio-canvas` prototype were removed. They remain available in the repository history and on `main`.
